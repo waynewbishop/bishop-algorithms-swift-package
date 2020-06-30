@@ -1,4 +1,6 @@
-import XCTest
+
+/*
+ import XCTest
 @testable import Structures
 
 final class StructuresTests: XCTestCase {
@@ -11,3 +13,7 @@ final class StructuresTests: XCTestCase {
     }
 
 }
+ 
+*/
+
+
