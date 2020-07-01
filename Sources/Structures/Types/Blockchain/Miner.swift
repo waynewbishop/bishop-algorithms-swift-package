@@ -9,16 +9,24 @@
 import Foundation
 
 
+    /**
+    A blockchain `member` that fulfills pending `Exchange` initiated by `Peers`.
+
+     - Complexity: O(n) - linear time.
+     */
+
 class Miner: Member {
     
     
-  internal var blockchain = LinkedList<Block>()
-  internal var desc: String?
+      var blockchain = LinkedList<Block>()
+      var desc: String?
+      var id: UUID
 
     
     init(balance: Float = 0.0, desc: String = "", model: inout Blockchain) {
         
         self.desc = desc
+        self.id = UUID()
         self.blockchain = model.currentChain()
         
         
@@ -35,7 +43,13 @@ class Miner: Member {
     }
         
     
-    //check shared network
+    /**
+    Miners `poll` for pending exchange records
+
+     - Parameter model: A reference to a Blockchain network.
+     - Complexity: O(n) - linear time.
+     */
+
    func poll(model: inout Blockchain) {
        
     

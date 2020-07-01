@@ -9,8 +9,9 @@
 import Foundation
 
 
-//record actions of blockchain miners
-
+/**
+ Records actions of blockchain `miners`. Used when polling for pending transactions, mining blocks and receiving rewards from the main network.
+ */
 class Audit {
     
     var action: String?

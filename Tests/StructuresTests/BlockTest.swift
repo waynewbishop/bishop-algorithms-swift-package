@@ -30,10 +30,9 @@ class BlockTest: XCTestCase {
          pending transactions that are eventually added to the blockchain.
          */
         
-        let elliott = Peer(balance: 45, desc: "elliott", model: &blockchain)
-        let karen = Peer(balance: 75, desc: "karen", model: &blockchain)
-        let wayne = Peer(balance: 20, desc: "wayne", model: &blockchain)
-
+        let elliott = Peer(amount: 45, desc: "elliott", model: &blockchain)
+        let karen = Peer(amount: 75, desc: "karen", model: &blockchain)
+        let wayne = Peer(amount: 20, desc: "wayne", model: &blockchain)
         
         
         /*
@@ -65,7 +64,6 @@ class BlockTest: XCTestCase {
         
         
         
-        
         //plan pending exchange
         karen.intent(from: karen, to: elliott, for: 20, desc: nil, model: &blockchain)
 
@@ -87,7 +85,6 @@ class BlockTest: XCTestCase {
         print("elliott: ending balance: \(elliott.bal)")
         print("karen: ending balance: \(karen.bal)")
         print("wayne: ending balance: \(wayne.bal)")
-
         
         
         //check miner balance

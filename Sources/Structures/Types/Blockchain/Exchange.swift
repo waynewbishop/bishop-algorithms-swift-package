@@ -9,12 +9,19 @@
 import Foundation
 
 
+//TODO: Implement trans type for exchanges..
+//TODO: Add this enum type tothe enums.swift file
+
+
 enum BTransType{
     case bank
     case member
     case gift
 }
 
+    /**
+    Records pending and completed transactions between network members. New records are assumed to be in `pending` status, which are eventually fufilled by `Miners`.
+     */
 
 class Exchange {
     

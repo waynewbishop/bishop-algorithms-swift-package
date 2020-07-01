@@ -10,13 +10,13 @@ import Foundation
 
 //used in conjunction with generic priorty queues
 
-class Table <T> {
+public class Table <T> {
     
     var tvalue: T?
     var count: Int
 
     //set initializers
-    init(_ tvalue: T, count: Int = 1) {
+   public init(_ tvalue: T, count: Int = 1) {
         
         self.tvalue = tvalue
         self.count = count

@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+ Tracks groups of completed transactions in a Blockchain network. Each `block` contains one or more `Exchange` which records the sender, recipient, `miner` and amount.
+ */
 
 public class Block {
     

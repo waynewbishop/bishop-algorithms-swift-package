@@ -13,13 +13,13 @@ import Foundation
 
 extension Member {
     
-      /*
-      note: peers and miners are different types that share membership in the
-      same blockchain network. As a result, they both maintain their own account balances.
-      As shown, this value is calculated based on the contents of the blockchain.
-      */
+     
+    /**
+     Computes the account balance of each conforming blockchain `Member`.
 
-    
+     - Complexity: O(n) - linear time.
+     */
+
        var bal: Float {
            
            //obtain list keys

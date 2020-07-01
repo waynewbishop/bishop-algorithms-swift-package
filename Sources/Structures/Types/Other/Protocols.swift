@@ -9,11 +9,15 @@
 import Foundation
 
 
-//peers and miners share blockchain membership
+/**
+ Used in a blockchain network, `Peers` and `Miners` both conform to this protocol. The conformance of `balance` is implemented through the `Member` protocol extension.
+ */
+
 protocol Member {
     
     var blockchain: LinkedList<Block> {get}
     var desc: String? {get}
+    var id: UUID {get}
     var bal: Float {get}
 }
 
@@ -30,6 +34,3 @@ protocol Indexable {
 protocol Sortable {
     func isSorted<T: Comparable>(_ sequence: Array<T>) -> Bool
 }
-
-
-

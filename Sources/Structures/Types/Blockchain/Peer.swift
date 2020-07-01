@@ -9,27 +9,31 @@
 import Foundation
 
 
+    /**
+    A participating member of a blockchain network. Peers send and receive funds from other `Members` through  `Exchange` records.
+     */
+
 class Peer: Member {
 
+
+    var blockchain = LinkedList<Block>()
+    var audit = Stack<Audit>()
+    var desc: String?
+    var id: UUID
+
     
-   internal var desc: String?
-   internal var audit = Stack<Audit>()
-   var blockchain = LinkedList<Block>()
-    
-    
-    //TODO: change to amount..
     //TODO: system to provide UUID as description upon login..
     //TODO: ability to check valid accounts from blockchain?
 
     
     //add references to main network
-    init(balance: Float = 0.0, desc: String = "", model: inout Blockchain){
+    init(amount: Float = 0.0, desc: String = "", model: inout Blockchain){
         
         self.blockchain = model.currentChain()
         self.desc = desc
+        self.id = UUID()
         
-        
-        let sTrans = Exchange(nil, self, balance, "starting transaction..")
+        let sTrans = Exchange(nil, self, amount, "starting transaction..")
         model.newExchange(sTrans)
 
         
