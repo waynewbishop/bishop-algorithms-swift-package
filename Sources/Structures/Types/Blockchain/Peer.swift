@@ -15,18 +15,21 @@ import Foundation
 
 class Peer: Member {
 
-
     var blockchain = LinkedList<Block>()
     var audit = Stack<Audit>()
     var desc: String?
     var id: UUID
 
     
-    //TODO: system to provide UUID as description upon login..
     //TODO: ability to check valid accounts from blockchain?
 
     
     //add references to main network
+    
+    /**
+     Peers objects do not store a `balance` as a stored property, but obtain this functionality through their conformance of being `Members`.
+     */
+
     init(amount: Float = 0.0, desc: String = "", model: inout Blockchain){
         
         self.blockchain = model.currentChain()
@@ -37,6 +40,7 @@ class Peer: Member {
         model.newExchange(sTrans)
 
         
+        //add reference to network
         model.newMember(item: self)
         
     }
@@ -45,6 +49,11 @@ class Peer: Member {
     //TODO: Should this be moved to Member extension??
     //TODO: Does "from" need to be removed?
     
+    
+    /**
+     A pending `Exchange` initiated from a Blockchain network `Peer`.
+     Important: Even
+     */
     
     //a pending exchange
     func intent(from: Member?, to recipient: Member, for amount: Float, desc: String?,

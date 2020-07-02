@@ -17,7 +17,7 @@ public class Block {
     var transactions: Array<Exchange>?
     var miner: Miner?
     var lastModified: Date
-    var description: String?
+    var desc: String?
     
     
     //initialize class

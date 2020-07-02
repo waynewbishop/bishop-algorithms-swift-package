@@ -41,10 +41,13 @@ class Miner: Member {
         model.newMember(item: self)
         
     }
-        
+
+
+    
+    //TODO: Refactor poll to support desc for new block..
     
     /**
-    Miners `poll` for pending exchange records
+    Miners `poll` for pending exchange records within the network. Once obtained, a new `Block` mined with
 
      - Parameter model: A reference to a Blockchain network.
      - Complexity: O(n) - linear time.
@@ -57,40 +60,40 @@ class Miner: Member {
         let plist = model.exchangeList(requester: self)
 
     
-        if plist.count > 0 {
+            if plist.count > 0 {
 
-            
-            //add audit to transactions
-            for trans in plist {
-                trans.miner = self
+                
+                //add audit to transactions
+                for trans in plist {
+                    trans.miner = self
+                }
+                
+                
+                //mine new block
+                let newblock = self.mineBlock()
+                
+                
+                newblock.transactions = plist
+                newblock.miner = self
+                newblock.desc = "test block.."
+                
+                
+                model.updateChain(with: newblock)
+
+                
+                //clear processed transactions..
+                model.clearExchange(requester: self)
+
+                
+                //receive reward
+                let amount = model.sendreward(to: self)
+
+                
+                //publish intent
+                let reward = Exchange(nil, self, amount, "mining reward..")
+                model.newExchange(reward)
+                
             }
-            
-            
-            //mine new block
-            let newblock = self.mineBlock()
-            
-            
-            newblock.transactions = plist
-            newblock.miner = self
-            newblock.description = "test block.."
-            
-            
-            model.updateChain(with: newblock)
-
-            
-            //clear processed transactions..
-            model.clearExchange(requester: self)
-
-            
-            //receive reward
-            let amount = model.sendreward(to: self)
-
-            
-            //publish intent
-            let reward = Exchange(nil, self, amount, "mining reward..")
-            model.newExchange(reward)
-            
-        }
         
     }
     
@@ -98,7 +101,11 @@ class Miner: Member {
     
     
     //mine a new block - the miner does this as part of their local instance..
+    
     private func mineBlock() -> Block {
+        print("mining new block..")
+        sleep(20)
+        
         return Block()
     }
         

@@ -71,7 +71,7 @@ class Blockchain {
       func genesisBlock() -> Block {
         
         let newblock = Block()
-        newblock.description = "genesis block.."
+        newblock.desc = "genesis block.."
         
         return newblock
       }
