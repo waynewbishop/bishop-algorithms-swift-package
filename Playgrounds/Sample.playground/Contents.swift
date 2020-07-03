@@ -5,9 +5,6 @@
 
 import Structures
 
-
-//run initial test of 
+//..create a new table
 let table = Table(8)
-
-var str = "Hello, playground"
 

@@ -33,7 +33,7 @@ class HashSet <T: Indexable> {
 
             
             //determine if more slots are needed
-            if slots == 0 {
+            if slots == 1 {
                 buckets.append(nil)
                 slots = 1
             }
@@ -42,6 +42,12 @@ class HashSet <T: Indexable> {
         }
         
       return false
+    }
+    
+    
+    func update(_ element: T) -> T? {
+        //TODO: How does this work? Check Apple documentation..
+        return nil
     }
     
         
@@ -66,7 +72,6 @@ class HashSet <T: Indexable> {
          ascii representation to be used by the hash algorithm.
          */
         
-
         var remainder: Int = 0
         remainder = element.asciiRepresentation % buckets.count
         return remainder

@@ -23,7 +23,7 @@ protocol Member {
 
 
 
-//define computed property - hashSet requirement
+//define stored property - hashSet requirement
 protocol Indexable {
     var asciiRepresentation: Int {get}
 }

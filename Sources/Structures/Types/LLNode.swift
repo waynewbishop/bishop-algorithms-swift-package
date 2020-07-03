@@ -8,10 +8,15 @@
 
 import Foundation
 
-class LLNode<T> {
+public class LLNode<T> {
     
     var tvalue: T?
     var next: LLNode?
     var previous: LLNode?
+    
+    public init() {
+        //playground support
+    }
+    
 }
 

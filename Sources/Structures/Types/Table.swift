@@ -10,6 +10,8 @@ import Foundation
 
 //used in conjunction with generic priorty queues
 
+//TODO: How to conform to Indexable?
+
 public class Table <T> {
     
     var tvalue: T?

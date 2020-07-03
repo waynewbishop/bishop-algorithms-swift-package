@@ -24,12 +24,6 @@ extension Int: Indexable {
     
     
     
-    //hash table requirement
-    var hash: String {
-        return String(self)
-    }
-
-    
     //iterates the closure body a specified number of times
     func times(closure:(Int)-> Void) {
         for i in 0...self {

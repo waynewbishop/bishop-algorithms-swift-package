@@ -52,10 +52,10 @@ class Peer: Member {
     
     /**
      A pending `Exchange` initiated from a Blockchain network `Peer`.
-     Important: Even
+     
+     - Parameter from: The `Member` that originated the `Exchange`.
      */
     
-    //a pending exchange
     func intent(from: Member?, to recipient: Member, for amount: Float, desc: String?,
                 model: inout Blockchain) {
         
