@@ -1,19 +1,24 @@
 Structures
 ====================
 
-This project provides a framework for commonly used data structures and algorithms written in <a href="http://www.waynewbishop.com" target="_blank">Swift</a>. While details of many algorithms exists on Wikipedia, these implementations are often written as pseudocode, or are expressed in C or C++. This code project, along with its supporting book provides theory, instruction and guidance on many commonly used models to power commercial solutions including social media, database managing, gaming and beyond.  
+This project provides a framework for commonly used data structures and algorithms written in <a href="http://www.waynewbishop.com" target="_blank">Swift</a>. While details of many algorithms exists on Wikipedia, these implementations are often written as pseudocode, or are expressed in C or C++. This code project, along with its supporting book provides theory, instruction and guidance on many commonly used models. These educational design can be used to help you pass your next technical interview or to build your next app. 
 
 
 Audience
 ---------------------
-
-As a developer, you should already be familiar with the basics of programming. Beyond algorithms, this project also aims to provide an alternative for learning the basics of Swift. This includes implementations of many Swift-specific features such as optionals, extensions, protocols and generics. Beyond Swift, audiences should be familiar with **Singleton** and **Factory** design patterns along with sets, arrays and dictionaries. 
+To best utilize this project you should already be familiar with the basics of programming. Beyond algorithms, this code also aims to provide an alternative for learning the basics of Swift. This includes implementations of many Swift-specific features such as optionals, extensions, protocols and generics. Beyond Swift, audiences should be familiar with **Singleton** and **Factory** design patterns along with sets, arrays and dictionaries. 
 
 
 Package Benefits
 ---------------------
 
-The project is organized as an Xcode Package project which bring added benefits and flexibility. The source project, along with its XCTest unit tests can be opened and executed as its own project in Xcode 12+, or the project can be included as its own project dependency in another Xcode project. Since Package projects support all Apple platforms, **Structures** can be used in any iOS, WatchOS, MacOS or TvOS application.    
+The project is organized as an Xcode package project which brings added benefits and flexibility. The source, along with its 70+ unit tests can be opened and executed as its own project, or can be included as its own dependency in another Xcode project. Since Swift packages support all Apple platforms, **Structures** can be used in any iOS, WatchOS, MacOS or TvOS application. Quick help documentation has also been made available for the many custom types and implementations.
+
+
+Playgrounds Sample
+---------------------
+
+In addition to the over 70 included unit tests, this project also contains a sample **Swift Playground** to demonstrate how one can use the custom types. This includes interactive illustrations of Linked List as well as Stacks / Queues. These UI implementations are written in the latest version of SwiftUI.  
 
 
 
@@ -48,12 +53,6 @@ The project features code-level examples for the following items:
 + Fibonacci Numbers
 + Dyanmic Programming
 + Closures
-
-
-Playgrounds Sample
----------------------
-
-In addition to the over 70 included unit tests, this project also contains a sample **Swift Playground** that shows how one can use the project. This includes interactive illustrations on the concepts of a linked list as well as Stacks / Queues all written in the latest version of SwiftUI.   
 
 
 
@@ -115,8 +114,8 @@ Getting Started
 
 Swift Structures has been optimized for **Swift 5.3** (e.g., Xcode 12.0) or later. The directories are organized as follows:
 + Sources - Code for all Swift data structures, algorithms and source extensions
-+ Playgrounds - An empty iOS single-view application template
-+ Tests - Unit tests with XCTest Framework
++ Playgrounds - Getting started material plus an interactive example of Linked List and Stacks / Queues. 
++ Tests - 70+ unit tests with XCTest Framework
 
 
 Usage
