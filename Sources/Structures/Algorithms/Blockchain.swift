@@ -9,14 +9,11 @@
 import Foundation
 
 
+/**
+    All blockchain resources are shared by peers and miners by reference. Any change to shared resources by either type is reflected directly the blockchain.
+ */
+
 class Blockchain {
-    
-    
-       /*
-       notes: all blockchain resources are shared by peers and miners by reference.
-       any change to shared resources by either type is reflected directly the blockchain.
-       */
-    
     
       private var intent = Array<Exchange>()
       private var blockchain = LinkedList<Block>()

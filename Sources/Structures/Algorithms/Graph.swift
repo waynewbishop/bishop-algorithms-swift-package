@@ -22,7 +22,6 @@ public class Graph {
      - Parameter directed: Indicates if the model should be established as directed or undirected graph.
      */
 
-    
     init(directed: Bool = true) {
         canvas = Array<Vertex>()
         isDirected = directed

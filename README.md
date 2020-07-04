@@ -13,7 +13,7 @@ As a developer, you should already be familiar with the basics of programming. B
 Package Benefits
 ---------------------
 
-The project is organized as an Xcode Package project which brings many benefits. 
+The project is organized as an Xcode Package project which bring added benefits and flexibility. The source project, along with its XCTest unit tests can be opened and executed as its own project in Xcode 12+, or the project can be included as its own project dependency in another Xcode project. Since Package projects support all Apple platforms, **Structures** can be used in any iOS, WatchOS, MacOS or TvOS application.    
 
 
 
@@ -48,6 +48,12 @@ The project features code-level examples for the following items:
 + Fibonacci Numbers
 + Dyanmic Programming
 + Closures
+
+
+Playgrounds Sample
+---------------------
+
+In addition to the over 70 included unit tests, this project also contains a sample **Swift Playground** that shows how one can use the project. This includes interactive illustrations on the concepts of a linked list as well as Stacks / Queues all written in the latest version of SwiftUI.   
 
 
 
@@ -108,9 +114,9 @@ Getting Started
 --------------------
 
 Swift Structures has been optimized for **Swift 5.3** (e.g., Xcode 12.0) or later. The directories are organized as follows:
-+ Source - Code for all Swift data structures, algorithms and source extensions
-+ Example - An empty iOS single-view application template
-+ SwiftTests - Unit tests with XCTest Framework
++ Sources - Code for all Swift data structures, algorithms and source extensions
++ Playgrounds - An empty iOS single-view application template
++ Tests - Unit tests with XCTest Framework
 
 
 Usage
