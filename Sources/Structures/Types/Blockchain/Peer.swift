@@ -20,12 +20,7 @@ class Peer: Member {
     var desc: String?
     var id: UUID
 
-    
-    //TODO: ability to check valid accounts from blockchain?
-
-    
-    //add references to main network
-    
+        
     /**
      Peers objects do not store a `balance` as a stored property, but obtain this functionality through their conformance of being `Members`.
      */
@@ -36,7 +31,7 @@ class Peer: Member {
         self.desc = desc
         self.id = UUID()
         
-        let sTrans = Exchange(nil, self, amount, "starting transaction..")
+        let sTrans = Exchange(nil, self, amount, "starting transaction..", .bank)
         model.newExchange(sTrans)
 
         
@@ -44,16 +39,16 @@ class Peer: Member {
         model.newMember(item: self)
         
     }
-    
-    
-    //TODO: Should this be moved to Member extension??
-    //TODO: Does "from" need to be removed?
-    
+        
     
     /**
      A pending `Exchange` initiated from a Blockchain network `Peer`.
      
      - Parameter from: The `Member` that originated the `Exchange`.
+     - Parameter to: The intended `Member` recipient.
+     - Parameter for: The amount of the `Exchange`.
+     - Parameter desc: Optional
+     - Parameter model: A reference to the `Blockchain` network.
      */
     
     func intent(from: Member?, to recipient: Member, for amount: Float, desc: String?,
@@ -61,7 +56,7 @@ class Peer: Member {
         
 
         //publish exchange to model
-        let exchange = Exchange(from, recipient, amount, desc)
+        let exchange = Exchange(from, recipient, amount, desc, .peer)
         model.newExchange(exchange)
                 
     }

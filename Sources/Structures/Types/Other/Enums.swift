@@ -9,6 +9,17 @@
 import Foundation
 
 
+/**
+The type of blockchain `Exchange`. While both peers and miners participate in the blockchain network, only peers are granted the ability to exchange funds with others.
+ */
+
+enum BTransType{
+    case bank
+    case reward
+    case peer
+}
+
+
 //recusive enum used to help build example Algorithm "models"
 indirect enum Algorithm<T> {
     

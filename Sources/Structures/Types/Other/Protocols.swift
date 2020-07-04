@@ -22,8 +22,10 @@ protocol Member {
 }
 
 
+/**
+ Required stored property. Custom `HashSet` type requirement.
+ */
 
-//define stored property - hashSet requirement
 protocol Indexable {
     var asciiRepresentation: Int {get}
 }

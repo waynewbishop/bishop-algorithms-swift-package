@@ -33,7 +33,7 @@ class Miner: Member {
         //TODO: enum for transaction type..
 
         
-        let sBalance = Exchange(nil, self, balance, "starting balance..")
+        let sBalance = Exchange(nil, self, balance, "starting balance..", .bank)
         model.newExchange(sBalance)
 
                
@@ -90,7 +90,7 @@ class Miner: Member {
 
                 
                 //publish intent
-                let reward = Exchange(nil, self, amount, "mining reward..")
+                let reward = Exchange(nil, self, amount, "mining reward..", .reward)
                 model.newExchange(reward)
                 
             }
