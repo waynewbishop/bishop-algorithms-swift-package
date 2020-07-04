@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+  Represents the connection between two `Graph` vertices.
+ */
 
 public class Edge {
     

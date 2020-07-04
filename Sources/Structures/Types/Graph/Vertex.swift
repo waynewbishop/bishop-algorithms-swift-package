@@ -9,6 +9,10 @@
 import Foundation
 
 
+/**
+  A participating member in a `Graph` data structure.
+ */
+
 public class Vertex {
     
     var key = String()

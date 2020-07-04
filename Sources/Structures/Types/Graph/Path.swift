@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Path.swift
 //  SwiftStructures
 //
 //  Created by Wayne Bishop on 8/4/14.
@@ -8,7 +8,9 @@
 
 import Foundation
 
-//the path class maintains objects that comprise the "frontier"
+/**
+ The `Path` class maintains objects that comprise the `frontier`. 
+ */
 
 class Path {
     

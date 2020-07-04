@@ -29,10 +29,7 @@ class Miner: Member {
         self.id = UUID()
         self.blockchain = model.currentChain()
         
-        
-        //TODO: enum for transaction type..
-
-        
+                
         let sBalance = Exchange(nil, self, balance, "starting balance..", .bank)
         model.newExchange(sBalance)
 
@@ -99,8 +96,15 @@ class Miner: Member {
     
     
     
+   
+    //TODO: Refactor poll to support desc for new block..
     
-    //mine a new block - the miner does this as part of their local instance..
+    /**
+    Miners `poll` for pending exchange records within the network. Once obtained, a new `Block` mined with
+
+     - Parameter model: A reference to a Blockchain network.
+     - Complexity: O(n) - linear time.
+     */
     
     private func mineBlock() -> Block {
         print("mining new block..")

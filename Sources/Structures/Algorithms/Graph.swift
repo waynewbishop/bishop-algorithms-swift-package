@@ -11,11 +11,17 @@ import Foundation
 
 public class Graph {
    
-    
-    //declare a default directed graph canvas
+
     var canvas: Array<Vertex>
     var isDirected: Bool
     
+    
+    /**
+      Declare a default directed `Graph` canvas.
+     
+     - Parameter directed: Indicates if the model should be established as directed or undirected graph.
+     */
+
     
     init(directed: Bool = true) {
         canvas = Array<Vertex>()
@@ -30,7 +36,15 @@ public class Graph {
     
     
     
-    //add edge to source vertex
+    /**
+      Adds an `Edge` to a source `Vertex`.
+     
+     - Parameter source: The source Vertex.
+     - Parameter neighbor: The connecting destination `Vertex`.
+     - Parameter weight: The `Edge` weight value.
+     
+     */
+    
     func addEdge(source: Vertex, neighbor: Vertex, weight: Int) {
         
         
@@ -64,21 +78,21 @@ public class Graph {
             
         }
         
-        
-        //TODO: Now update a meta dictionary with the outgoing link pointed
-        //to that source verex.
-        
-        
     }
 
     
     
-    
-    
-    /* reverse the sequence of paths given the shortest path.
-       process analagous to reversing a linked list. */
 
-    func reversePath(_ head: Path!, source: Vertex) -> Path! {
+    
+    /**
+     Reverse the sequence of paths given the shortest path. Process analagous to reversing a linked list..
+     
+     - Parameter head: The source Vertex.
+     - Parameter source: The connecting destination `Vertex`.
+     - Returns: The reversed `Path`.
+     */
+
+    func reversePath(_ head: Path?, source: Vertex) -> Path? {
         
         
         guard head != nil else {

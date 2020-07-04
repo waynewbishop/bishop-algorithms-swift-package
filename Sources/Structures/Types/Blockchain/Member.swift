@@ -15,7 +15,7 @@ extension Member {
     
      
     /**
-     Computes the account balance of each conforming blockchain `Member`.
+     Computes the account balance of each conforming blockchain `Member` at runtime.
 
      - Complexity: O(n) - linear time.
      */

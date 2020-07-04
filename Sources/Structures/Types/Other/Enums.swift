@@ -20,7 +20,10 @@ enum BTransType{
 }
 
 
-//recusive enum used to help build example Algorithm "models"
+/**
+ Recusive enum used to help build example Algorithm `models`.
+ */
+
 indirect enum Algorithm<T> {
     
     case Empty

@@ -22,7 +22,12 @@ class Peer: Member {
 
         
     /**
-     Peers objects do not store a `balance` as a stored property, but obtain this functionality through their conformance of being `Members`.
+     Peers objects do not store a `balance` as a stored property, but calcuate this amount a runtime by iterating through the network `Blockchain`.
+     
+     - Parameter amount: The amount of the initial transaction.
+     - Parameter desc: Optional
+     - Parameter model: A reference to the `Blockchain` network.
+     
      */
 
     init(amount: Float = 0.0, desc: String = "", model: inout Blockchain){
