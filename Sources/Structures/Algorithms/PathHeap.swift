@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+Used in conjunction with a `Graph`, `PathHeap` represents an optimized version of a `min heap` data structure.  It is used to define a Graph's search `Frontier` .
+  */
 
 public class PathHeap {
     

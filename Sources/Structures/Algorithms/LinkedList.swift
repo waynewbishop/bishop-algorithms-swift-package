@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+ Generic `Linked List` algorithm used in conjunction with the `LLNode` data structure.
+  */
 
 class LinkedList<T> {
     

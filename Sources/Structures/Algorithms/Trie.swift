@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+A tree-base data structure used to define overlapping work hierarchies and permuation models.
+  */
 
 public class Trie {
     

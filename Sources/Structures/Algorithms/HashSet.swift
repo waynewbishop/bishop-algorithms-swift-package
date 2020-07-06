@@ -9,6 +9,12 @@
 import Foundation
 
 
+/**
+Example of a Hash Table. This example replicates the base functionality of a native Swift `Set` collection and does not support hash collisions.
+ 
+ - Complexity: Average time of O(1) - constant time.
+ */
+
 class HashSet <T: Indexable> {
  
     private var buckets: Array<T?>

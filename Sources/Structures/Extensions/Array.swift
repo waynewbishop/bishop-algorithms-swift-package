@@ -10,11 +10,12 @@ import Foundation
 
 
 extension Array where Element: Comparable {
-        
+       
     
     //find the length of the longest sub-sequence
     func subSequence(capacity: Int = 100) -> Int {
-            
+    
+        
         var buckets = Array<Int?>(repeatElement(nil, count: capacity))
         
         //build bucket list

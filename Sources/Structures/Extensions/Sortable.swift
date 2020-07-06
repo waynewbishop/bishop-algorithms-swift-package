@@ -13,18 +13,15 @@ import Foundation
 
 extension Sortable {
 
-    
     func isSorted<T: Comparable>(_ sequence: Array<T>) -> Bool {
-        
-        
+                
         //check trivial cases 
         guard sequence.count >= 1 else {
             return true
         }
         
         var index = sequence.startIndex
-        
-        
+                
         //compare sequence values
         while index < sequence.endIndex - 1 {
             if sequence[index] > sequence[sequence.index(after: index)] {

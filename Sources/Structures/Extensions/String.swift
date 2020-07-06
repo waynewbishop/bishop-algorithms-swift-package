@@ -9,8 +9,11 @@
 import Foundation
 
 
-
 extension String: Indexable {
+    
+    /**
+     A requirement of the custom `Indexable` protocol. When adding content to a `HashSet` generic elements must conform to this protocol.
+      */
     
     var asciiRepresentation: Int {
         var divisor: Int = 0
@@ -136,14 +139,13 @@ extension String: Indexable {
     }
     
     
-    //reverse string order
+    /**
+     While this operation would normally be done with the
+     native characters.reversed() method, this has been added as an example interview question.
+      */
+
     func reverse() -> String {
-        
-         /*
-         notes: While this operation would normally be done with the 
-         native characters.reversed() method, this has been added as an example interview question.
-         */
-        
+                
         //convert to array
         var characters = Array(self)
         

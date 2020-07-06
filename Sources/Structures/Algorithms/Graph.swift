@@ -8,10 +8,12 @@
 
 import Foundation
 
+/**
+A `Graph` defines a relationship between two or more `Vertices`.
+ */
 
 public class Graph {
    
-
     var canvas: Array<Vertex>
     var isDirected: Bool
     
@@ -34,14 +36,12 @@ public class Graph {
     }
     
     
-    
     /**
       Adds an `Edge` to a source `Vertex`.
      
      - Parameter source: The source Vertex.
      - Parameter neighbor: The connecting destination `Vertex`.
      - Parameter weight: The `Edge` weight value.
-     
      */
     
     func addEdge(source: Vertex, neighbor: Vertex, weight: Int) {
@@ -78,9 +78,6 @@ public class Graph {
         }
         
     }
-
-    
-    
 
     
     /**

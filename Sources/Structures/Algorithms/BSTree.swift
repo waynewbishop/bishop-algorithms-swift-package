@@ -8,11 +8,11 @@
 
 import Foundation
 
- /*
- note: self-balancing binary search tree (BST). Elements are positioned based on the
+ 
+/**
+ Self-balancing binary search tree (BST). Elements are positioned based on the
  value. After insertion, the model is checked for balance and automatically completes required rotations.
  */
-
 
 class BSTree<T: Comparable>{
     
