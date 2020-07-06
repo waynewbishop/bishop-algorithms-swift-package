@@ -38,27 +38,6 @@ class SortingTest: XCTestCase, Sortable {
     }
     
     
-    func testBackwardsSequence() {
-        
-        guard let results = numberList.backwards() else {
-           XCTFail("No correct values were passed..")
-           return
-        }
-        
-        print("The results are: \(results)")
-        
-    }
-    
-    
-    func testLongestSequence() {
-        
-        let list = [0,1,0,1,1,1,0,1,1,1,1,1]
-        let results = list.longestSequence(of: 1)
-        
-        print("the longest sequence is \(results)")        
-    }
-
-    
     //MARK: - Binary Search Algorithms
     
 

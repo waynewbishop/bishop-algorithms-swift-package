@@ -8,9 +8,9 @@
 
 import Foundation
 
-//used in conjunction with generic priorty queues
-
-//TODO: How to conform to Indexable?
+/**
+  Custom genetic structure used with hash tables and priorty queues.
+ */
 
 public class Table <T> {
     

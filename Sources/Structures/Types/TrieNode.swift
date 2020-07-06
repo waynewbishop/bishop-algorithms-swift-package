@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+  Custom data structure used with `Trie` algorithms.
+ */
 
 public class TrieNode {
         

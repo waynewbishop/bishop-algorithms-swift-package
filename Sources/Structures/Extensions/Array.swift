@@ -12,114 +12,13 @@ import Foundation
 extension Array where Element: Comparable {
        
     
-    //find the length of the longest sub-sequence
-    func subSequence(capacity: Int = 100) -> Int {
-    
-        
-        var buckets = Array<Int?>(repeatElement(nil, count: capacity))
-        
-        //build bucket list
-        for e in self {
-            if let evalue = e as? Int  {
-                buckets[evalue] = evalue
-            }
-        }
-                
-        //use dp to determine the consecutive count of non-open slots
-        var counter: Int = 0
-        var longest: Int = 0
-        
-        for current in buckets {
-            
-            //current iteration
-            if current != nil {
-                counter += 1
-            }
-            else {
-                counter = 0
-            }
-            
-            //preserve the longest sequence
-            if counter >= longest {
-                longest = counter
-            }
-        }
-        
-            
-      return longest
-        
-    }
-    
-    
     
     //returns middle index
     var midIndex: Int {
       return startIndex + (count / 2)
     }
     
-    
-    //reverse elements in sequential order - O(n)
-    func backwards() -> Array<Element?>? {
         
-        //trivial case
-        guard self.count != 0 else {
-            return nil
-        }
-    
-        //establish an empty array for later storage
-        var output = Array<Element?>(repeatElement(nil, count: self.count))
-        var current: Int = 0
-        
-    
-        //iterate forwards
-        while current < self.count {
-            
-           let item = self[current]
-           let newposition = (self.count - 1) - current
-           
-           output[newposition] = item
-        
-           current += 1
-        }
-            
-        return output
-    }
-    
-        
-    //determines the longest sequence of specified values
-    func longestSequence(of key: Element) -> Int {
-            
-            //initial values
-            var current: Element
-            var counter: Int = 0
-            var longest: Int = 0
-            
-            //iterate through list - O(n)
-            for s in self {
-                
-                //current iteration
-                current = s
-                
-                if current == key {
-                    counter += 1
-                }
-                else {
-                    counter = 0
-                }
-                
-                //preserve the longest sequence
-                if counter >= longest {
-                    longest = counter
-                }
-            }
-            
-            //return count results
-            return longest
-            
-        }
-    
-    
-    
     //MARK: - Binary Search
     
     

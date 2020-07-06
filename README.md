@@ -1,24 +1,24 @@
 Structures
 ====================
 
-This project provides a framework for commonly used data structures and algorithms written in <a href="http://www.waynewbishop.com" target="_blank">Swift</a>. While details of many algorithms exists on Wikipedia, these implementations are often written as pseudocode, or are expressed in C or C++. This code project, along with its supporting book provides theory, instruction and guidance on many commonly used models. These educational design can be used to help you pass your next technical interview or to build your next app. 
+This project provides a framework for commonly used data structures and algorithms written in <a href="http://www.waynewbishop.com" target="_blank">Swift</a>. While details of many algorithms exist on Wikipedia, these implementations are often written as pseudocode or are expressed in C or C++. This code project, along with its supporting book, provides theory, instruction and guidance on many commonly used models. These educational designs can help you pass your next technical interview or build your next app.
 
 
 Audience
 ---------------------
-To best utilize this project you should already be familiar with the basics of programming. Beyond algorithms, this code also aims to provide an alternative for learning the basics of Swift. This includes implementations of many Swift-specific features such as optionals, extensions, protocols and generics. Beyond Swift, audiences should be familiar with **Singleton** and **Factory** design patterns along with sets, arrays and dictionaries. 
+To best utilize this project, you should already be familiar with the basics of programming. Beyond algorithms, this code also aims to provide an alternative for learning the basics of Swift. Code examples include many Swift-specific features such as optionals, extensions, protocols and generics. Beyond Swift, audiences should be familiar with **Singleton** and **Factory** design patterns along with sets, arrays and dictionaries.
 
 
 Package Benefits
 ---------------------
 
-The project is organized as an Xcode package project which brings added benefits and flexibility. The source, along with its 70+ unit tests can be opened and executed as its own project, or can be included as its own dependency in another Xcode project. Since Swift packages support all Apple platforms, **Structures** can be used in any iOS, WatchOS, MacOS or TvOS application. Quick help documentation has also been made available for the many custom types and implementations.
+The project is an Xcode package project which brings added benefits and flexibility. The source, along with its 70+ unit tests can be opened and executed as a standalone project or included as a project dependency. Since Swift packages support all Apple platforms, **Structures** can be used in any iOS, WatchOS, MacOS, or TvOS application. Quick help documentation has also been made available for the many custom types and implementations.
 
 
 Playgrounds Sample
 ---------------------
 
-In addition to the over 70 included unit tests, this project also contains a sample **Swift Playground** to demonstrate how one can use the custom types. This includes interactive illustrations of Linked List as well as Stacks / Queues. These UI implementations are written in the latest version of SwiftUI.  
+In addition to the over 70 included unit tests, this project also contains a sample **Swift Playground** to demonstrate how one can use the custom types. Executing the example provides an interactive illustration of Linked List as well as Stacks / Queues. These UI implementations are written in the latest version of SwiftUI.
 
 
 

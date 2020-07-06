@@ -9,7 +9,9 @@
 import Foundation
 
 
-//generic node to be used with binary search trees (BST's)
+/**
+ Generic node to be used with binary search trees (BST's)
+ */
 
 class BSNode<T>{
     

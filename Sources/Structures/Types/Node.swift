@@ -8,8 +8,9 @@
 
 import Foundation
 
-
-//generic node used for stacks, queues and hash tables
+/**
+ Generic node used for stacks, queues and hash tables.
+ */
 
 class Node<T> {
     
