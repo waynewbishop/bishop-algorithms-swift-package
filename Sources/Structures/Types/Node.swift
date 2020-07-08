@@ -10,10 +10,11 @@ import Foundation
 
 /**
  Generic node used for stacks, queues and hash tables.
+ - Important: Conformance to `Identifiable` required for used as model in SwiftUI.
  */
 
-class Node<T> {
-    
+class Node<T> : Identifiable {
+    var id: UUID = UUID()
     var tvalue: T?
     var next: Node?
 }

@@ -32,7 +32,11 @@ protocol Indexable {
 
 
 
-//determine sort order
+/**
+To determine if items stored in a `Comparable` collection are correctly sorted.
+ - Complexity: O(n) - Linear Time.
+ */
+
 protocol Sortable {
     func isSorted<T: Comparable>(_ sequence: Array<T>) -> Bool
 }
