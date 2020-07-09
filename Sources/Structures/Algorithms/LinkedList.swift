@@ -35,8 +35,8 @@ class LinkedList<T> {
     }
 
     
-    //returns all keys
-    var keys: Array<T> {
+    //returns all values
+    var values: Array<T> {
         
         var current: LLNode? = head
         var results = Array<T>()

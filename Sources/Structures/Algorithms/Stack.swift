@@ -9,19 +9,37 @@
 import Foundation
 
 
-class Stack<T> {
+public class Stack<T> {
     
-    var top: Node<T>
-    private var counter: Int = 0
+   public var top: Node<T>
+   private var counter: Int = 0
     
     
-    init() {
+  public init() {
         top = Node<T>()
     }
     
+
+    //returns all values
+    public var values: Array<Node<T>> {
+
+        var results = Array<Node<T>>()
+        
+        var current: Node<T>? = top
+        
+        while let item = current {
+            results.append(item)
+            current = item.next
+        }
+                
+        return results
+        
+    }
+    
+    
     
     //the number of items - O(1)
-    var count: Int {
+  public  var count: Int {
         return counter
     }
     
@@ -30,7 +48,7 @@ class Stack<T> {
     
     
     //retrieve the top most item - O(1)
-    func peek() -> T? {
+    public func peek() -> T? {
         
         if let item = top.tvalue {
             return item
@@ -43,7 +61,7 @@ class Stack<T> {
     
     
     //check for value - O(1)
-    func isEmpty() -> Bool {
+    public func isEmpty() -> Bool {
         
         if self.count == 0 {
             return true
@@ -56,8 +74,8 @@ class Stack<T> {
     }
     
     
-    //add item to the stack - O(1)
-    func push(_ tvalue: T) {
+  //add item to the stack - O(1)
+  public func push(_ tvalue: T) {
         
         
         //return trivial case
@@ -88,7 +106,7 @@ class Stack<T> {
 
     
     //returns item from the stack - O(1)
-    func popValue() ->T? {
+    public func popValue() ->T? {
         
         
         guard let results = top.tvalue else {
@@ -110,7 +128,7 @@ class Stack<T> {
     
     
     //remove item from the stack - O(1)
-    func pop() {
+    public func pop() {
         
         if top.tvalue == nil {
             counter = 0

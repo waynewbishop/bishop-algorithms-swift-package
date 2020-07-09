@@ -13,10 +13,11 @@ import Foundation
  - Important: Conformance to `Identifiable` required for used as model in SwiftUI.
  */
 
-class Node<T> : Identifiable {
-    var id: UUID = UUID()
-    var tvalue: T?
-    var next: Node?
+public class Node<T> : Identifiable {
+    
+   public var id: UUID = UUID()
+   public var tvalue: T?
+   public var next: Node?
 }
 
 

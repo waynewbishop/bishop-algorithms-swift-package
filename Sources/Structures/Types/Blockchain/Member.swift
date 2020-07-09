@@ -23,7 +23,7 @@ extension Member {
        var bal: Float {
            
            //obtain list keys
-           let blocks = blockchain.keys
+           let blocks = blockchain.values
            var value: Float = 0.0
 
            
