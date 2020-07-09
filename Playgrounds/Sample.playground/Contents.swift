@@ -10,7 +10,7 @@ import Structures
 import SwiftUI
 
 /*:
- Shown above, playgrounds created with the Xcode 12+ can include additional resources from a Swift package or iOS app project. In this case, resources from the **Structures** package are being referenced to build the sample **Stack** data structure.
+ Shown above, playgrounds created with the Xcode 12+ can include additional resources from a Swift package or iOS app project. In this case, resources from the **Structures** package are being referenced to build the sample **Stack** data structure. As you experiment with the code, feel free to push and pop additional items. Also, test the generic features by changing **Int** to a **String** type.
  */
 
 //create a new stack
@@ -22,6 +22,7 @@ stack.push(10)
 stack.push(2)
 stack.push(9)
 stack.push(4)
+
 
 //uncomment this code to see what changes!
 //stack.pop()
@@ -65,3 +66,8 @@ struct StackView: View {
 
 let stackView = StackView()
 PlaygroundPage.current.setLiveView(stackView)
+
+
+/*:
+In addition to this playgrounds sample, be sure to check out the 70+ unit tests that provide much more details on how to utilize the more complex algorithms like **Binary Search Trees**, Heaps and Graphs. These can be found under Tests/StructureTests under the main **Structures** project.
+ */
