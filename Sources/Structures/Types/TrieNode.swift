@@ -14,10 +14,10 @@ import Foundation
 
 public class TrieNode {
         
-    var tvalue: String?
-    var children: Array<TrieNode>
-    var isFinal: Bool
-    var level: Int
+    var tvalue: String?  //App
+    var children: Array<TrieNode> //Appe, Append
+    var isFinal: Bool  //false
+    var level: Int //3
 
     
     init() {

@@ -37,7 +37,7 @@ public class Trie {
         
         var current: TrieNode = root
         
-        
+
         while keyword.length != current.level {
             
             var childToUse = TrieNode()

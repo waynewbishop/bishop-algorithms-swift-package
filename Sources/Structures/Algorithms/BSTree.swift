@@ -233,7 +233,7 @@ class BSTree<T: Comparable>{
         
         //create new element
         let childToUse = BSNode<T>()
-        childToUse.height = 0
+        childToUse.height = 0  //TODO: Not required..
         childToUse.tvalue = element.tvalue
 
         

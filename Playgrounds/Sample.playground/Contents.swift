@@ -1,9 +1,12 @@
 /*:
  
- # Stack Playground
+ # Style Guide
  
  This project provides a framework for commonly used data structures and algorithms written in Swift! This sample playground provides a quick guide for utilizing the many algorithms and data structures.
  */
+
+//note: Is this a style guide? What else could be added
+//to make this cool?
 
 import PlaygroundSupport
 import Structures
@@ -21,8 +24,6 @@ stack.push(8)
 stack.push(10)
 stack.push(2)
 stack.push(9)
-stack.push(4)
-
 
 //uncomment this code to see what changes!
 //stack.pop()
@@ -33,7 +34,7 @@ stack.push(4)
 
 struct StackView: View {
         
-   var results = stack.values
+   @State var results = stack.values
     
 /*:
  The Stack also makes use of SwiftUI for its visual elements. To prepare the Stack data to be used SwiftUI, the model supporting the custom structure was extended to support the **Identifiable** protocol. This works as the main **source of truth**, as its results are always interpreted at runtime using a computed property.
@@ -41,12 +42,13 @@ struct StackView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-                        
+            
             ForEach(results, id: \.id) { result in
                 
+                //TODO: extract as subView.
                 ZStack {
                         RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(.red)
+                            .foregroundColor(.gray)
                             .frame(width: 195.0, height: 65.0)
                     
                         if let tvalue = result.tvalue {
@@ -56,12 +58,25 @@ struct StackView: View {
                                 .fontWeight(.bold)
                         }
                 }
-                    Divider()
-                    .frame(width: 250, height:20, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                
+                    Spacer()
+                        .frame(width: nil, height: 10, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             }
         }
+        Spacer()
+        Button("Pop from Stack..", action: removeFromStack)
+            .frame(width: nil, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
     }
+    
+    func removeFromStack() {
+        print("pop item from stack..")
+        
+        guard results.count > 0 else {
+            return
+        }
+        results.removeFirst()
+        
+    }
+
 }
 
 let stackView = StackView()

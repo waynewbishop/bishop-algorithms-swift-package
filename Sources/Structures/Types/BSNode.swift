@@ -21,7 +21,7 @@ class BSNode<T>{
     var height: Int
     
     init() {
-        self.height = -1
+        self.height = 0
     }
     
     
