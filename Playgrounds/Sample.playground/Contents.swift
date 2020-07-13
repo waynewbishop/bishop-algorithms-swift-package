@@ -41,6 +41,7 @@ struct StackView: View {
  */
     
     var body: some View {
+        
         VStack(alignment: .center) {
             
             ForEach(results, id: \.id) { result in
@@ -67,6 +68,7 @@ struct StackView: View {
             .frame(width: nil, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
     }
     
+    
     func removeFromStack() {
         print("pop item from stack..")
         
@@ -74,8 +76,8 @@ struct StackView: View {
             return
         }
         results.removeFirst()
-        
     }
+    
 
 }
 

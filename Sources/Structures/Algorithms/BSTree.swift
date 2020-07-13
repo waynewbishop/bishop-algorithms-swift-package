@@ -12,6 +12,9 @@ import Foundation
 /**
  Self-balancing binary search tree (BST). Elements are positioned based on the
  value. After insertion, the model is checked for balance and automatically completes required rotations.
+ 
+ - Important:  As the tree expands with additional nodes, the entire structure is reevaluated to determine
+ to check for balance and perform any required rotations.
  */
 
 class BSTree<T: Comparable>{
@@ -39,7 +42,12 @@ class BSTree<T: Comparable>{
         
         while current.tvalue != nil {  //TODO: refine model to use standard if-let statement. 
 
-            //send reference of current item to stack
+            /*
+             note: as the tree expands with additional nodes, the entire structure is reevaluated to determine
+             to check for balance and perform any required rotations.
+             */
+            
+            //send reference of current item to stack:
             push(element: &current)
             
             
@@ -144,6 +152,7 @@ class BSTree<T: Comparable>{
 
   //determine height and balance
   private func rebalance() {
+        print("rebalanced called..:")
         
         for _ in stride(from: elementStack.count, through: 1, by: -1) {
             
