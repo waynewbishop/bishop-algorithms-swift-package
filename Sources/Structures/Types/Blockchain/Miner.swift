@@ -108,8 +108,6 @@ class Miner: Member {
     
     private func mineBlock() -> Block {
         print("mining new block..")
-        sleep(20)
-        
         return Block()
     }
         

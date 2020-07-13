@@ -12,8 +12,7 @@ import Foundation
  Self-balancing binary search tree (BST). Elements are positioned based on the
  value. After insertion, the model is checked for balance and automatically completes required rotations.
  
- - Important:  As the tree expands with additional nodes, the entire structure is reevaluated to check for possible left or right imbalances.
- To track potential issues, `BSNode` values  are passed via reference to a `Stack` data structure for processing.
+ - Important:  As the tree expands with additional nodes, the entire structure is reevaluated to check for possible left or right imbalances. To track potential issues, `BSNode` values  are passed via reference to a `Stack` data structure for processing.
  */
 
 class BSNew <T: Comparable>{
@@ -79,7 +78,7 @@ class BSNew <T: Comparable>{
         } //end while
         
        
-        //recalculate tree height
+        //recompute tree structure
        self.rebalance()
         
         
@@ -94,8 +93,7 @@ class BSNew <T: Comparable>{
 Stack `BSNode` elements for later processing - memoization.
  
 - Important:  As the tree expands with additional nodes, the entire structure is reevaluated to check for
- possible left or right imbalances. To track potential issues, `BSNode` values  are passed via reference to a `Stack` data structure
- for processing.
+ possible left or right imbalances. To track potential issues, `BSNode` values  are passed via reference to a `Stack` data structure for processing.
 */
 
     private func push(element: inout BSNode<T>) {
@@ -105,8 +103,7 @@ Stack `BSNode` elements for later processing - memoization.
     
 /**
  Determine tree height and balance. As the tree expands with additional nodes, the entire structure is reevaluated to check for
-possible left or right imbalances.To track potential issues, `BSNode` values  are passed via reference to a `Stack` data structure
-for processing.
+possible left or right imbalances.To track potential issues, `BSNode` values  are passed via reference to a `Stack` data structure for processing.
  */
     
     private func rebalance() {
@@ -125,24 +122,102 @@ for processing.
                 //recalcuate height
                 setHeight(for: bsNode)
                 
-                
+    
                 if self.isTreeBalanced(for: bsNode) == true {
                     print("tree balanced..")
                 }
+                
                 else {
-                    //TODO: determine left or right rotation code here..
+                    
+                    //determine side imbalance
+                    let right = getHeight(of: bsNode.left) - getHeight(of: bsNode.right)
+                    let left =  getHeight(of: bsNode.right) - getHeight(of: bsNode.left)
+                    
+                    if right > 1 {
+                        self.rotateRight(for: bsNode)
+                    }
+                    
+                    if left > 1 {
+                        self.rotateLeft(for: bsNode)
+                    }
+                    
                 }
                 
-                
-                //remove stacked item
                 stack.pop()
-                
             }
         
-      }
+    } //end function
+    
 
     
-//MARK: Height Measurement and Balancing
+    
+//MARK: Balancing - Rotation Methods
+    
+    
+/**
+ Determine tree height and balance. As the tree expands with additional nodes, the entire structure is reevaluated to check for possible left or right imbalances.To track potential issues, `BSNode` values  are passed via reference to a `Stack` data structure for processing.
+ */
+
+    private func rotateLeft(for element: BSNode<T>) {
+        
+        //new element
+        let leftChild = BSNode<T>()
+        leftChild.tvalue = element.tvalue
+                
+        
+        if let rightChild = element.right {
+        
+            //reset the root node
+            element.tvalue = rightChild.tvalue
+            element.height = self.getHeight(of: rightChild)
+            
+            
+            //adjust right
+            element.right = rightChild.right
+            
+        }
+                        
+        //assign new right node
+        element.left = leftChild
+        
+        self.printTree(element)
+        
+    }
+
+
+/**
+ Determine tree height and balance. As the tree expands with additional nodes, the entire structure is reevaluated to check for possible left or right imbalances.To track potential issues, `BSNode` values  are passed via reference to a `Stack` data structure for processing.
+ */
+    
+    private func rotateRight(for element: BSNode<T>) {
+        
+        
+        //new element
+        let rightChild = BSNode<T>()
+        rightChild.tvalue = element.tvalue
+                
+        
+        if let leftChild = element.left {
+        
+            //reset the root node
+            element.tvalue = leftChild.tvalue
+            element.height = self.getHeight(of: leftChild)
+            
+            
+            //adjust left
+            element.left = leftChild.left
+            
+        }
+                        
+        //assign new right node
+        element.right = rightChild
+        
+        self.printTree(element)
+        
+    }
+    
+    
+//MARK: Balancing - Height Measurement 
     
     private func getHeight(of node: BSNode<T>?) -> Int {
          
@@ -164,11 +239,11 @@ for processing.
         //compare to calculate height
         nodeHeight = max(getHeight(of: node.left), getHeight(of: node.right)) + 1
         node.height = nodeHeight
-         
+        
      }
     
     
-   private func isTreeBalanced(for element: BSNode<T>) -> Bool {
+     public func isTreeBalanced(for element: BSNode<T>) -> Bool {
         
         //use absolute value to measure imbalance
         if (abs(getHeight(of: element.left) - getHeight(of: element.right)) <= 1) {
@@ -182,21 +257,11 @@ for processing.
     
     
     
-//MARK: Rotation Methods
+    //MARK: Helper function
         
-    private func rotateLeft(element: BSNode<T>) {
-        //code goes here..
+    public func printTree(_ element: BSNode<T>) {
+        print("left is : \(element.left!.tvalue!) | root is: \(element.tvalue!)  | right is : \(element.right!.tvalue!)..")
     }
-
-
+            
     
-    private func rotateRight(element: BSNode<T>) {
-        //code goes here..
-    }
-    
-        
-}
-
-
-
-
+} //end class

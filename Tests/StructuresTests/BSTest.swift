@@ -50,6 +50,17 @@ class BSTest: XCTestCase {
     }
     
     
+    //essay documentation - single right rotation - O(n)
+    func testSingleRotationLeft() {
+        
+        let numberList : Array<Int> = [29, 32, 36]
+        
+        //build and balance model
+        let _: Void = buildBSTree(numberList)
+        
+    }
+    
+    
     //input for a balanced avl tree - O(log n)
     func testBalancedTree() {
         
@@ -243,7 +254,7 @@ class BSTest: XCTestCase {
         
         
         //test for new instance
-        let bsTest: BSTree<Int> = BSTree<Int>()
+        let bsTest = BSNew<Int>()
         XCTAssertNotNil(bsTest, "bst instance not created..")
         
         

@@ -246,7 +246,9 @@ class BSTree<T: Comparable>{
         childToUse.tvalue = element.tvalue
 
         
-        //determine side imbalance
+        //determine side imbalance: note, this is not an either / or condition as both sides of the tree could be
+    //imbalance.
+    
         let rightSide = findHeight(of: element.left) - findHeight(of: element.right)
         let leftSide =  findHeight(of: element.right) - findHeight(of: element.left)
         
