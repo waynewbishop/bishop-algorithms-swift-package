@@ -25,7 +25,7 @@ class BSTest: XCTestCase {
     func testCount() {
         
         let numberList = [1, 2, 3, 5, 234, -20]
-        let bsTree = BSTree<Int>()
+        let bsTree = BSModel<Int>()
         
         for number in numberList {
             bsTree.append(number)
@@ -48,6 +48,8 @@ class BSTest: XCTestCase {
         let _: Void = buildBSTree(numberList)
         
     }
+    
+    //MARK: Rotation Tests
     
     
     //essay documentation - single right rotation - O(n)
@@ -107,8 +109,9 @@ class BSTest: XCTestCase {
 
     
     
-    //MARK: Search Tests
+    //MARK: Contains Tests
 
+    
     
     
     func testContainsRoot() {
@@ -117,7 +120,7 @@ class BSTest: XCTestCase {
         let testvalue: Int = sequence[1]
         
         //build and balance model
-        let bsTest: BSTree<Int> = buildBSTree(sequence)
+        let bsTest: BSModel<Int> = buildBSTree(sequence)
         
         if bsTest.contains(testvalue) == false {
             XCTFail("contains bst test fails for value: \(testvalue)..")
@@ -131,7 +134,7 @@ class BSTest: XCTestCase {
         let testvalue: Int = sequence[2]
         
         //build and balance model
-        let bsTest: BSTree<Int> = buildBSTree(sequence)
+        let bsTest: BSModel<Int> = buildBSTree(sequence)
         
         if bsTest.contains(testvalue) == false {
             XCTFail("contains bst test fails for value: \(testvalue)..")
@@ -145,7 +148,7 @@ class BSTest: XCTestCase {
         let testvalue: Int = sequence[3]
         
         //build and balance model
-        let bsTest: BSTree<Int> = buildBSTree(sequence)
+        let bsTest: BSModel<Int> = buildBSTree(sequence)
         
         if bsTest.contains(testvalue) == false {
             XCTFail("contains bst test fails for value: \(testvalue)..")
@@ -162,12 +165,15 @@ class BSTest: XCTestCase {
 
         
         //build and balance model
-        let bsTest: BSTree<Int> = buildBSTree(sequence)
+        let bsTest: BSModel<Int> = buildBSTree(sequence)
         
         if bsTest.contains(testvalue) == true {
             XCTFail("contains bst test fails for value: \(testvalue)..")
         }
     }
+ 
+    
+    
     
     
     func testBFSTraversal() {
@@ -175,7 +181,7 @@ class BSTest: XCTestCase {
         let sequence: Array<Int> = [8, 2, 10, 5, 9, 11, 1]
         
         //build and balance model
-        let bsTest: BSTree<Int> = buildBSTree(sequence)
+        let bsTest: BSModel<Int> = buildBSTree(sequence)
         
         if bsTest.root.count != sequence.count {
             XCTFail("incorrect values present for BST model..")
@@ -185,7 +191,9 @@ class BSTest: XCTestCase {
         bsTest.root.BFSTraverse()
         
     }
-
+ 
+  
+    
 
     
     //MARK: Closure Tests
@@ -254,7 +262,7 @@ class BSTest: XCTestCase {
         
         
         //test for new instance
-        let bsTest = BSNew<Int>()
+        let bsTest = BSModel<Int>()
         XCTAssertNotNil(bsTest, "bst instance not created..")
         
         
@@ -270,11 +278,11 @@ class BSTest: XCTestCase {
 
     
     //helper function - build and balance bst
-    func buildBSTree(_ sequence: Array<Int>) -> BSTree<Int> {
+    func buildBSTree(_ sequence: Array<Int>) -> BSModel<Int> {
         
         
         //test for new instance
-        let bsTest: BSTree<Int> = BSTree<Int>()
+        let bsTest: BSModel<Int> = BSModel<Int>()
         XCTAssertNotNil(bsTest, "bst instance not created..")
         
         
@@ -297,10 +305,9 @@ class BSTest: XCTestCase {
 
     
     //helper function - build specific model to be traversed with closures
-    func buildClosureTree() -> BSTree<Int> {
+    func buildClosureTree() -> BSModel<Int> {
         
-        
-        let bsTest: BSTree<Int> = BSTree<Int>()
+        let bsTest = BSModel<Int>()
         XCTAssertNotNil(bsTest, "bst instance not created..")
         
         

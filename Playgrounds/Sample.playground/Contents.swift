@@ -23,7 +23,7 @@ let stack = Stack<Int>()
 stack.push(8)
 stack.push(10)
 stack.push(2)
-stack.push(9)
+//stack.push(9)
 
 //uncomment this code to see what changes!
 //stack.pop()

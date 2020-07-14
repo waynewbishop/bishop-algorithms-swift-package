@@ -1,5 +1,5 @@
 //
-//  BSNew.swift
+//  BSModel.swift
 //  SwiftStructures
 //
 //  Created by Wayne Bishop on 7/13/20.
@@ -15,14 +15,13 @@ import Foundation
  - Important:  As the tree expands with additional nodes, the entire structure is reevaluated to check for possible left or right imbalances. To track potential issues, `BSNode` values  are passed via reference to a `Stack` data structure for processing.
  */
 
-class BSNew <T: Comparable>{
+class BSModel <T: Comparable>{
     
     var root = BSNode<T>()
     private var stack = Stack<BSNode<T>>()
 
     
     func append(_ item: T) {
-        
         
         //initial check
         guard root.tvalue != nil else {
@@ -86,13 +85,71 @@ class BSNew <T: Comparable>{
 
     
     
+    /**
+     Finds an element in the specified `BSNew` instance.
+     
+     - Complexity: O(log n) - logarithmic time.
+     */
+    func contains(_ item: T) -> Bool {
+
+        guard root.tvalue != nil else {
+            return false
+        }
+        
+        //obtain reference
+        var current: BSNode<T> = root
+        
+        
+        while current.tvalue != nil {
+        
+            if let tvalue = current.tvalue {
+                
+                if item == tvalue {
+                    return true
+                }
+                
+                //check left side
+                if item < tvalue {
+
+                        if let lnode = current.left {
+                          current = lnode
+                        }
+                        else {
+                          return false
+                        }
+                }
+
+                      
+                //check right side
+                if item > tvalue {
+
+                    if let rnode = current.right {
+                      current = rnode
+                    }
+
+                    else {
+                        return false
+                    }
+                }
+                                
+            } //end if
+            
+        }
+            
+        
+        return false
+    }
+    
+  
+    
+    
 //MARK: Stack Memoization Process
 
     
 /**
-Stack `BSNode` elements for later processing - memoization.
+Store `BSNode` references for later processing - memoization.
  
-- Important:  As the tree expands with additional nodes, the entire structure is reevaluated to check for
+- Important:  As the tree expands with additional nodes, the `BSTree` structure is reevaluated to check for
  possible left or right imbalances. To track potential issues, `BSNode` values  are passed via reference to a `Stack` data structure for processing.
 */
 
@@ -102,8 +159,7 @@ Stack `BSNode` elements for later processing - memoization.
     
     
 /**
- Determine tree height and balance. As the tree expands with additional nodes, the entire structure is reevaluated to check for
-possible left or right imbalances.To track potential issues, `BSNode` values  are passed via reference to a `Stack` data structure for processing.
+ Determine tree height and balance. As the tree expands with additional nodes, the entire structure is reevaluated to check for possible left or right imbalances.To track potential issues, `BSNode` values  are passed via reference to a `Stack` data structure for processing.
  */
     
     private func rebalance() {
@@ -189,8 +245,7 @@ possible left or right imbalances.To track potential issues, `BSNode` values  ar
  Determine tree height and balance. As the tree expands with additional nodes, the entire structure is reevaluated to check for possible left or right imbalances.To track potential issues, `BSNode` values  are passed via reference to a `Stack` data structure for processing.
  */
     
-    private func rotateRight(for element: BSNode<T>) {
-        
+    private func rotateRight(for element: BSNode<T>) {        
         
         //new element
         let rightChild = BSNode<T>()
