@@ -51,9 +51,10 @@ class HashSet <T: Indexable> {
     }
     
     
-    func update(_ element: T) -> T? {
-        //TODO: How does this work? Check Apple documentation..
-        return nil
+    //unconditional insert
+    func update(_ element: T) -> Bool {
+        let result: Bool = self.insert(element)
+        return result
     }
     
         

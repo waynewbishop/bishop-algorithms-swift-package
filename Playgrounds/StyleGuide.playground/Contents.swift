@@ -2,18 +2,15 @@
  
  # Style Guide
  
- This project provides a framework for commonly used data structures and algorithms written in Swift! This sample playground provides a quick guide for utilizing the many algorithms and data structures.
+ This playground provides for getting started with the **Structures** package. Swift Structures has been optimized for **Swift 5.3** (e.g., Xcode 12.0) or later.
  */
-
-//note: Is this a style guide? What else could be added
-//to make this cool?
 
 import PlaygroundSupport
 import Structures
 import SwiftUI
 
 /*:
- Shown above, playgrounds created with the Xcode 12+ can include additional resources from a Swift package or iOS app project. In this case, resources from the **Structures** package are being referenced to build the sample **Stack** data structure. As you experiment with the code, feel free to push and pop additional items. Also, test the generic features by changing **Int** to a **String** type.
+ Shown above, playgrounds created with the Xcode 12+ can include additional resources from a Swift package. In addition, **Structures** can also be used as a project dependency in an existing iOS, WatchOS or TvOS app.  In this case, package resources are being referenced to build the sample **Stack** data structure. As you experiment with the code, feel free to push and pop additional items. Also, test the generic features by changing **Int** to a **String** type.
  */
 
 //create a new stack
@@ -23,7 +20,7 @@ let stack = Stack<Int>()
 stack.push(8)
 stack.push(10)
 stack.push(2)
-//stack.push(9)
+stack.push(9)
 
 //uncomment this code to see what changes!
 //stack.pop()
@@ -37,7 +34,7 @@ struct StackView: View {
    @State var results = stack.values
     
 /*:
- The Stack also makes use of SwiftUI for its visual elements. To prepare the Stack data to be used SwiftUI, the model supporting the custom structure was extended to support the **Identifiable** protocol. This works as the main **source of truth**, as its results are always interpreted at runtime using a computed property.
+ To prepare the Stack data to be used SwiftUI, the model supporting the custom structure was extended to support the **Identifiable** protocol. This works as the main **source of truth**, as its results are always interpreted at runtime using a computed property.
  */
     
     var body: some View {
@@ -46,7 +43,6 @@ struct StackView: View {
             
             ForEach(results, id: \.id) { result in
                 
-                //TODO: extract as subView.
                 ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .foregroundColor(.gray)
@@ -63,22 +59,7 @@ struct StackView: View {
                         .frame(width: nil, height: 10, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             }
         }
-        Spacer()
-        Button("Pop from Stack..", action: removeFromStack)
-            .frame(width: nil, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
     }
-    
-    
-    func removeFromStack() {
-        print("pop item from stack..")
-        
-        guard results.count > 0 else {
-            return
-        }
-        results.removeFirst()
-    }
-    
-
 }
 
 let stackView = StackView()

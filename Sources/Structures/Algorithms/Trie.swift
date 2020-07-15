@@ -98,30 +98,22 @@ public class Trie {
         
         
         while keyword.length != current.level {
-            
-            var childToUse: TrieNode!
+                        
             let searchKey = keyword.substring(to: current.level + 1)
-            
 
-            //print("looking for prefix: \(searchKey)..")
-            
             
             //iterate through any child nodes
             for child in current.children {
                 
-                if (child.tvalue == searchKey) {
-                    childToUse = child
-                    current = childToUse
+                if child.tvalue == searchKey {
+                    current = child
                     break
+                }
+                else {
+                    return nil
                 }
                 
             }
-            
- 
-            if childToUse == nil {
-               return nil
-            }
-            
             
         } //end while
         

@@ -46,6 +46,10 @@ class BSModel <T: Comparable>{
             
             
             if let tvalue = current.tvalue {
+                                
+                if tvalue == item {
+                    return
+                }
                 
                 //check left side
                 if item < tvalue {

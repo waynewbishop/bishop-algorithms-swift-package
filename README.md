@@ -15,10 +15,10 @@ Package Benefits
 The project is an Xcode package project which brings added benefits and flexibility. The source, along with its 70+ unit tests can be opened and executed as a standalone project or included as a project dependency. Since Swift packages support all Apple platforms, **Structures** can be used in any iOS, WatchOS, MacOS, or TvOS application. Quick help documentation has also been made available for the many custom types and implementations.
 
 
-Playgrounds Sample
+Style Guide
 ---------------------
 
-In addition to the over 70 included unit tests, this project also contains a sample **Swift Playground** to demonstrate how one can use the custom types. Executing the example provides an interactive illustration of Linked List as well as Stacks / Queues. These UI implementations are written in the latest version of SwiftUI.
+In addition to the over 70 included unit tests, this project also contains a sample **Swift Playground** to demonstrate how one can use the custom types. Executing the example provides an interactive illustration of building a Stack data structure. Beyond the algorithm, a visual implementation is also shown using SwiftUI. 
 
 
 
