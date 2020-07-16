@@ -9,25 +9,28 @@
 import Foundation
 
 
-class Queue<T> {
+public class Queue<T> {
         
     var top = Node<T>()
     private var counter: Int = 0
 
+    public init() {
+        //dependency support
+    }
     
-    var count: Int {
+    public var count: Int {
         return counter
     }
 
     
-    func peek() -> T? {
+    public func peek() -> T? {
         return top.tvalue
     }
     
     
     
     //check for a value
-    func isEmpty() -> Bool {
+    public func isEmpty() -> Bool {
         
         guard top.tvalue != nil else {
             return true
@@ -42,7 +45,7 @@ class Queue<T> {
 
     
     //enqueue specified item - O(n)
-    func enQueue(_ key: T) {
+    public func enQueue(_ key: T) {
         
         
         //trivial case
@@ -71,7 +74,7 @@ class Queue<T> {
 
     
     //retrieve top level item - O(1)
-   func deQueue() -> T? {
+    public func deQueue() -> T? {
     
     
         //trivial case
