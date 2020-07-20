@@ -16,6 +16,9 @@ public class Trie {
     
     private var root = TrieNode()
    
+    public init() {
+        //package support
+    }
     
     //find subscript shortcut
     subscript(word: String) -> Array<String>? {

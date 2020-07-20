@@ -15,15 +15,15 @@ import Foundation
      - Complexity: O(n) - linear time.
      */
 
-class Miner: Member {
+public class Miner: Member {
     
     
-      var blockchain = LinkedList<Block>()
-      var desc: String?
-      var id: UUID
+    public var blockchain = LinkedList<Block>()
+    public var desc: String?
+    public var id: UUID
 
     
-    init(balance: Float = 0.0, desc: String = "", model: inout Blockchain) {
+    public init(balance: Float = 0.0, desc: String = "", model: inout Blockchain) {
         
         self.desc = desc
         self.id = UUID()

@@ -13,7 +13,7 @@ import Foundation
  Used in a blockchain network, `Peers` and `Miners` both conform to this protocol. The conformance of `balance` is implemented through the `Member` protocol extension.
  */
 
-protocol Member {
+public protocol Member {
     
     var blockchain: LinkedList<Block> {get}
     var desc: String? {get}
@@ -26,7 +26,7 @@ protocol Member {
  Required stored property. Custom `HashSet` type requirement.
  */
 
-protocol Indexable {
+public protocol Indexable {
     var asciiRepresentation: Int {get}
 }
 
@@ -37,6 +37,6 @@ To determine if items stored in a `Comparable` collection are correctly sorted.
  - Complexity: O(n) - Linear Time.
  */
 
-protocol Sortable {
+public protocol Sortable {
     func isSorted<T: Comparable>(_ sequence: Array<T>) -> Bool
 }

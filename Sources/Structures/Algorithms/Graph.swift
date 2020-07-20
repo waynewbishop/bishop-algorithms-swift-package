@@ -24,14 +24,14 @@ public class Graph {
      - Parameter directed: Indicates if the model should be established as directed or undirected graph.
      */
 
-    init(directed: Bool = true) {
+   public init(directed: Bool = true) {
         canvas = Array<Vertex>()
         isDirected = directed
     }
     
     
     //add vertex to graph canvas
-    func addVertex(element: Vertex) {
+    public func addVertex(element: Vertex) {
         canvas.append(element)
     }
     
@@ -44,7 +44,7 @@ public class Graph {
      - Parameter weight: The `Edge` weight value.
      */
     
-    func addEdge(source: Vertex, neighbor: Vertex, weight: Int) {
+    public func addEdge(source: Vertex, neighbor: Vertex, weight: Int) {
         
         
         //create a new edge
@@ -88,7 +88,7 @@ public class Graph {
      - Returns: The reversed `Path`.
      */
 
-    func reversePath(_ head: Path?, source: Vertex) -> Path? {
+    public func reversePath(_ head: Path?, source: Vertex) -> Path? {
         
         
         guard head != nil else {
@@ -128,9 +128,8 @@ public class Graph {
 
     
     
-    
     //process Dijkstra's shortest path algorthim
-    func processDijkstra(_ source: Vertex, destination: Vertex) -> Path? {
+    public func processDijkstra(_ source: Vertex, destination: Vertex) -> Path? {
         
         
         var frontier: Array<Path> = Array<Path>()
@@ -229,7 +228,7 @@ public class Graph {
     
     
     ///an optimized version of Dijkstra's shortest path algorthim
-    func processDijkstraWithHeap(_ source: Vertex, destination: Vertex) -> Path? {
+    public func processDijkstraWithHeap(_ source: Vertex, destination: Vertex) -> Path? {
         
         
         let frontier: PathHeap = PathHeap()
@@ -307,7 +306,7 @@ public class Graph {
     
     
     //bfs traversal with inout closure function
-    func traverse(_ startingv: Vertex, formula: (_ node: inout Vertex) -> ()) {
+    public func traverse(_ startingv: Vertex, formula: (_ node: inout Vertex) -> ()) {
 
         
         //establish a new queue
@@ -356,7 +355,7 @@ public class Graph {
     
     
     //breadth first search
-    func traverse(_ startingv: Vertex) {
+    public func traverse(_ startingv: Vertex) {
         
     
         
@@ -401,7 +400,7 @@ public class Graph {
     
     
     //implement google pagerank based on trailing closure formula
-    func rank(startingv: Vertex, formula:((Vertex) -> Int)) {
+    public func rank(startingv: Vertex, formula:((Vertex) -> Int)) {
         
         /*
         note: the being that one implements pageRank based on a "score". This is a
@@ -459,12 +458,8 @@ public class Graph {
         
         
         print("graph traversal complete..")
-        
-        
+                
     }
 
-    
-
-    
     
 }

@@ -15,13 +15,17 @@ import Foundation
  - Important:  As the tree expands with additional nodes, the entire structure is reevaluated to check for possible left or right imbalances. To track potential issues, `BSNode` values  are passed via reference to a `Stack` data structure for processing.
  */
 
-class BSModel <T: Comparable>{
+public class BSModel <T: Comparable>{
     
     var root = BSNode<T>()
     private var stack = Stack<BSNode<T>>()
-
     
-    func append(_ item: T) {
+    public init() {
+        //package support
+    }
+    
+
+   public func append(_ item: T) {
         
         //initial check
         guard root.tvalue != nil else {
@@ -94,7 +98,7 @@ class BSModel <T: Comparable>{
      
      - Complexity: O(log n) - logarithmic time.
      */
-    func contains(_ item: T) -> Bool {
+    public func contains(_ item: T) -> Bool {
 
         guard root.tvalue != nil else {
             return false

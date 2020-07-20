@@ -12,7 +12,7 @@ import Foundation
  Generic `Linked List` algorithm used in conjunction with the `LLNode` data structure.
   */
 
-class LinkedList<T> {
+public class LinkedList<T> {
     
     
    //new instance
@@ -20,6 +20,9 @@ class LinkedList<T> {
    private var counter: Int  = 0
     
     
+    public init() {
+        //package support
+    }
     
     //the number of items - O(1)
     var count: Int {
@@ -28,7 +31,7 @@ class LinkedList<T> {
 
     
     //find subscript shortcut
-    subscript(index: Int) -> LLNode<T>? {
+    public subscript(index: Int) -> LLNode<T>? {
         get {
            return find(at: index)
         }
@@ -36,7 +39,7 @@ class LinkedList<T> {
 
     
     //returns all values
-    var values: Array<T> {
+    public var values: Array<T> {
         
         var current: LLNode? = head
         var results = Array<T>()
@@ -54,7 +57,7 @@ class LinkedList<T> {
     
     
     //empty list check
-    func isEmpty() -> Bool {
+    public func isEmpty() -> Bool {
         return counter == 0 || head.tvalue == nil
     }
     
@@ -62,7 +65,7 @@ class LinkedList<T> {
     
     
     //add link item
-    func append(_ key: T) {
+    public func append(_ key: T) {
         
         
         //trivial check
@@ -95,7 +98,7 @@ class LinkedList<T> {
 
     
     //print all keys for the class
-    func listkeys() {
+    public func listkeys() {
         
         //a dictionary - O(1)
         
@@ -117,7 +120,7 @@ class LinkedList<T> {
     
     
     //obtain link at a specific index
-    func find(at index: Int) ->LLNode<T>? {
+    public func find(at index: Int) ->LLNode<T>? {
 
         
         //check empty conditions
@@ -146,7 +149,7 @@ class LinkedList<T> {
     
     
     //insert at specific index
-    func insert(_ key: T, at index: Int) {
+    public func insert(_ key: T, at index: Int) {
         
         
         //check for nil conditions
@@ -223,7 +226,7 @@ class LinkedList<T> {
     
     
     //remove at specific index
-    func remove(at index: Int) {
+    public func remove(at index: Int) {
         
         //check for nil conditions
         if ((index < 0) || (index > (self.count - 1)) || (head.tvalue == nil)) {
@@ -277,7 +280,7 @@ class LinkedList<T> {
     
     
   //reverse the order of a linked list
-  func reverse() {
+    public func reverse() {
 
     
     //initial condition
@@ -322,7 +325,7 @@ class LinkedList<T> {
     
     
     //filter list content - higher order function
-    func filter(_ formula: (LLNode<T>) -> Bool) -> LinkedList<T>? {
+    public func filter(_ formula: (LLNode<T>) -> Bool) -> LinkedList<T>? {
         
         
         //check for instance
@@ -355,7 +358,7 @@ class LinkedList<T> {
     
     
     //map list content - higher order function
-    func map(_ formula: (LLNode<T>) -> T) -> LinkedList<T>! {
+    public func map(_ formula: (LLNode<T>) -> T) -> LinkedList<T>! {
         
         
         //check for instance
@@ -388,14 +391,5 @@ class LinkedList<T> {
         
     }
 
-    
-    
-    
 } //end class
-
-
-
-
-
-
 

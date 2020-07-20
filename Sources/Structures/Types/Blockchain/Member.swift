@@ -12,15 +12,14 @@ import Foundation
 //extension of a protocol
 
 extension Member {
-    
-     
+         
     /**
      Computes the account balance of each conforming blockchain `Member` at runtime.
 
      - Complexity: O(n) - linear time.
      */
 
-       var bal: Float {
+    public var bal: Float {
            
            //obtain list keys
            let blocks = blockchain.values

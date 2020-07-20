@@ -9,10 +9,10 @@
 import Foundation
 
 /**
-  Custom genetic structure used with hash tables and priorty queues.
+  Custom generic structure used with hash tables and priorty queues.
  */
 
-public class Table <T> {
+public class Table <T: Comparable> {
     
     var tvalue: T?
     var count: Int
@@ -23,5 +23,7 @@ public class Table <T> {
         self.tvalue = tvalue
         self.count = count
     }
+    
+    //TODO: implement add method
     
 }

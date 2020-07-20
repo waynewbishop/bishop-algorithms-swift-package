@@ -18,6 +18,11 @@ public class Node<T> : Identifiable {
    public var id: UUID = UUID()
    public var tvalue: T?
    public var next: Node?
+    
+    public init() {
+        //package support
+    }
+    
 }
 
 

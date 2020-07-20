@@ -13,13 +13,13 @@ import Foundation
     A participating member of a blockchain network. Peers send and receive funds from other `Members` through  `Exchange` records.
      */
 
-class Peer: Member {
+public class Peer: Member {
 
-    var blockchain = LinkedList<Block>()
+    public var blockchain = LinkedList<Block>()
+    public var desc: String?
+    public  var id: UUID
+    
     var audit = Stack<Audit>()
-    var desc: String?
-    var id: UUID
-
         
     /**
      Peers objects do not store a `balance` as a stored property, but calcuate this amount a runtime by iterating through the network `Blockchain`.
@@ -30,7 +30,7 @@ class Peer: Member {
      
      */
 
-    init(amount: Float = 0.0, desc: String = "", model: inout Blockchain){
+    public init(amount: Float = 0.0, desc: String = "", model: inout Blockchain){
         
         self.blockchain = model.currentChain()
         self.desc = desc
@@ -56,7 +56,7 @@ class Peer: Member {
      - Parameter model: A reference to the `Blockchain` network.
      */
     
-    func intent(from: Member?, to recipient: Member, for amount: Float, desc: String?,
+    public func intent(from: Member?, to recipient: Member, for amount: Float, desc: String?,
                 model: inout Blockchain) {
         
 

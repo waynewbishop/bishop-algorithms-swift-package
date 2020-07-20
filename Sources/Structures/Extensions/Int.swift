@@ -15,7 +15,7 @@ extension Int: Indexable {
      A requirement of the custom `Indexable` protocol. When adding content to a `HashSet` generic elements must conform to this protocol.
       */
     
-    var asciiRepresentation: Int {
+    public var asciiRepresentation: Int {
            var divisor: Int = 0
 
            for item in String(self).unicodeScalars {

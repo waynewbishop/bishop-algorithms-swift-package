@@ -12,7 +12,7 @@ import Foundation
  The `Path` class maintains objects that comprise the `frontier`. 
  */
 
-class Path {
+public class Path {
     
     var total: Int
     var destination: Vertex
@@ -20,7 +20,7 @@ class Path {
 
     
     //object initialization
-    init(){
+    public init(){
         destination = Vertex()
         total = 0
     }

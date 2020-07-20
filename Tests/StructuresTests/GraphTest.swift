@@ -1,5 +1,5 @@
 //
-//  GraphsTest.swift
+//  GraphTest.swift
 //  SwiftStructures
 //
 //  Created by Wayne Bishop on 9/19/14.

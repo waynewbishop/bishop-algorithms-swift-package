@@ -20,10 +20,11 @@ public class Vertex {
     var visited: Bool = false
     var lastModified = Date()
 
-    init() {
+   public init() {
+        //package support
     }
     
-    init(with name: String) {
+   public init(with name: String) {
        self.key = name
     }
     

@@ -12,7 +12,7 @@ import Foundation
  A generic heap algorithm. This class can be defined as a min or max heap.
   */
 
-class Heap<T: Comparable> {
+public class Heap<T: Comparable> {
     
     
     var items: Array<T>
@@ -20,7 +20,7 @@ class Heap<T: Comparable> {
     
     
     //min-heap default initialization
-    init(type: HeapType = .Min) {
+    public init(type: HeapType = .Min) {
         
         items = Array<T>()
         heapType = type
@@ -34,13 +34,13 @@ class Heap<T: Comparable> {
     
     
     //number of items
-    var count: Int {
+    public var count: Int {
         return self.items.count
     }
     
     
     //the min or max value
-    func peek() -> T? {
+    public func peek() -> T? {
         
         if items.count > 0 {
             return items[0] //the min or max value
@@ -53,7 +53,7 @@ class Heap<T: Comparable> {
     
     
     //addition of new items
-    func enQueue(_ key: T) {
+    public func enQueue(_ key: T) {
         
         items.append(key)
         

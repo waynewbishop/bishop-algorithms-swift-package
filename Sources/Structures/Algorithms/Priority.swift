@@ -14,14 +14,17 @@ import Foundation
  replaced with a standard dictionary collection.
   */
 
-class Priority <T: Comparable> {
-    
-    
+public class Priority <T: Comparable> {
+
     private var items: Array<Table<T>> = [Table<T>]()
         
     
+    public init() {
+        //package support
+    }
+    
     //return the entire structure
-    func peek() -> Array<Table<T>>? {
+    public func peek() -> Array<Table<T>>? {
         
         if items.count > 0 {
             return items
@@ -33,7 +36,7 @@ class Priority <T: Comparable> {
 
     
     
-    func add(_ tvalue: T) {
+    public func add(_ tvalue: T) {
         
         var isAdded: Bool = false
         

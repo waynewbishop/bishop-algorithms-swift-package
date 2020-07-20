@@ -12,7 +12,7 @@ import Foundation
     Records pending and completed transactions between network members. New records are assumed to be in `pending` status, which are eventually fufilled by `Miners`.
      */
 
-class Exchange {
+public class Exchange {
     
     var from: Member?
     var to: Member
@@ -24,7 +24,7 @@ class Exchange {
 
     
     //class initialization
-    init(_ from: Member? = nil , _ to: Member, _ amount: Float, _ desc: String?, _ type: BTransType) {
+    public init(_ from: Member? = nil , _ to: Member, _ amount: Float, _ desc: String?, _ type: BTransType) {
         
         self.from = from
         self.to = to

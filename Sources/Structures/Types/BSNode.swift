@@ -13,14 +13,14 @@ import Foundation
  Generic node to be used with binary search trees (BST's)
  */
 
-class BSNode<T>{
+public class BSNode<T>{
     
     var tvalue: T?
     var left: BSNode?
     var right: BSNode?
     var height: Int
     
-    init() {
+   public init() {
         self.height = 0
     }
     
@@ -36,7 +36,7 @@ class BSNode<T>{
 
     
     //execute breadth-first search
-    func BFSTraverse() -> () {
+    public func BFSTraverse() -> () {
         
         
         let bsQueue = Queue<BSNode<T>>()
@@ -79,7 +79,7 @@ class BSNode<T>{
     
     
     //regular dfs traversal
-    func DFSTraverse() {
+    public func DFSTraverse() {
         
         //trivial condition
         guard let key = self.tvalue else {
@@ -102,7 +102,7 @@ class BSNode<T>{
     
     
     //use dfs with trailing closure to update all values
-    func DFSTraverse(withFormula formula: (BSNode<T>) -> T) {
+    public func DFSTraverse(withFormula formula: (BSNode<T>) -> T) {
         
         
         //check for trivial condition

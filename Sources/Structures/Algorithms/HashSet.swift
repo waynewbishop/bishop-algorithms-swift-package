@@ -15,20 +15,20 @@ Example of a Hash Table. This example replicates the base functionality of a nat
  - Complexity: Average time of O(1) - constant time.
  */
 
-class HashSet <T: Indexable> {
+public class HashSet <T: Indexable> {
  
     private var buckets: Array<T?>
     private var slots: Int = 0
     
     
-    init(capacity: Int = 20) {
+    public init(capacity: Int = 20) {
         
         self.buckets = Array<T?>(repeatElement(nil, count: capacity))
         self.slots = buckets.capacity
     }
     
 
-    func insert (_ element: T) -> Bool {
+    public func insert (_ element: T) -> Bool {
         
       //compute hash value
       let hvalue = self.hash(element)
@@ -51,14 +51,8 @@ class HashSet <T: Indexable> {
     }
     
     
-    //unconditional insert
-    func update(_ element: T) -> Bool {
-        let result: Bool = self.insert(element)
-        return result
-    }
-    
         
-    func contains(_ element: T) -> Bool {
+    public func contains(_ element: T) -> Bool { //O(1) - constant time.
         
       //compute hash value
       let hvalue = self.hash(element)
@@ -70,6 +64,12 @@ class HashSet <T: Indexable> {
       return true
     }
     
+    
+    //unconditional insert
+    public func update(_ element: T) -> Bool {
+        let result: Bool = self.insert(element)
+        return result
+    }
     
     
     private func hash(_ element: T) -> Int {

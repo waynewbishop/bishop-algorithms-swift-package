@@ -16,20 +16,20 @@ public class PathHeap {
     
     private var heap: Array<Path>
     
-    init() {
+    public init() {
         heap = Array<Path>()
     }
     
     
     //the number of frontier items
-    var count: Int {
+  public var count: Int {
         return self.heap.count
     }
     
     
     
     //obtain the minimum path
-    func peek() -> Path? {
+    public  func peek() -> Path? {
         
         if heap.count > 0 {
            return heap[0] //the shortest path: O(n) - constant time
@@ -43,7 +43,7 @@ public class PathHeap {
 
 
     //remove the minimum path
-    func deQueue() {
+    public func deQueue() {
         
         if heap.count > 0 {
             heap.remove(at: 0)
@@ -53,7 +53,7 @@ public class PathHeap {
     
 
     //sort shortest paths into a min-heap (heapify)
-    func enQueue(_ key: Path) {
+    public func enQueue(_ key: Path) {
         
 
         heap.append(key)

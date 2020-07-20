@@ -13,7 +13,7 @@ import Foundation
     All blockchain resources are shared by peers and miners by reference. Any change to shared resources by either type is reflected directly the blockchain.
  */
 
-class Blockchain {
+public class Blockchain {
     
       private var intent = Array<Exchange>()
       private var blockchain = LinkedList<Block>()
@@ -26,7 +26,7 @@ class Blockchain {
 
     
     
-      init() {
+    public init() {
         self.updateChain(with: genesisBlock())
       }
     
@@ -34,7 +34,7 @@ class Blockchain {
     
       //MARK: member function (e.g. peer or miner)
     
-      func newMember(item: Member) {
+    public func newMember(item: Member) {
         self.members.append(item)
       }
 
@@ -42,19 +42,19 @@ class Blockchain {
      
       //MARK: exchange functions
     
-      func newExchange(_ exchange: Exchange) {
+    public func newExchange(_ exchange: Exchange) {
         intent.append(exchange)
       }
       
     
-      func exchangeList(requester: Miner) -> Array<Exchange> {
+    public func exchangeList(requester: Miner) -> Array<Exchange> {
         
          audit.push(Audit(action: "get exchange list", requester))
          return self.intent
       }
     
     
-      func clearExchange(requester: Miner) {
+    public func clearExchange(requester: Miner) {
         
         audit.push(Audit(action: "clear exchange", requester))
         intent.removeAll()
@@ -65,7 +65,7 @@ class Blockchain {
     
       
       //empty block
-      func genesisBlock() -> Block {
+    public func genesisBlock() -> Block {
         
         let newblock = Block()
         newblock.desc = "genesis block.."
@@ -76,14 +76,14 @@ class Blockchain {
 
     
       //return current blockchain
-      func currentChain() -> LinkedList<Block> {
+    public func currentChain() -> LinkedList<Block> {
           return blockchain
       }
         
     
     
       //issue reward for mining block
-      func sendreward(to requester: Miner) -> Float {
+    public func sendreward(to requester: Miner) -> Float {
         
         audit.push(Audit(action: "issue reward", requester))
         return self.reward
@@ -92,7 +92,7 @@ class Blockchain {
  
     
       //update network participants
-      func updateChain(with newblock: Block) {
+    public func updateChain(with newblock: Block) {
         
         /*
          note: all members maintain a reference to the main network blockchain
