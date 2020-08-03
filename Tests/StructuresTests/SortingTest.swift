@@ -21,7 +21,9 @@ class SortingTest: XCTestCase, Sortable {
     
     
     //test input types for algorithms
-    var numberList = [8, 2, 10, 9, 7, 5]
+    //var numberList = [8, 2, 10, 9, 7, 5]
+    var numberList = [2, 0, 2, 1, 1, 3, 0]
+    
     var searchList = [0,4,7,9,13,16,34]
     var trivialNumberList = [1]
     var emptyNumberList: Array<Int> = []

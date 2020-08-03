@@ -64,7 +64,7 @@ public class Heap<T: Comparable> {
         
         //calculate parent index
         if  childIndex != 0 {
-            parentIndex = Int(floorf((childIndex - 1) / 2))
+            parentIndex = Int(floorf((childIndex - 1) / 2))   //todo: make this a method!
         }
         
         

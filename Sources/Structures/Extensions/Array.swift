@@ -168,27 +168,30 @@ extension Array where Element: Comparable {
         var output: Array<Element> = self
         
         
-        for primaryIndex in 0..<self.count {
+        for pindex in 0..<output.count {
             
+            print("pindex: \(pindex)")
             
-            let passes = (output.count - 1) - primaryIndex
+            let range = (output.count - 1) - pindex
             
+            print("range: \(range)")
             
             //"half-open" range operator
-            for secondaryIndex in 0..<passes {
+            for sindex in 0..<range {
                 
-                let key = output[secondaryIndex]
+                print("sindex: \(sindex)")
                 
-                print("comparing \(key) and \(output[secondaryIndex + 1])")
+                let key = output[sindex]
+                
+              //  print("comparing \(key) and \(output[sindex + 1])")
                 
                 //compare / swap positions
-                if (key > output[secondaryIndex + 1]) {
-                    output.swapAt(secondaryIndex, secondaryIndex + 1)
+                if (key >= output[sindex + 1]) {
+                    output.swapAt(sindex, sindex + 1)
                 }
             }
         }
-        
-        
+                
         return output
         
     }

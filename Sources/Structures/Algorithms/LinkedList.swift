@@ -38,7 +38,7 @@ public class LinkedList<T> {
     }
 
     
-    //returns all values
+    //returns all values - O(n)
     public var values: Array<T> {
         
         var current: LLNode? = head
@@ -65,12 +65,12 @@ public class LinkedList<T> {
     
     
     //add link item
-    public func append(_ key: T) {
+    public func append(_ tvalue: T) {
         
         
         //trivial check
         guard head.tvalue != nil else {
-            head.tvalue = key
+            head.tvalue = tvalue
             counter += 1
             return
         }
@@ -87,7 +87,7 @@ public class LinkedList<T> {
          //append item
          let childToUse = LLNode<T>()
          
-         childToUse.tvalue = key
+         childToUse.tvalue = tvalue
          childToUse.previous = current
          current.next = childToUse
        
@@ -149,7 +149,7 @@ public class LinkedList<T> {
     
     
     //insert at specific index
-    public func insert(_ key: T, at index: Int) {
+    public func insert(_ tvalue: T, at index: Int) {
         
         
         //check for nil conditions
@@ -160,7 +160,7 @@ public class LinkedList<T> {
         
         //establish the head node
         guard head.tvalue != nil else {
-            head.tvalue = key
+            head.tvalue = tvalue
             counter += 1
             return
         }
@@ -180,7 +180,7 @@ public class LinkedList<T> {
                 let childToUse: LLNode = LLNode<T>()
                 
                 //create the new node
-                childToUse.tvalue = key
+                childToUse.tvalue = tvalue
                 
                 
                 //connect the node infront of the current node
@@ -335,15 +335,14 @@ public class LinkedList<T> {
         
         
         var current: LLNode! = head
-        let results: LinkedList<T>? = LinkedList<T>()
-        
+        let results = LinkedList<T>()
         
         while current != nil {
             
             //filter based on formula
             if formula(current) == true {
                 if let key = current.tvalue {
-                    results?.append(key)
+                    results.append(key)
                 }
             }
                         
@@ -368,7 +367,7 @@ public class LinkedList<T> {
         
         
         var current: LLNode! = head
-        let results: LinkedList<T> = LinkedList<T>()
+        let results = LinkedList<T>()
         var newKey: T!
         
         

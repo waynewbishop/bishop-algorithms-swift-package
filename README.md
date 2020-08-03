@@ -41,11 +41,11 @@ The project features code-level examples for the following items:
 + Priority Queues
 + Hash Tables
 + Tries
-+ Graphs
-+ Blockchain Networks
++ Graph Theory
 + Dijkstra's Shortest Path
 + Depth-First Search
 + Breadth-First Search
++ Blockchain Networks
 + Generics
 + Type Contraints
 + Protocol Extensions

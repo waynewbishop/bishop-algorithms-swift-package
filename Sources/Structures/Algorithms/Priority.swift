@@ -54,6 +54,7 @@ public class Priority <T: Comparable> {
                 s.count += 1
                 isAdded = true
                 childIndex = addedIndex
+                break
             }
         }
         
@@ -67,7 +68,7 @@ public class Priority <T: Comparable> {
         }
                 
         
-        //heapify - bottom-up approach
+        //heapify - bottom-up approach O(log n)
                   
           
           //calculate parent index

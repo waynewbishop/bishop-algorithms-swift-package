@@ -15,8 +15,9 @@ import Foundation
 
 public class Vertex {
     
-    var key = String()
+    var tvalue = String()  //todo: extend to a generic type
     var neighbors = Array<Edge>()
+    var rank: Double?
     var visited: Bool = false
     var lastModified = Date()
 
@@ -25,7 +26,7 @@ public class Vertex {
     }
     
    public init(with name: String) {
-       self.key = name
+       self.tvalue = name
     }
     
     
