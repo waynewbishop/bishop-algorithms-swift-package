@@ -1,23 +1,22 @@
 //
-//  HashSet.swift
-//  SwiftStructures
+//  HashChain.swift
+//  
 //
-//  Created by Wayne Bishop on 5/18/20.
-//  Copyright © 2020 Arbutus Software Inc. All rights reserved.
+//  Created by Wayne Bishop on 8/18/20.
 //
 
 import Foundation
 
 
 /**
-Example of a Hash Table. This example replicates the base functionality of a native Swift `Set` collection and does not support hash collisions.
+Example of a Hash Table implementation. Demonstrates functionality of hash collisions through the concept of separate chaining.
  
- - Complexity: Average time of O(1) - constant time.
+ - Complexity: Best-case O(1) - constant time. Worst-case O(n) - linear time. 
  */
 
-public class HashSet <T: Indexable> {
+public class HashChain <T: Indexable> {
  
-    private var buckets: Array<T?>
+    private var buckets: Array<T?>  //todo: change to support a generic LinkedList algorithm
     private var slots: Int = 0
     
     
@@ -48,32 +47,23 @@ public class HashSet <T: Indexable> {
         }
         
         else {
-            //separate chaining..
+            //todo: separate chaining..
+            //call LinkedList.append() to add a new generic LLNode to the list.
         }
         
       return false
     }
     
     
-        
-    public func contains(_ element: T) -> Bool { //O(1) - constant time.
-        
-      //compute hash value
-      let hvalue = self.hash(element)
-      
-      guard buckets[hvalue] != nil else {
+    public func contains(element: T) -> Bool {
+        /*
+         todo: my current LinkedList implementation doesn't support a
+         contains function, as generic objects would need to conform to
+         Equatable. If you would like to give this try just let me know.
+        */
         return false
-      }
-                                
-      return true
     }
     
-    
-    //unconditional insert
-    public func update(_ element: T) -> Bool {
-        let result: Bool = self.insert(element)
-        return result
-    }
     
     
     private func hash(_ element: T) -> Int {
@@ -89,4 +79,3 @@ public class HashSet <T: Indexable> {
     }
     
 }
-

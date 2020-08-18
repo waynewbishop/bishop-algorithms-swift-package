@@ -97,20 +97,22 @@ public class LinkedList<T> {
     
 
     
-    //print all keys for the class
-    public func listkeys() {
-        
-        //a dictionary - O(1)
+    //print all list values
+    public func printValues() {
         
         var current: LLNode? = head
         
         print("------------------")
         
         //assign the next instance
-        
         while current != nil {
-            print("link item is: \(String(describing: current?.tvalue!))")
-            current = current?.next
+            
+            if let item = current {
+                if let tvalue = item.tvalue {
+                    print("link item is: \(tvalue)")
+                }
+                current = item.next
+            }
         }
         
     }
@@ -121,7 +123,6 @@ public class LinkedList<T> {
     
     //obtain link at a specific index
     public func find(at index: Int) ->LLNode<T>? {
-
         
         //check empty conditions
         if ((index < 0) || (index > (self.count - 1)) || (head.tvalue == nil)) {

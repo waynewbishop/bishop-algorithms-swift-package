@@ -17,7 +17,6 @@ public class Graph {
     var canvas: Array<Vertex>
     var isDirected: Bool
     
-    
     /**
       Declare a default directed `Graph` canvas.
      
@@ -136,7 +135,7 @@ public class Graph {
         var finalPaths: Array<Path> = Array<Path>()
         
         
-        //use source edges to create the frontier
+        //use source edges to populate the frontier
         for e in source.neighbors {
             
             let newPath: Path = Path()
@@ -357,7 +356,6 @@ public class Graph {
     //breadth first search
     public func traverse(_ startingv: Vertex) {
         
-    
         
         //establish a new queue
         let graphQueue: Queue<Vertex> = Queue<Vertex>()
