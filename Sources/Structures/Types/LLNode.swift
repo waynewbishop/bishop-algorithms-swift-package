@@ -12,7 +12,7 @@ import Foundation
     Generic `linked list` data structure.
  */
 
-public class LLNode<T> {
+public class LLNode <T> {
     
     var tvalue: T?
     var next: LLNode?

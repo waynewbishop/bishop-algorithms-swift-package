@@ -11,31 +11,37 @@ import Foundation
 /**
 Example of a Hash Table implementation. Demonstrates functionality of hash collisions through the concept of separate chaining.
  
- - Complexity: Best-case O(1) - constant time. Worst-case O(n) - linear time. 
+ - Complexity: Best-case O(1) - constant time. Worst-case O(n) - linear time.
+ - Important: Generic chain value
  */
 
 public class HashChain <T: Indexable> {
  
-    private var buckets: Array<T?>  //todo: change to support a generic LinkedList algorithm
     private var slots: Int = 0
-    
+    private var buckets: Array<Chain<T>?>
+
     
     public init(capacity: Int = 20) {
         
-        self.buckets = Array<T?>(repeatElement(nil, count: capacity))
+        self.buckets = Array<Chain<T>?>(repeatElement(nil, count: capacity))
         self.slots = buckets.capacity
     }
     
 
-    public func insert (_ element: T) -> Bool {
+    public func insert (_ element: T) {
         
       //compute hash value
       let hvalue = self.hash(element)
         
         if buckets[hvalue] == nil {
-            buckets[hvalue] = element
+            
+            //new chain
+            let chain = Chain<T>()
+            chain.append(element)
+            
+            buckets[hvalue] = chain
             slots -= 1
-
+            
             
             //determine if more slots are needed
             if slots == 1 {
@@ -43,30 +49,37 @@ public class HashChain <T: Indexable> {
                 slots = 1
             }
             
-            return true
         }
-        
         else {
-            //todo: separate chaining..
-            //call LinkedList.append() to add a new generic LLNode to the list.
+            
+            //use existing chain
+            if let chain = buckets[hvalue] {
+                chain.append(element)
+            }
+                
         }
         
-      return false
-    }
-    
-    
-    public func contains(element: T) -> Bool {
-        /*
-         todo: my current LinkedList implementation doesn't support a
-         contains function, as generic objects would need to conform to
-         Equatable. If you would like to give this try just let me know.
-        */
-        return false
     }
     
     
     
-    private func hash(_ element: T) -> Int {
+    public func contains(_ element: T) -> Bool {
+        
+      //compute hash value
+      let hvalue = self.hash(element)
+      
+        guard let chain = buckets[hvalue] else {
+            return false
+        }
+
+      return chain.contains(element)
+        
+    }
+    
+    
+    
+    
+    private func hash (_ element: T) -> Int {
         
         /*
          conforming indexable objects are required to have an

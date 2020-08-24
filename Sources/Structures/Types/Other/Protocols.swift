@@ -26,7 +26,7 @@ public protocol Member {
  Required stored property. Custom `HashSet` type requirement.
  */
 
-public protocol Indexable {
+public protocol Indexable: Equatable {
     var asciiRepresentation: Int {get}
 }
 
