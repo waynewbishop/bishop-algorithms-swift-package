@@ -23,7 +23,7 @@ public protocol Member {
 
 
 /**
- Required stored property. Custom `HashSet` type requirement.
+ Required stored property. Custom `HashSet` and `HashChain` type requirement.
  */
 
 public protocol Indexable: Equatable {

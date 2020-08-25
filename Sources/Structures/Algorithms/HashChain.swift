@@ -55,7 +55,9 @@ public class HashChain <T: Indexable> {
             
             //use existing chain
             if let chain = buckets[hvalue] {
-                chain.append(element)
+                if chain.contains(element) == false {
+                    chain.append(element)
+                }
             }
                 
         }
