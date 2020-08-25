@@ -3,6 +3,7 @@
 //  
 //
 //  Created by Wayne Bishop on 8/18/20.
+//  Copyright © 2020 Arbutus Software Inc. All rights reserved.
 //
 
 import Foundation
@@ -42,8 +43,7 @@ public class HashChain <T: Indexable> {
             buckets[hvalue] = chain
             slots -= 1
             
-            
-            //determine if more slots are needed
+        
             if slots == 1 {
                 buckets.append(nil)
                 slots = 1
@@ -51,6 +51,7 @@ public class HashChain <T: Indexable> {
             
         }
         else {
+            print("collision detected!")
             
             //use existing chain
             if let chain = buckets[hvalue] {

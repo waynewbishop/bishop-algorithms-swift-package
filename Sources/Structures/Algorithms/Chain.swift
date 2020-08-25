@@ -10,7 +10,7 @@ import Foundation
 
 
 /**
- Generic `Linked List` algorithm used to demonstrate hash collision technique of separate chaining.
+ Generic `Linked List` algorithm used to demonstrate the hash collision technique of separate chaining.
  
  - Important: To support type comparisions, any generic type being used must conform
  to the standard Equatable protocol.
@@ -52,22 +52,24 @@ public class Chain <T: Equatable> {
     //check for existing value
     public func contains(_ tvalue: T) -> Bool {
         
-        var current: LLNode<T> = head
+        var current: LLNode<T>? = head
         
         //find possible match - O(n)
-        while let item = current.next {
-            if item.tvalue == tvalue {
-                return true
-            }
-            else {
-            current = item
+        while current != nil {
+            if let item = current {
+                if let chainValue = item.tvalue {
+                    if chainValue == tvalue {
+                        return true
+                    }
+                }
+                current = item.next
             }
         }
         
         return false
     }
     
-    
+        
     
     public func printValues() {
         
