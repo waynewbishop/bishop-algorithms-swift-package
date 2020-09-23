@@ -14,9 +14,9 @@ import Foundation
  replaced with a standard dictionary collection.
   */
 
-public class Priority <T: Comparable> {
+public class Priority <T: Equatable> {
 
-    private var items: Array<Table<T>> = [Table<T>]()
+    private var items: Array<Table<T>> = [Table<T>]()  //todo: needs to be changed to a set object.
         
     
     public init() {
@@ -92,6 +92,9 @@ public class Priority <T: Comparable> {
               //swap child and parent positions
               if childToUse.count > parentToUse.count {
                   items.swapAt(parentIndex, Int(childIndex))
+              }
+              else {
+                break
               }
               
               

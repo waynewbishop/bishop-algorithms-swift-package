@@ -85,7 +85,9 @@ public class PathHeap {
             if childToUse.total < parentToUse.total {
                 heap.swapAt(parentIndex, Int(childIndex))
             }
-            
+            else {
+                break
+            }            
             
             //reset indices
             childIndex = Float(parentIndex)
@@ -94,6 +96,7 @@ public class PathHeap {
             if childIndex != 0 {
                 parentIndex = Int(floorf((childIndex - 1) / 2))
             }
+            
             
             
         } //end while

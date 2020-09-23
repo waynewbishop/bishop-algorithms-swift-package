@@ -12,7 +12,7 @@ import Foundation
   Custom generic structure used with hash tables and priorty queues.
  */
 
-public class Table <T: Comparable> {
+public class Table <T: Equatable> {
     
     var tvalue: T?
     var count: Int
@@ -24,6 +24,12 @@ public class Table <T: Comparable> {
         self.count = count
     }
     
-    //TODO: implement add method
+    //increases the count
+    public func add(_ tvalue: T) {
+        
+        if self.tvalue == tvalue {
+            self.count += 1
+        }
+    }
     
 }

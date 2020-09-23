@@ -66,7 +66,7 @@ public class HashChain <T: Indexable> {
     
     
     
-    public func contains(_ element: T) -> Bool {
+     public func contains(_ element: T) -> Bool {
         
       //compute hash value
       let hvalue = self.hash(element)
@@ -82,7 +82,7 @@ public class HashChain <T: Indexable> {
     
     
     
-    private func hash (_ element: T) -> Int {
+     private func hash (_ element: T) -> Int {
         
         /*
          conforming indexable objects are required to have an

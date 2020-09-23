@@ -13,9 +13,9 @@ import Foundation
   A participating member in a `Graph` data structure.
  */
 
-public class Vertex {
+public class Vertex: Equatable {
     
-    var tvalue = String()  //todo: extend to a generic type <T: Comparable>
+    var tvalue = String()  //todo: extend to a generic type <T: Equatable>
     var neighbors = Array<Edge>()
     var visited: Bool = false
     var lastModified = Date()
@@ -26,6 +26,11 @@ public class Vertex {
     
    public init(with name: String) {
        self.tvalue = name
+    }
+    
+    
+    public static func == (lhs: Vertex, rhs: Vertex) -> Bool {
+        return lhs.tvalue == rhs.tvalue
     }
     
     

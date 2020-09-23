@@ -61,7 +61,7 @@ public class Trie {
             
             
             //new node
-            if childToUse.tvalue == nil {
+            if childToUse.tvalue == nil {  //todo: where is this being populated?
                 childToUse.tvalue = searchKey
                 childToUse.level = current.level + 1
                 current.children.append(childToUse)

@@ -89,12 +89,18 @@ public class Heap<T: Comparable> {
                 if childToUse <= parentToUse {
                     items.swapAt(parentIndex, Int(childIndex))
                 }
+                else {
+                    break
+                }
                 
             case .Max:
                 
                 //swap child and parent positions
                 if childToUse >= parentToUse {
                     items.swapAt(parentIndex, Int(childIndex))
+                }
+                else {
+                    break
                 }
                 
             }

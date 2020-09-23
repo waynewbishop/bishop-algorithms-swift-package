@@ -35,14 +35,6 @@ public class Graph {
     }
     
     
-    /**
-      Adds an `Edge` to a source `Vertex`.
-     
-     - Parameter source: The source Vertex.
-     - Parameter neighbor: The connecting destination `Vertex`.
-     - Parameter weight: The `Edge` weight value.
-     */
-    
     public func addEdge(source: Vertex, neighbor: Vertex, weight: Int) {
         
         
@@ -124,12 +116,14 @@ public class Graph {
         return output
         
     }
-
     
+    
+
+
     
     //process Dijkstra's shortest path algorthim
     public func processDijkstra(_ source: Vertex, destination: Vertex) -> Path? {
-        
+    
         
         var frontier: Array<Path> = Array<Path>()
         var finalPaths: Array<Path> = Array<Path>()
@@ -351,6 +345,32 @@ public class Graph {
     }
 
     
+    /// Identifies all unconnected vertices of related neighbors (e.g. mutual friends).
+    ///
+    /// - Parameter source: the source vertex
+    /// - Returns: the list of unconnected vertices, based on priority
+    
+    public func mutualNeighbors(of source: Vertex) -> Priority<Vertex>  {
+                
+        let edgelist = Priority<Vertex>()
+    
+                
+        //review adjacency list
+        for e in source.neighbors {
+            
+            //evaluate each neighbors list
+            for s in e.neighbor.neighbors {
+                if s.neighbor != source {  //todo: additional condition..
+                    edgelist.add(s.neighbor)
+                }
+            }
+            
+        }
+        
+        return edgelist
+        
+    }
+    
     
     
     //breadth first search
@@ -395,18 +415,6 @@ public class Graph {
         
     } //end function
     
-    
-    
-    //implement google pagerank based on trailing closure formula
-    public func rank(startingv: Vertex, formula:((Vertex) -> Int)) {
-        
-        /*
-        note: the being that one implements pageRank based on a "score". This is a
-        a basic recursive type that is associated with each vertex. The score gets
-        updated based on the number neigbors for all associated neighbor.
-       */
-        
-    }
     
     
     //use bfs with trailing closure to update all values
