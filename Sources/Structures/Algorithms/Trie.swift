@@ -20,6 +20,7 @@ public class Trie {
         //package support
     }
     
+    
     //find subscript shortcut
     subscript(word: String) -> Array<String>? {
         get {
@@ -30,7 +31,6 @@ public class Trie {
     
     //builds a tree hierarchy of dictionary content
     func append(word keyword: String) {
-        
         
         //trivial case
         guard keyword.length > 0 else {

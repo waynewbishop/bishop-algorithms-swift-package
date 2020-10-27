@@ -179,6 +179,7 @@ public class Graph {
                 newPath.total = bestPath.total + e.weight
                 
                 
+                
                 //add the new path to the frontier
                 frontier.append(newPath)
             }
@@ -220,7 +221,7 @@ public class Graph {
     
     
     
-    ///an optimized version of Dijkstra's shortest path algorthim
+    ///An optimized version of Dijkstra's shortest path algorthim
     public func processDijkstraWithHeap(_ source: Vertex, destination: Vertex) -> Path? {
         
         
@@ -344,6 +345,8 @@ public class Graph {
         
     }
 
+
+    
     
     /// Identifies all unconnected vertices of related neighbors (e.g. mutual friends).
     ///
@@ -351,24 +354,27 @@ public class Graph {
     /// - Returns: the list of unconnected vertices, based on priority
     
     public func mutualNeighbors(of source: Vertex) -> Priority<Vertex>  {
+       
+        let priority = Priority<Vertex>()
                 
-        let edgelist = Priority<Vertex>()
-    
-                
-        //review adjacency list
+        //initialize source list
         for e in source.neighbors {
             
-            //evaluate each neighbors list
-            for s in e.neighbor.neighbors {
-                if s.neighbor != source {  //todo: additional condition..
-                    edgelist.add(s.neighbor)
+            //iterate through entire graph
+            for g in self.canvas {
+                
+                //examine each neighbors adjacency list
+                for s in g.neighbors {
+                    if (s.neighbor == e.neighbor) && (s.neighbor != source) {
+                        print("mutual connection found..")
+                        priority.add(g)
+                    }
                 }
             }
-            
         }
-        
-        return edgelist
-        
+    
+                
+        return priority
     }
     
     

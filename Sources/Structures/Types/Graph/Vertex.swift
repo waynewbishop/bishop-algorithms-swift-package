@@ -29,10 +29,12 @@ public class Vertex: Equatable {
     }
     
     
+
+    
+    //equatable conformance
     public static func == (lhs: Vertex, rhs: Vertex) -> Bool {
         return lhs.tvalue == rhs.tvalue
     }
-    
     
 }
 

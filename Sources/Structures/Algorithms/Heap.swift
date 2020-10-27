@@ -43,7 +43,7 @@ public class Heap<T: Comparable> {
     public func peek() -> T? {
         
         if items.count > 0 {
-            return items[0] //the min or max value
+            return items[0] //the min or max value - O(1)
         }
         else {
             return nil

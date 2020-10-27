@@ -17,13 +17,49 @@ class PriorityTest: XCTestCase {
     /*
      note: all words, characters and numbers conform to the comparable protocol
      */
-            
-    
+                
     override func setUp() {
         // Put setup code here.
     }
     
-       
+    
+    
+    /// The concept of finding a palindrome permutation lies with being able to detect
+    /// each character occurs exactly twice in the sequence.
+    func testPalindromePermuation() {
+        
+        let phrase: String = "abba"
+        let pqueue = Priority<Character>()
+        var isPalindrome: Bool = true
+
+        //add items to queue
+        for p in phrase {
+            pqueue.add(p)
+        }
+        
+        if let results = pqueue.peek() {
+        
+            //base analysis off the number of possible matches. even or odd.
+            if (phrase.count % 2 == 0) {
+               
+                for letter in results {
+                    if (letter.count % 2 != 0) {
+                        isPalindrome = false
+                        break
+                    }
+                }
+            }
+            
+            //todo: contains an odd number of characters?
+            
+        }
+        
+        
+        print(isPalindrome)
+        
+    }
+
+    
     //test priority based on words
     func testPriorityWords() {
            

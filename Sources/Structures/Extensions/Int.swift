@@ -11,6 +11,12 @@ import Foundation
 
 extension Int: Indexable {
     
+    
+    //even or add value 
+    public func isEven() -> Bool {
+        return (self % 2 == 0 ? true : false)
+    }
+    
     /**
      A requirement of the custom `Indexable` protocol. When adding content to a `HashSet` generic elements must conform to this protocol.
       */
