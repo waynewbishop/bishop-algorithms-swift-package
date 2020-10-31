@@ -29,7 +29,14 @@ class TrieTest: XCTestCase {
         testTrie.append(word: "Bar")
     }
     
-    
+    /*
+    func testTrieFilter() {
+            
+        let filter = testTrie.filter("B", "t")  //should find 'Bat' in model
+        
+        print("filter returns \(filter)..")
+    }
+    */
 
     /*
     the findWord algorithm will only return strings identified as words. For example, the prefix "Ba" has children,

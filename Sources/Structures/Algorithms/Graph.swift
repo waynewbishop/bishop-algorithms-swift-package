@@ -121,7 +121,7 @@ public class Graph {
 
 
     
-    //process Dijkstra's shortest path algorthim
+    //process Dijkstra's shortest path algorithm
     public func processDijkstra(_ source: Vertex, destination: Vertex) -> Path? {
     
         
@@ -408,7 +408,7 @@ public class Graph {
                 }
             }
             
-            
+        
             vitem.visited = true
             print("traversed vertex: \(vitem.tvalue)..")
             

@@ -146,5 +146,83 @@ public class Trie {
         
     } //end function
     
+    
+    
+    func traverse(using keyword: String) -> Array<String>? {
+        
+        
+        //trivial case
+        guard keyword.length > 0 else {
+            return nil
+        }
+        
+        
+        var current: TrieNode = root
+        var wordList = Array<String>()
+        
+        
+        while keyword.length != current.level {
+                        
+            let searchKey = keyword.substring(to: current.level + 1)
 
-}
+            
+            //iterate through any child nodes
+            for child in current.children {
+                
+                if child.tvalue == searchKey {
+                    current = child
+                    break
+                }
+                else {
+                    return nil
+                }
+                
+            }
+            
+        } //end while
+        
+        
+        //initiate bfs process
+        
+        let trieQueue: Queue<TrieNode> = Queue<TrieNode>()
+        
+        
+        //queue a starting vertex
+        trieQueue.enQueue(current)
+        
+        
+        while !trieQueue.isEmpty() {
+            
+            
+            //traverse the next queued vertex
+            guard let leaf = trieQueue.deQueue() else {
+                break
+            }
+            
+            
+            //add unvisited trie nodes to the queue
+            for e in leaf.children {
+                print("adding leaf: \(e.tvalue!) to queue..")
+                    trieQueue.enQueue(e)
+            }
+
+            
+            if leaf.isFinal == true {
+                if let tvalue = leaf.tvalue {
+                    wordList.append(tvalue)
+                }
+            }
+
+            print("traversed trie: \(leaf.tvalue!)..")
+            
+        }
+        
+                        
+        return wordList
+        
+    } //end function
+    
+    
+} //end class
+    
+    

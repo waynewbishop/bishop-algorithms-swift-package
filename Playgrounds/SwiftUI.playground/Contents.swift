@@ -46,7 +46,7 @@ To prepare the Stack data to be used SwiftUI, the model supporting the custom st
                 
                 ZStack {
                         RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(.gray)
+                            .foregroundColor(.blue)
                             .frame(width: 195.0, height: 65.0)
                     
                         if let tvalue = result.tvalue {

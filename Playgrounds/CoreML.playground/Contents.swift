@@ -12,7 +12,7 @@ class Learning {
         
 /*:
 **AEClassifier** is a manually generated *.mlmodel* file trained with csv data built on MacOS.
-This file is found in the respective **Resources** director and is built as part of the CoreML playground file.
+This file is found in the respective **Resources** directory and is built as part of the CoreML playground file.
 */
 
     func loadModel() -> MLModel? {
