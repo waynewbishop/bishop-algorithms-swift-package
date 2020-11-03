@@ -20,73 +20,57 @@ class TrieTest: XCTestCase {
         super.setUp()
         
         XCTAssertNotNil(testTrie, "Trie instance not correctly intialized..")
-                
+
+        /*
         //add words to data structure
         testTrie.append(word: "Ball")
         testTrie.append(word: "Balls")
         testTrie.append(word: "Ballard")
         testTrie.append(word: "Bat")
         testTrie.append(word: "Bar")
+        */
+        
+        testTrie.append(word: "Apple")
+        testTrie.append(word: "App")
+        testTrie.append(word: "Append")
+        
     }
     
-    /*
-    func testTrieFilter() {
-            
-        let filter = testTrie.filter("B", "t")  //should find 'Bat' in model
-        
-        print("filter returns \(filter)..")
-    }
-    */
-
-    /*
-    the findWord algorithm will only return strings identified as words. For example, the prefix "Ba" has children,
-    but only 2 are marked as final. Even though the phrase "Bal" is found in the trie, it is not
-    identified as a word.
-    */
-
-    func testFindWithPrefix() {
-        
-        guard let list = testTrie["Ba"] else {
-            XCTFail("test failed: no words found..")
-            return
-        }
-        
-        for word in list {
-            print("\(word) found in trie..")
-        }
-    }
-
     
-    
- 
-    //note: the findWord algorthim will identify both parents and children identified as words
- 
-    func testFindWithWord() {
+    func testTraverseWithPrefix() {
+
         
-        guard let list = testTrie["Ball"] else {
-            XCTFail("test failed: no words found")
-            return
+        if let wordList = testTrie.traverse(using: "Ap") {
+           print("word list is: \(wordList)")
         }
+        else {
+            XCTFail("test failed: word list not returned")
+        }
+    }
+    
+
+    func testTraverseWithWord() {
         
-        for word in list {
-            print("\(word) found in trie..")
+        if let wordList = testTrie.traverse(using: "Append") {
+           print("word list is: \(wordList)")
+        }
+        else {
+            XCTFail("test failed: word list not returned")
         }
         
     }
+
     
     
     //testing false search results
-    func testFindNoExist() {
+    func testTraverseNoExist() {
         
         let keyword = "Barstool"
         
-        //attempt to find word
-        guard let _ = testTrie[keyword] else {
-            return
+        if testTrie.traverse(using: keyword) != nil {
+            XCTFail("test failed: \(keyword) incorrectly found in trie..")
         }
-        
-        XCTFail("test failed: \(keyword) incorrectly found in trie..")
+
     }
     
-
 }

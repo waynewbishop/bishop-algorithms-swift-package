@@ -24,7 +24,7 @@ public class Trie {
     //find subscript shortcut
     subscript(word: String) -> Array<String>? {
         get {
-            return find(word)
+            return traverse(using: word)
         }
     }
         
@@ -84,75 +84,16 @@ public class Trie {
     } //end function
     
     
-
     
-    //find words based on the prefix
-    func find(_ keyword: String) -> Array<String>? {
-        
-        
-        //trivial case
-        guard keyword.length > 0 else {
-            return nil
-        }
-        
-        
-        var current: TrieNode = root
-        var wordList = Array<String>()
-        
-        
-        while keyword.length != current.level {
-                        
-            let searchKey = keyword.substring(to: current.level + 1)
-
-            
-            //iterate through any child nodes
-            for child in current.children {
-                
-                if child.tvalue == searchKey {
-                    current = child
-                    break
-                }
-                else {
-                    return nil
-                }
-                
-            }
-            
-        } //end while
-        
-        
-        
-        //retrieve the keyword and any descendants
-        if ((current.tvalue == keyword) && (current.isFinal)) {
-            if let key = current.tvalue {
-                wordList.append(key)
-            }
-        }
-
-        
-        //include only children that are words
-        for child in current.children {
-            
-            if (child.isFinal == true) {
-                if let key = child.tvalue {
-                    wordList.append(key)
-                }
-            }
-        }
-        
-        
-        return wordList
-
-        
-    } //end function
-    
-    
+    /// Employs Breadth-First Search to find one or many values based on a designated keyword prefix.
+    /// - Parameter keyword: Search word or phrase
+    /// - Returns: A list of possible words (optional).
     
     func traverse(using keyword: String) -> Array<String>? {
         
         
         //trivial case
-        guard keyword.length > 0 else {
+        guard keyword.length > 0 else {  //this is where can set the minimum length requirements..
             return nil
         }
         
@@ -164,26 +105,28 @@ public class Trie {
         while keyword.length != current.level {
                         
             let searchKey = keyword.substring(to: current.level + 1)
-
+            var isFound: Bool = false
             
             //iterate through any child nodes
             for child in current.children {
                 
                 if child.tvalue == searchKey {
                     current = child
+                    isFound = true
                     break
-                }
-                else {
-                    return nil
-                }
-                
+                }                
             }
+            
+            if isFound == false {
+                return nil
+            }
+            
             
         } //end while
         
         
-        //initiate bfs process
         
+        //initiate bfs process
         let trieQueue: Queue<TrieNode> = Queue<TrieNode>()
         
         
@@ -192,8 +135,7 @@ public class Trie {
         
         
         while !trieQueue.isEmpty() {
-            
-            
+                        
             //traverse the next queued vertex
             guard let leaf = trieQueue.deQueue() else {
                 break
@@ -213,10 +155,11 @@ public class Trie {
                 }
             }
 
-            print("traversed trie: \(leaf.tvalue!)..")
+            print("traversed substring: \(leaf.tvalue!)..")
             
         }
         
+        print("trie traversal complete..")
                         
         return wordList
         
