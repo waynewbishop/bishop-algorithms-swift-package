@@ -36,6 +36,13 @@ class TrieTest: XCTestCase {
         
     }
     
+    func testTrieFilter() {
+        
+        let results = testTrie.filter("A", "z")
+        print(results)
+        
+    }
+    
     
     func testTraverseWithPrefix() {
 

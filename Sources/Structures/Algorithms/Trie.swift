@@ -85,6 +85,82 @@ public class Trie {
     
     
     
+    
+    /// Determines if the model contains at least one word with the
+    /// specififed starting and ending values.
+    /// - Returns: Boolean value.
+    
+    func filter(_ start: String, _ end: String) -> Bool {
+        
+        let current: TrieNode = root
+        var isFirst: Bool = false
+        
+        //check the first level
+        for child in current.children {
+            
+            if let tvalue = child.tvalue {
+                if tvalue == start {
+                    isFirst = true
+                    break
+                }
+            }
+        }
+                
+        guard isFirst == true else {
+            return false
+        }
+        
+        
+        //initiate bfs process
+        let trieQueue: Queue<TrieNode> = Queue<TrieNode>()
+        
+        
+        //queue a starting vertex
+        trieQueue.enQueue(current)
+        
+        
+        while !trieQueue.isEmpty() {
+                        
+            //traverse the next queued vertex
+            guard let leaf = trieQueue.deQueue() else {
+                break
+            }
+            
+            
+            //add unvisited trie nodes to the queue
+            for e in leaf.children {
+                print("adding leaf: \(e.tvalue!) to queue..")
+                    trieQueue.enQueue(e)
+            }
+
+            //check for qualifying value
+            if leaf.isFinal == true {
+                if let tvalue = leaf.tvalue {
+                    if tvalue.last == Character(end) {
+                        return true
+                    }
+                }
+            }
+
+
+            if let tvalue = leaf.tvalue {
+                print("traversed leaf: \(tvalue)..")
+            }
+            else {
+             print("traversed root..")
+            }
+
+        }
+        
+        
+        print("traversal complete..")
+        
+        return false
+    }
+    
+    
+    
+    
     /// Employs Breadth-First Search to find one or many values based on a designated keyword prefix.
     /// - Parameter keyword: Search word or phrase
     /// - Returns: A list of possible words (optional).
