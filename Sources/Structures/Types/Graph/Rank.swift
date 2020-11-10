@@ -13,17 +13,21 @@ The meta-data structure used for tracking a graph vertex PageRank value.
 Used in conjunction with HashChain and Heap data structures.
  */
 
-public class Rank: Equatable, Comparable {
+public class Rank: Equatable, Comparable, Indexable {
 
  var destination: Vertex
  var score: Int
 
-    public init() {
+    public init(_ node: Vertex, starting: Int) {
         
-        self.destination = Vertex()
-        self.score = 0
+        self.destination = node
+        self.score = starting
     }
 
+    
+    public var asciiRepresentation: Int {
+        return destination.tvalue.asciiRepresentation
+    }
     
     //equatable conformance
     public static func == (lhs: Rank, rhs: Rank) -> Bool {

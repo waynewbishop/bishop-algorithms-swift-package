@@ -12,25 +12,40 @@ import Foundation
 
 public class PageRank {
     
-    private var canvas = Graph() //represents tha graph canvas
-    private var model = HashChain<String>()
+    private var scores: Heap<Rank>
+    
+    public init() {
+        self.scores = Heap<Rank>()
+    }
     
     
-    public init(for canvas: Graph) {
-        self.canvas = canvas
+    var rank: Heap<Rank>? {
+        return scores
     }
     
     ///Process for organizing and calcuating graph vertices
-    public func crawl() {
-
-    }
-    
-
-        /// Tally of PageRank results
-    /// - Returns: Scores derrived PageRank algorithm
-    
-    public func scores() -> Heap<Rank>? {
-        return nil
-    }
+    public func crawl(_ graph: Graph) {
         
+        var model = HashChain<Rank>()
+        var round: Int = 0
+        
+        //calcuate starting score
+        let sScore: Int = 100 / graph.canvas.count
+        
+        //add graph vertices
+        for v in graph.canvas {
+            let rank = Rank(v, starting: sScore)
+            model.insert(rank)
+        }
+
+        
+        //calculate 2nd round scores
+        for b in model.buckets {
+            //code goes here..
+        }
+        
+        //obtain the latest scores and store in heap object
+        
+    }
+            
 }

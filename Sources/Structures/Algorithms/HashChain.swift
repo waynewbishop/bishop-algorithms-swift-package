@@ -19,7 +19,7 @@ Example of a Hash Table implementation. Demonstrates functionality of hash colli
 public class HashChain <T: Indexable> {
  
     private var slots: Int = 0
-    private var buckets: Array<Chain<T>?>
+    var buckets: Array<Chain<T>?>
 
     
     public init(capacity: Int = 20) {
