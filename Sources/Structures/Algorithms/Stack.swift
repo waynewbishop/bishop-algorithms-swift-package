@@ -107,10 +107,8 @@ public class Stack<T> {
     
     //returns item from the stack - O(1)
     public func popValue() ->T? {
-        
-        
+                
         guard let results = top.tvalue else {
-            counter = 0
             return nil
         }
         
@@ -119,6 +117,11 @@ public class Stack<T> {
         if let element = top.next {
             top = element
             counter -= 1
+        }
+        
+        else {
+            top.tvalue = nil
+            counter = 0
         }
         
         return results

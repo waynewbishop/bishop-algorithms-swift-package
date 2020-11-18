@@ -108,6 +108,12 @@ class GraphTest: XCTestCase {
     func testBFSTraverseFunction() {
         testGraph.traverse(vertexA, formula: traverseFormula)
     }
+    
+    
+    //topological sort - (dfs)
+    func testTopologicalSort() {
+        testGraph.topologicalSort(from: vertexA)
+    }
 
     
     

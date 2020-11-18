@@ -471,6 +471,55 @@ public class Graph {
         print("graph traversal complete..")
                 
     }
+    
+    
+    //breadth first search
+    public func topologicalSort(from startingv: Vertex) {
+        
+        
+        //establish a new stack / queue
+        let queue = Queue<Vertex>()
+        let stack = Stack<Vertex>()
+        
+        
+        //queue a starting vertex
+        queue.enQueue(startingv)
+        
+        
+        while !queue.isEmpty() {
+            
+            
+            //traverse the next queued vertex
+            guard let vitem = queue.deQueue() else {
+                break
+            }
+
+            
+            //add unvisited vertices to the queue
+            for e in vitem.neighbors {
+                if e.neighbor.visited == false {
+                    print("adding vertex: \(e.neighbor.tvalue) to queue..")
+                    queue.enQueue(e.neighbor)
+                }
+            }
+            
+            //mark item as visited and push to stack
+            vitem.visited = true
+            stack.push(vitem)
+            
+            
+        } //end while
+        
+        
+        //pop items from stack..
+        while stack.count > 0 {
+            if let item = stack.popValue() {
+                print("traversed item: \(item.tvalue)")
+            }
+        }
+        
+        
+    } //end function
 
     
 }
