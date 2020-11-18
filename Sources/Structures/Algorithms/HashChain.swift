@@ -26,6 +26,7 @@ public class HashChain <T: Indexable> {
         
         self.buckets = Array<Chain<T>?>(repeatElement(nil, count: capacity))
         self.slots = buckets.capacity
+        
     }
     
 

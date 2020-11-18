@@ -19,16 +19,23 @@ import Foundation
 public class Chain <T: Equatable> {
     
     private var head = LLNode<T>()
+    private var lastvalue: T?
     
     public init() {
         //package support
     }
     
     
+    var last: T? {
+        return lastvalue
+    }
+    
+    
     public func append(_ tvalue: T) {  // O(n) -  linear time
         
-         guard head.tvalue != nil else {
+        guard head.tvalue != nil else {
            head.tvalue = tvalue
+           lastvalue = tvalue
            return
          }
         
@@ -46,6 +53,8 @@ public class Chain <T: Equatable> {
 
           childToUse.previous = current
           current.next = childToUse
+        
+          lastvalue = tvalue
     }
     
 

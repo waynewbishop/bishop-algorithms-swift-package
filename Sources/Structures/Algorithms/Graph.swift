@@ -33,8 +33,7 @@ public class Graph {
     public func addVertex(element: Vertex) {
         canvas.append(element)
     }
-    
-    
+        
     public func addEdge(source: Vertex, neighbor: Vertex, weight: Int) {
         
         

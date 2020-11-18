@@ -12,40 +12,43 @@ import Foundation
 
 public class PageRank {
     
-    private var scores: Heap<Rank>
-    
-    public init() {
-        self.scores = Heap<Rank>()
-    }
-    
-    
-    var rank: Heap<Rank>? {
-        return scores
-    }
-    
-    ///Process for organizing and calcuating graph vertices
-    public func crawl(_ graph: Graph) {
+    ///process for organizing and calcuating importance of graph vertices
+    ///
+    public func crawl(graph: inout Graph) {
+                
+        let startingRank: Float = roundf(Float((1 / graph.canvas.count)))
         
-        var model = HashChain<Rank>()
-        var round: Int = 0
-        
-        //calcuate starting score
-        let sScore: Int = 100 / graph.canvas.count
-        
-        //add graph vertices
+        //equal allocation - random surfer
         for v in graph.canvas {
-            let rank = Rank(v, starting: sScore)
-            model.insert(rank)
-        }
-
-        
-        //calculate 2nd round scores
-        for b in model.buckets {
-            //code goes here..
+            v.rank.push(startingRank)
         }
         
-        //obtain the latest scores and store in heap object
+        
+        for v in graph.canvas {
+            
+            //obtain current rank
+            if let currRank = v.rank.peek() {
+                let assignedRank = roundf(currRank / Float(v.neighbors.count))
+                
+                for n in v.neighbors {
+                    
+                    if n.neighbor.rank.count >= 2 {
+                        //add new rank to existing rank
+                    }
+                    else {
+                        n.neighbor.rank.push(assignedRank)
+                    }
+                }
+            }
+            
+        } //end for
+        
+        
+    } 
+    
+    //ensure vertex probability equals 1
+    private func recentProbability(_ graph: Graph) {
         
     }
-            
+    
 }
