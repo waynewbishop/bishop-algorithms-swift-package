@@ -109,11 +109,6 @@ class GraphTest: XCTestCase {
         testGraph.traverse(vertexA, formula: traverseFormula)
     }
     
-    
-    //topological sort - (dfs)
-    func testTopologicalSort() {
-        testGraph.topologicalSort(from: vertexA)
-    }
 
     
     

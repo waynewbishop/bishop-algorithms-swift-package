@@ -294,8 +294,55 @@ public class Graph {
     }
     
     
-    //MARK: traversal algorithms
+    //MARK: PageRank algorithms
     
+    public func pageRank() {
+        
+        let startingRank: Float = roundf(Float((1 / self.canvas.count)))
+
+        
+        //equal allocation - random surfer
+        for v in self.canvas {
+            v.rank.insert(startingRank, at: 0)
+        }
+        
+        
+        for v in self.canvas {
+            
+            if let currRank = v.rank.first {
+                
+                //calculate adjusted rank
+                if v.neighbors.count > 0 {
+                    
+                    let assignedRank = roundf(currRank / Float(v.neighbors.count))
+                    
+                    for m in v.neighbors {
+                        
+                        if let neighborRank = m.neighbor.rank.last {
+                            let newRank = neighborRank + assignedRank
+                            m.neighbor.rank[1] = newRank        //revised existing rank
+                        }
+                    }
+                    
+                }
+                
+                //sink vertex - bring value forward
+                else {
+                    
+                    if let sinkFirstRank = v.rank.first {
+                        if let sinkCurrRank = v.rank.last {
+                            v.rank[1] = sinkFirstRank + sinkCurrRank
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
+        
+    
+    //MARK: traversal algorithms
     
     
     //bfs traversal with inout closure function
@@ -402,7 +449,7 @@ public class Graph {
             //add unvisited vertices to the queue
             for e in vitem.neighbors {
                 if e.neighbor.visited == false {
-                    print("adding vertex: \(e.neighbor.tvalue) to queue..")
+                   // print("adding vertex: \(e.neighbor.tvalue) to queue..")
                     graphQueue.enQueue(e.neighbor)
                 }
             }
@@ -472,54 +519,25 @@ public class Graph {
                 
     }
     
-    
-    //breadth first search
-    public func topologicalSort(from startingv: Vertex) {
+/*
+    //return the graph model in topological order
+    func traverseTopo() -> () {
         
+        //mutated copy
+        let topolist: Array<Vertex> = self.canvas
         
-        //establish a new stack / queue
-        let queue = Queue<Vertex>()
-        let stack = Stack<Vertex>()
-        
-        
-        //queue a starting vertex
-        queue.enQueue(startingv)
-        
-        
-        while !queue.isEmpty() {
+        while topolist.count > 0 {
             
-            
-            //traverse the next queued vertex
-            guard let vitem = queue.deQueue() else {
-                break
-            }
-
-            
-            //add unvisited vertices to the queue
-            for e in vitem.neighbors {
-                if e.neighbor.visited == false {
-                    print("adding vertex: \(e.neighbor.tvalue) to queue..")
-                    queue.enQueue(e.neighbor)
+            for (index, v) in topolist.enumerated() {
+                for n in v.neighbors {
+                    print(n.neighbor.tvalue)
                 }
             }
-            
-            //mark item as visited and push to stack
-            vitem.visited = true
-            stack.push(vitem)
-            
-            
-        } //end while
-        
-        
-        //pop items from stack..
-        while stack.count > 0 {
-            if let item = stack.popValue() {
-                print("traversed item: \(item.tvalue)")
-            }
+                        
         }
         
-        
-    } //end function
-
+    }
+     
+   */
     
 }
