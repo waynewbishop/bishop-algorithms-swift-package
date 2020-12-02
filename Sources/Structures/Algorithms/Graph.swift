@@ -296,9 +296,9 @@ public class Graph {
     
     //MARK: PageRank algorithms
     
-    public func pageRank() {
+    public func processPageRank() {
         
-        let startingRank: Float = roundf(Float((1 / self.canvas.count)))
+        let startingRank: Float = roundf(Float((100 / self.canvas.count)))
 
         
         //equal allocation - random surfer
@@ -316,11 +316,13 @@ public class Graph {
                     
                     let assignedRank = roundf(currRank / Float(v.neighbors.count))
                     
+                    //assign rank
                     for m in v.neighbors {
-                        
-                        if let neighborRank = m.neighbor.rank.last {
-                            let newRank = neighborRank + assignedRank
-                            m.neighbor.rank[1] = newRank        //revised existing rank
+                        if m.neighbor.rank.indices.contains(1) {
+                            m.neighbor.rank[1] += assignedRank
+                        }
+                        else {
+                            m.neighbor.rank.append(assignedRank)
                         }
                     }
                     
@@ -329,14 +331,23 @@ public class Graph {
                 //sink vertex - bring value forward
                 else {
                     
-                    if let sinkFirstRank = v.rank.first {
-                        if let sinkCurrRank = v.rank.last {
-                            v.rank[1] = sinkFirstRank + sinkCurrRank
-                        }
+                    if v.rank.indices.contains(1) {
+                        v.rank[1] += v.rank[0]
+                    }
+                    else {
+                        v.rank.append(v.rank[0])
                     }
                 }
             }
         }
+        
+        //adjust vertices - received no authority
+        for v in self.canvas {
+            if v.rank.indices.contains(1) == false {
+                v.rank.append(0)
+            }
+        }
+        
     }
     
     

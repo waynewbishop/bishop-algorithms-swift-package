@@ -90,9 +90,22 @@ class GraphTest: XCTestCase {
         XCTAssertNotNil(shortestPath, "shortest path not found..")
         
         printPath(shortestPath)
+    }
+
+    
+    //MARK: PageRank algorithms
+
+    
+    //default pagerank - sink values are moved forward
+    func testPageRank() {
+        testGraph.processPageRank()
         
+        for v in testGraph.canvas {
+            print("\(v.tvalue) pagerank is: \(v.rank.last!)" )
+        }
         
     }
+    
 
     
     //MARK: Closures and traversals
