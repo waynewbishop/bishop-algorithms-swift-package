@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+/*
 ///Provides a basic blueprint for the implementation of a Google's pagerank.
 
 public class PageRank {
@@ -57,3 +57,5 @@ public class PageRank {
         }       
     }
 }
+*/
+

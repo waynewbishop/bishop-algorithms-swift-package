@@ -106,6 +106,17 @@ class GraphTest: XCTestCase {
         
     }
     
+    
+    //pagerank with sinks - sink values are allocated to other vertices
+    func testPageRankWithSink() {
+        testGraph.processPageRankWithSink()
+        
+        for v in testGraph.canvas {
+            print("\(v.tvalue) pagerank is: \(v.rank.last!)" )
+        }
+        
+    }
+    
 
     
     //MARK: Closures and traversals
