@@ -17,7 +17,7 @@ public class Vertex: Equatable {
     
     var tvalue = String()  //todo: extend to a generic type <T: Equatable>
     var neighbors = Array<Edge>()
-    var rank = Array<Float>()
+    var rank: Array<Float> = [0, 0, 0]
     var visited: Bool = false
     var lastModified = Date()
 

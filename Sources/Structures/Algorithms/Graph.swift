@@ -297,9 +297,10 @@ public class Graph {
     
     //MARK: PageRank algorithms
     
+    /*
     public func processPageRank() {
         
-        let startingRank: Float = roundf(Float((100 / self.canvas.count)))
+        let startingRank: Float = roundf(Float((100 / self.canvas.count)))  //todo: don't round?
         
         
         //equal allocation - random surfer
@@ -351,40 +352,35 @@ public class Graph {
         }
         
     }
-    
+    */
 
     
     public func processPageRankWithSink() {
-        
-        let startingRank: Float = roundf(Float((100 / self.canvas.count)))
-
-        
-        //equal allocation - random surfer
-        for v in self.canvas {
-            v.rank.insert(startingRank, at: 0)
-        }
-        
-        
-        for v in self.canvas {
-            
-            if let currRank = v.rank.first {
                 
-                //calculate and distribute rank
+        let startingRank: Float = roundf(Float((100 / self.canvas.count)))
+        var round: Int = 0
+        
+        
+        while round < 2 {
+            
+            for v in self.canvas {
+                
+                //equal allocation - random surfer
+                if round == 0 {
+                    v.rank[round] = startingRank
+                }
+                
+                let currRank = v.rank[round]
+                
+                //calculate & assign
                 if v.neighbors.count > 0 {
                     
                     let assignedRank = roundf(currRank / Float(v.neighbors.count))
                     
                     //assign rank
                     for m in v.neighbors {
-                        
-                        if m.neighbor.rank.indices.contains(1) {
-                            m.neighbor.rank[1] += assignedRank
-                        }
-                        else {
-                            m.neighbor.rank.append(assignedRank)
-                        }
+                        m.neighbor.rank[round + 1] += assignedRank
                     }
-                    
                 }
                 
                 //sink vertex - distribute previous rank to other vertices
@@ -392,33 +388,23 @@ public class Graph {
                     if self.canvas.count > 1 {
                         
                         let sinkRank = currRank / (Float(self.canvas.count) - 1)
-                                              
-                        //only assign to other vertices
+                        
                         for m in self.canvas {
-                            
-                            if v.tvalue != m.tvalue {       //for readability - Vertex conforms to Comparable
-                                if m.rank.indices.contains(1) {
-                                    m.rank[1] += sinkRank
-                                }
-                                else {
-                                    m.rank.append(sinkRank)
-                                }
+                            if v.tvalue != m.tvalue {
+                                m.rank[round + 1] += sinkRank
                             }
                         }
                     }
                 }
             }
+
+            //advance to next round
+            round += 1
         }
         
-        //adjust vertices who received no authority
-        for v in self.canvas {
-            if v.rank.indices.contains(1) == false {
-                v.rank.append(0)
-            }
-        }
         
     }
-    
+
         
     
     //MARK: traversal algorithms

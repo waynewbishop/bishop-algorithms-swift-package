@@ -95,18 +95,7 @@ class GraphTest: XCTestCase {
     
     //MARK: PageRank algorithms
 
-    
-    //default pagerank - sink values are moved forward
-    func testPageRank() {
-        testGraph.processPageRank()
         
-        for v in testGraph.canvas {
-            print("\(v.tvalue) pagerank is: \(v.rank.last!)" )
-        }
-        
-    }
-    
-    
     //pagerank with sinks - sink values are allocated to other vertices
     func testPageRankWithSink() {
         testGraph.processPageRankWithSink()
