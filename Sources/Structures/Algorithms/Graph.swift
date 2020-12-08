@@ -297,64 +297,6 @@ public class Graph {
     
     //MARK: PageRank algorithms
     
-    /*
-    public func processPageRank() {
-        
-        let startingRank: Float = roundf(Float((100 / self.canvas.count)))  //todo: don't round?
-        
-        
-        //equal allocation - random surfer
-        for v in self.canvas {
-            v.rank.insert(startingRank, at: 0)
-        }
-        
-        
-        for v in self.canvas {
-            
-            if let currRank = v.rank.first {
-                
-                //calculate and distribute rank
-                if v.neighbors.count > 0 {
-                    
-                    let assignedRank = roundf(currRank / Float(v.neighbors.count))
-                    
-                    //assign rank
-                    for m in v.neighbors {
-                        
-                        if m.neighbor.rank.indices.contains(1) {
-                            m.neighbor.rank[1] += assignedRank
-                        }
-                        else {
-                            m.neighbor.rank.append(assignedRank)
-                        }
-                    }
-                    
-                }
-                
-                //sink vertex - bring rank forward
-                else {
-                    
-                    if v.rank.indices.contains(1) {
-                        v.rank[1] += currRank
-                    }
-                    else {
-                        v.rank.append(currRank)
-                    }
-                }
-            }
-        }
-        
-        //adjust vertices who received no authority
-        for v in self.canvas {
-            if v.rank.indices.contains(1) == false {
-                v.rank.append(0)
-            }
-        }
-        
-    }
-    */
-
-    
     public func processPageRankWithSink() {
                 
         let startingRank: Float = roundf(Float((100 / self.canvas.count)))

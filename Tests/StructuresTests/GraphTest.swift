@@ -98,12 +98,20 @@ class GraphTest: XCTestCase {
         
     //pagerank with sinks - sink values are allocated to other vertices
     func testPageRankWithSink() {
+        
+        var probability: Float = 0.0
+        
         testGraph.processPageRankWithSink()
         
         for v in testGraph.canvas {
-            print("\(v.tvalue) pagerank is: \(v.rank.last!)" )
+            
+            if let rvalue = v.rank.last {
+                probability += rvalue
+                print("\(v.tvalue) pagerank is: \(rvalue)" )
+            }
         }
-        
+             
+        XCTAssert(probability == 100, "test failed: pagerank probability for all vertices does not equal 1")
     }
     
 
