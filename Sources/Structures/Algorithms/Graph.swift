@@ -299,7 +299,7 @@ public class Graph {
     
     public func processPageRankWithSink() {
                 
-        let startingRank: Float = roundf(Float((100 / self.canvas.count)))
+        let startingRank: Float = roundf(Float((100 / self.canvas.count))) //todo: change from default 100 to 1?
         var round: Int = 0
         
         

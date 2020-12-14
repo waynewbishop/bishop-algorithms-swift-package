@@ -13,13 +13,16 @@ import Foundation
   A participating member in a `Graph` data structure.
  */
 
-public class Vertex: Equatable {
+public class Vertex : Equatable {
     
-    var tvalue = String()  //todo: extend to a generic type <T: Equatable>
+    //todo: public class Vertex <T> : Equatable {}
+    
+    var tvalue = String()  //todo: change to generic placeholder T
     var neighbors = Array<Edge>()
     var rank: Array<Float> = [0, 0, 0]
     var visited: Bool = false
     var lastModified = Date()
+    let uuid = UUID()
 
    public init() {
         //package support
@@ -32,7 +35,7 @@ public class Vertex: Equatable {
     
     //equatable conformance
     public static func == (lhs: Vertex, rhs: Vertex) -> Bool {
-        return lhs.tvalue == rhs.tvalue
+        return lhs.uuid == rhs.uuid
     }
     
 }
