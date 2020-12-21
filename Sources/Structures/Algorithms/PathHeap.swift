@@ -12,12 +12,12 @@ import Foundation
 Used in conjunction with a `Graph`, `PathHeap` represents an optimized version of a `min heap` data structure.  It is used to define a Graph's search `Frontier` .
   */
 
-public class PathHeap {
+public class PathHeap <T> {
     
-    private var heap: Array<Path>
+    private var heap: Array<Path<T>>
     
     public init() {
-        heap = Array<Path>()
+        heap = Array<Path<T>>()
     }
     
     
@@ -29,7 +29,7 @@ public class PathHeap {
     
     
     //obtain the minimum path
-    public  func peek() -> Path? {
+    public  func peek() -> Path<T>? {
         
         if heap.count > 0 {
            return heap[0] //the shortest path: O(n) - constant time
@@ -53,7 +53,7 @@ public class PathHeap {
     
 
     //sort shortest paths into a min-heap (heapify)
-    public func enQueue(_ key: Path) {
+    public func enQueue(_ key: Path<T>) {
         
 
         heap.append(key)
@@ -69,8 +69,8 @@ public class PathHeap {
         }
 
         
-        var childToUse: Path
-        var parentToUse: Path
+        var childToUse: Path<T>
+        var parentToUse: Path<T>
         
         
         //use the bottom-up approach

@@ -13,12 +13,10 @@ import Foundation
   A participating member in a `Graph` data structure.
  */
 
-public class Vertex : Equatable {
-    
-    //todo: public class Vertex <T> : Equatable {}
-    
-    var tvalue = String()  //todo: change to generic placeholder T
-    var neighbors = Array<Edge>()
+public class Vertex <T> : Equatable {
+        
+    var tvalue: T?
+    var neighbors = Array<Edge<T>>()
     var rank: Array<Float> = [0, 0, 0]
     var visited: Bool = false
     var lastModified = Date()
@@ -28,7 +26,7 @@ public class Vertex : Equatable {
         //package support
     }
     
-   public init(with name: String) {
+   public init(with name: T) {
        self.tvalue = name
     }
     

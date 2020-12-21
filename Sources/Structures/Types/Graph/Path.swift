@@ -12,16 +12,16 @@ import Foundation
  The `Path` class maintains objects that comprise the `frontier`. 
  */
 
-public class Path {
+public class Path <T> {
     
     var total: Int
-    var destination: Vertex
+    var destination: Vertex<T>
     var previous: Path?
 
     
     //object initialization
     public init(){
-        destination = Vertex()
+        destination = Vertex<T>()
         total = 0
     }
     

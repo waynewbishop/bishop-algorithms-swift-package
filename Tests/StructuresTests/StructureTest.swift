@@ -42,7 +42,7 @@ class StructureTest: XCTestCase {
 
     func testVertex() {
         
-        let testVertex: Vertex = Vertex()
+        let testVertex: Vertex = Vertex<String>()
         
         XCTAssertNotNil(testVertex, "instance not intialized..")
         XCTAssertFalse(testVertex.visited, "visited property not intialized..")
@@ -50,7 +50,8 @@ class StructureTest: XCTestCase {
         
         //downcast to test for membership
         let neigborList: AnyObject = testVertex.neighbors as AnyObject
-        if !(neigborList is Array<Edge>) {
+        
+        if !(neigborList is Array<Edge<String>>) {
             XCTFail("neighborlist does not include array list of edges..")
         }
         
@@ -60,13 +61,14 @@ class StructureTest: XCTestCase {
     
     func testEdge() {
         
-        let edgeTest: Edge = Edge()
+        let edgeTest: Edge = Edge<String>()
         
         XCTAssertNotNil(edgeTest, "instance not initialized..")
         XCTAssertEqual(edgeTest.weight, 0, "edge weight not initialized..")
         
         let testVertex: AnyObject = edgeTest.neighbor as AnyObject
-        if !(testVertex is Vertex) {
+        
+        if !(testVertex is Vertex<String>) {
             XCTFail("edge vertex not intialized..")
         }
         
@@ -75,14 +77,14 @@ class StructureTest: XCTestCase {
 
     func testPath() {
         
-        let pathTest: Path = Path()
+        let pathTest: Path = Path<String>()
         
         XCTAssertNotNil(pathTest, "instance not initialized..")
         XCTAssertNil(pathTest.previous, "path previous property not initialized..")
         XCTAssertTrue(pathTest.total == 0, "path total property not initialized..")
         
         let testVertex: AnyObject = pathTest.destination as AnyObject
-        if !(testVertex is Vertex) {
+        if !(testVertex is Vertex<String>) {
             XCTFail("destination vertex not intialized..")
         }
         

@@ -12,126 +12,51 @@ import Foundation
 A `Graph` defines a relationship between two or more `Vertices`.
  */
 
-public class Graph {
+public class Graph <T> {
    
-    var canvas: Array<Vertex>
-    var isDirected: Bool
+    var canvas: Array<Vertex<T>>
     
-    /**
-      Declare a default directed `Graph` canvas.
-     
-     - Parameter directed: Indicates if the model should be established as directed or undirected graph.
-     */
-
-   public init(directed: Bool = true) {
+    
+   public init() {
         canvas = Array<Vertex>()
-        isDirected = directed
     }
     
     
     //add vertex to graph canvas
-    public func addVertex(element: Vertex) {
+    public func addVertex(element: Vertex<T>) {
         canvas.append(element)
     }
         
-    public func addEdge(source: Vertex, neighbor: Vertex, weight: Int) {
-        
+    
+    public func addEdge(source: Vertex<T>, neighbor: Vertex<T>, weight: Int) {
         
         //create a new edge
-        let newEdge = Edge()
+        let newEdge = Edge<T>()
         
         
-        //establish the default properties
+        //connect source vertex with the neighboring edge
         newEdge.neighbor = neighbor
         newEdge.weight = weight
         source.neighbors.append(newEdge)
-        
-        
-        print("The neighbor of vertex: \(source.tvalue as String?) is \(neighbor.tvalue as String?)..")
-        
-        
-        //check condition for an undirected graph
-        if isDirected == false {
-            
-            
-           //create a new reversed edge
-           let reverseEdge = Edge()
-            
-            
-           //establish the reversed properties
-           reverseEdge.neighbor = source
-           reverseEdge.weight = weight
-           neighbor.neighbors.append(reverseEdge)
-            
-           print("The neighbor of vertex: \(neighbor.tvalue as String?) is \(source.tvalue as String?)..")
-            
-        }
-        
+                                
     }
 
     
-    /**
-     Reverse the sequence of paths given the shortest path. Process analagous to reversing a linked list..
-     
-     - Parameter head: The source Vertex.
-     - Parameter source: The connecting destination `Vertex`.
-     - Returns: The reversed `Path`.
-     */
 
-    public func reversePath(_ head: Path?, source: Vertex) -> Path? {
-        
-        
-        guard head != nil else {
-            return head
-        }
-        
-        //mutated copy
-        var output = head
-        
-        
-        var current: Path! = output
-        var prev: Path!
-        var next: Path!
-        
-        
-        while(current != nil) {
-            next = current.previous
-            current.previous = prev
-            prev = current
-            current = next
-        }
-        
-        
-        //append the source path to the sequence
-        let sourcePath: Path = Path()
-        
-        sourcePath.destination = source
-        sourcePath.previous = prev
-        sourcePath.total = 0
-        
-        output = sourcePath
-        
-        
-        return output
-        
-    }
-    
-    
 
 
     
     //process Dijkstra's shortest path algorithm
-    public func processDijkstra(_ source: Vertex, destination: Vertex) -> Path? {
-    
-        
-        var frontier: Array<Path> = Array<Path>()
-        var finalPaths: Array<Path> = Array<Path>()
+    public func processDijkstra(_ source: Vertex<T>, destination: Vertex<T>) -> Path<T>? {
+            
+        var frontier: Array<Path<T>> = Array<Path<T>>()
+        var finalPaths: Array<Path<T>> = Array<Path<T>>()
         
         
         //use source edges to populate the frontier
         for e in source.neighbors {
             
-            let newPath: Path = Path()
+            let newPath: Path = Path<T>()
             
             
             newPath.destination = e.neighbor
@@ -146,7 +71,7 @@ public class Graph {
         
 
         //construct the best path
-        var bestPath: Path = Path()
+        var bestPath: Path = Path<T>()
         
         
         while frontier.count != 0 {
@@ -171,7 +96,7 @@ public class Graph {
             //enumerate the bestPath edges
             for e in bestPath.destination.neighbors {
                 
-                let newPath: Path = Path()
+                let newPath: Path = Path<T>()
                 
                 newPath.destination = e.neighbor
                 newPath.previous = bestPath
@@ -198,12 +123,12 @@ public class Graph {
         
     
         //establish the shortest path as an optional
-        var shortestPath: Path! = Path()
+        var shortestPath: Path! = Path<T>()
         
         
         for itemPath in finalPaths {
             
-            if (itemPath.destination.tvalue == destination.tvalue) {
+            if (itemPath.destination == destination) {
                 
                 if  (shortestPath.total == 0) || (itemPath.total < shortestPath.total) {
                     shortestPath = itemPath
@@ -221,17 +146,17 @@ public class Graph {
     
     
     ///An optimized version of Dijkstra's shortest path algorthim
-    public func processDijkstraWithHeap(_ source: Vertex, destination: Vertex) -> Path? {
+    public func processDijkstraWithHeap(_ source: Vertex<T>, destination: Vertex<T>) -> Path<T>? {
         
         
-        let frontier: PathHeap = PathHeap()
-        let finalPaths: PathHeap = PathHeap()
+        let frontier: PathHeap = PathHeap<T>()
+        let finalPaths: PathHeap = PathHeap<T>()
         
         
         //use source edges to create the frontier
         for e in source.neighbors {
             
-            let newPath: Path = Path()
+            let newPath: Path = Path<T>()
             
             
             newPath.destination = e.neighbor
@@ -257,7 +182,7 @@ public class Graph {
             //enumerate the bestPath edges
             for e in bestPath.destination.neighbors {
                 
-                let newPath: Path = Path()
+                let newPath: Path = Path<T>()
                 
                 newPath.destination = e.neighbor
                 newPath.previous = bestPath
@@ -266,12 +191,12 @@ public class Graph {
                 
                 //add the new path to the frontier
                 frontier.enQueue(newPath)
-                
+            
             }
             
             
             //preserve the bestPaths that match destination
-            if (bestPath.destination.tvalue == destination.tvalue) {
+            if (bestPath.destination == destination) {
                 finalPaths.enQueue(bestPath)
             }
             
@@ -285,13 +210,62 @@ public class Graph {
         
         
         //obtain the shortest path from the heap
-        var shortestPath: Path? = Path()
+        var shortestPath: Path? = Path<T>()
         shortestPath = finalPaths.peek()
         
         
         return shortestPath
         
     }
+    
+    
+    
+    /**
+     Reverse the sequence of paths given the shortest path. Process analagous to reversing a linked list..
+     
+     - Parameter head: The source Vertex.
+     - Parameter source: The connecting destination `Vertex`.
+     - Returns: The reversed `Path`.
+     */
+
+    public func reversePath(_ head: Path<T>?, source: Vertex<T>) -> Path<T>? {
+        
+        
+        guard head != nil else {
+            return head
+        }
+        
+        //mutated copy
+        var output = head
+        
+        
+        var current: Path! = output
+        var prev: Path<T>!
+        var next: Path<T>!
+        
+        
+        while(current != nil) {
+            next = current.previous
+            current.previous = prev
+            prev = current
+            current = next
+        }
+        
+        
+        //append the source path to the sequence
+        let sourcePath: Path = Path<T>()
+        
+        sourcePath.destination = source
+        sourcePath.previous = prev
+        sourcePath.total = 0
+        
+        output = sourcePath
+        
+        
+        return output
+        
+    }
+    
     
         
     
@@ -332,7 +306,7 @@ public class Graph {
                         let sinkRank = currRank / (Float(self.canvas.count) - 1)
                         
                         for m in self.canvas {
-                            if v.tvalue != m.tvalue {
+                            if v != m {
                                 m.rank[round + 1] += sinkRank
                             }
                         }
@@ -353,11 +327,11 @@ public class Graph {
     
     
     //bfs traversal with inout closure function
-    public func traverse(_ startingv: Vertex, formula: (_ node: inout Vertex) -> ()) {
+    public func traverse(_ startingv: Vertex<T>, formula: (_ node: inout Vertex<T>) -> ()) {
 
         
         //establish a new queue
-        let graphQueue: Queue<Vertex> = Queue<Vertex>()
+        let graphQueue: Queue<Vertex<T>> = Queue<Vertex<T>>()
         
         
         //queue a starting vertex
@@ -375,7 +349,7 @@ public class Graph {
             //add unvisited vertices to the queue
             for e in vitem.neighbors {
                 if e.neighbor.visited == false {
-                    print("adding vertex: \(e.neighbor.tvalue) to queue..")
+                    print("adding vertex: \(e.neighbor.tvalue!) to queue..")
                     graphQueue.enQueue(e.neighbor)
                 }
             }
@@ -406,9 +380,9 @@ public class Graph {
     /// - Parameter source: the source vertex
     /// - Returns: the list of unconnected vertices, based on priority
     
-    public func mutualNeighbors(of source: Vertex) -> Priority<Vertex>  {
+    public func mutualNeighbors(of source: Vertex<T>) -> Priority<Vertex<T>>  {
        
-        let priority = Priority<Vertex>()
+        let priority = Priority<Vertex<T>>()
                 
         //initialize source list
         for e in source.neighbors {
@@ -433,11 +407,11 @@ public class Graph {
     
     
     //breadth first search
-    public func traverse(_ startingv: Vertex) {
+    public func traverse(_ startingv: Vertex<T>) {
         
         
         //establish a new queue
-        let graphQueue: Queue<Vertex> = Queue<Vertex>()
+        let graphQueue: Queue<Vertex> = Queue<Vertex<T>>()
         
         
         //queue a starting vertex
@@ -463,7 +437,7 @@ public class Graph {
             
         
             vitem.visited = true
-            print("traversed vertex: \(vitem.tvalue)..")
+            print("traversed vertex: \(vitem.tvalue!)..")
             
             
         } //end while
@@ -477,11 +451,11 @@ public class Graph {
     
     
     //use bfs with trailing closure to update all values
-    func update(startingv: Vertex, formula:((Vertex) -> Bool)) {
+    func update(startingv: Vertex<T>, formula:((Vertex<T>) -> Bool)) {
         
         
         //establish a new queue
-        let graphQueue: Queue<Vertex> = Queue<Vertex>()
+        let graphQueue: Queue<Vertex<T>> = Queue<Vertex<T>>()
         
         
         //queue a starting vertex
@@ -502,7 +476,7 @@ public class Graph {
             //add unvisited vertices to the queue
             for e in vitem.neighbors {
                 if e.neighbor.visited == false {
-                    print("adding vertex: \(e.neighbor.tvalue) to queue..")
+                    print("adding vertex: \(e.neighbor.tvalue!) to queue..")
                     graphQueue.enQueue(e.neighbor)
                 }
             }
@@ -513,7 +487,7 @@ public class Graph {
                 print("formula unable to update: \(String(describing: vitem.tvalue))")
             }
             else {
-                print("traversed vertex: \(vitem.tvalue)..")
+                print("traversed vertex: \(vitem.tvalue!)..")
             }
             
             vitem.visited = true
@@ -526,25 +500,5 @@ public class Graph {
                 
     }
     
-/*
-    //return the graph model in topological order
-    func traverseTopo() -> () {
-        
-        //mutated copy
-        let topolist: Array<Vertex> = self.canvas
-        
-        while topolist.count > 0 {
-            
-            for (index, v) in topolist.enumerated() {
-                for n in v.neighbors {
-                    print(n.neighbor.tvalue)
-                }
-            }
-                        
-        }
-        
-    }
-     
-   */
     
 }

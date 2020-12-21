@@ -12,14 +12,14 @@ import Foundation
   Represents the connection between two `Graph` vertices.
  */
 
-public class Edge {
+public class Edge <T> {
     
-    var neighbor: Vertex
+    var neighbor: Vertex<T>
     var weight: Int
     
     init() {
         weight = 0
-        self.neighbor = Vertex()
+        self.neighbor = Vertex<T>()
     }
     
 }

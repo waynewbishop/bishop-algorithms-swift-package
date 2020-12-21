@@ -18,7 +18,7 @@ import XCTest
 
 class GraphTest: XCTestCase {
 
-    var testGraph: Graph = Graph()
+    var testGraph: Graph = Graph<String>()
     
     var vertexA = Vertex(with: "A")
     var vertexB = Vertex(with: "B")
@@ -107,7 +107,7 @@ class GraphTest: XCTestCase {
             
             if let rvalue = v.rank.last {
                 probability += rvalue
-                print("\(v.tvalue) pagerank is: \(rvalue)" )
+                print("\(v.tvalue!) pagerank is: \(rvalue)" )
             }
         }
              
@@ -144,7 +144,7 @@ class GraphTest: XCTestCase {
         testGraph.traverse(vertexA) { ( node: inout Vertex) -> () in
             
             node.visited = true
-            print("traversed vertex: \(node.tvalue)..")
+            print("traversed vertex: \(node.tvalue!)..")
             
         }
         
@@ -154,7 +154,7 @@ class GraphTest: XCTestCase {
 
     
     //closure function passed as parameter
-    func traverseFormula(node: inout Vertex) -> () {
+    func traverseFormula(node: inout Vertex<String>) -> () {
         
         /*
         notes: the inout parameter is passed by reference. 
@@ -162,7 +162,7 @@ class GraphTest: XCTestCase {
         */
         
         node.visited = true
-        print("traversed vertex: \(node.tvalue)..")
+        print("traversed vertex: \(node.tvalue!)..")
     }
 
     
@@ -172,7 +172,7 @@ class GraphTest: XCTestCase {
     
     
     //check for membership
-    func neighborTest(of source: Vertex, with neighbor: Vertex) {
+    func neighborTest(of source: Vertex<String>, with neighbor: Vertex<String>) {
 
         
         //add unvisited vertices to the queue
@@ -182,17 +182,17 @@ class GraphTest: XCTestCase {
             }
         }
         
-        XCTFail("vertex \(neighbor.tvalue) is not a neighbor of vertex \(source.tvalue)")
+        XCTFail("vertex \(neighbor.tvalue!) is not a neighbor of vertex \(source.tvalue!)")
         
     }
     
     
     //reverse a path data structure
-    func printPath(_ shortestPath: Path!) {
+    func printPath(_ shortestPath: Path<String>!) {
 
         
-        var reversedPath: Path! = Path()
-        var current: Path! = Path()
+        var reversedPath: Path! = Path<String>()
+        var current: Path! = Path<String>()
         
         
         //reverse the sequence of paths
@@ -202,7 +202,7 @@ class GraphTest: XCTestCase {
         
         //iterate and print each path sequence
         while (current != nil) {
-            print("The path is : \(current.destination.tvalue) with a total of : \(current.total)..")
+            print("The path is : \(current.destination.tvalue!) with a total of : \(current.total)..")
             current = current.previous
         }
 
