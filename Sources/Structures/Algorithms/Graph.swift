@@ -28,6 +28,13 @@ public class Graph <T> {
     }
         
     
+    
+    /// <#Description#>
+    /// - Parameters:
+    ///   - source: <#source description#>
+    ///   - neighbor: <#neighbor description#>
+    ///   - weight: <#weight description#>
+    
     public func addEdge(source: Vertex<T>, neighbor: Vertex<T>, weight: Int) {
         
         //create a new edge
