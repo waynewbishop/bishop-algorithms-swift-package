@@ -8,30 +8,45 @@
 import Foundation
 
 
-class Roomba <T> {
+class Roomba <T: Equatable> {
     
     var room = Graph<T>()
-    private var current = Vertex<T>()
+    var history = Priority<T>()
+    
+    
+    private var last = Vertex<T>()
+    
+    private var revisited: Float = 0
+    private var total: Float = 0
+    
     
     //last known location
     public var lastLocation: Vertex <T>? {
-        return current
+        return last
     }
-
     
-    public init(_ location: T) {
+    
+    //is the room clean?
+    public var threshold: Float {
+        return revisited / total
+    }
         
+    public init(_ location: T) {
+                
         let center = Vertex<T>(with: location)
         room.addVertex(element: center)
         
+        total += 1
+        history.add(location)
+        
         //set location
-        self.current = center
+        self.last = center
     }
     
     
-    public func newTurn(_ destination: T) {
+    public func trackDeviceTurn(_ destination: T) {
         
-        //check room to determine if location has been visited..
+        //check room for previous visit..
         for v in self.room.canvas {
             
             if let vcleaned = v.tvalue as? Vector {
@@ -39,9 +54,14 @@ class Roomba <T> {
                 if let location = destination as? Vector {
                     if location == vcleaned {
                         
-                        v.count += 1
-                        room.addEdge(source: current, neighbor: v, weight: 0)
-                        current = v
+                        print("existing turn..")
+                        
+                        revisited += 1
+                        history.add(destination)
+                        
+                        //make new connection
+                        room.addEdge(source: last, neighbor: v, weight: 0)
+                        last = v
                         
                         return
                     }
@@ -50,15 +70,26 @@ class Roomba <T> {
         }
         
         
+        print("new turn..")
+        
         //build and extend graph
         let newLocation = Vertex<T>(with: destination)
         
+        total += 1
+        history.add(destination)
+        
         room.addVertex(element: newLocation)
-        room.addEdge(source: current, neighbor: newLocation, weight: 0)
+        room.addEdge(source: last, neighbor: newLocation, weight: 0)
         
         //revise new location
-        current = newLocation
+        last = newLocation
         
+    }
+    
+    
+    //what the path taken by the Roomba device?
+    func trackPathHistory() {
+        self.room.traverse(<#T##startingv: Vertex<Equatable>##Vertex<Equatable>#>)
     }
     
 }

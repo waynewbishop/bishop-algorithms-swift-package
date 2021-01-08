@@ -13,14 +13,14 @@ class Vector : Equatable {
     var y: Int
      
     //class initialization
-    init(_ x: Int, _ y: Int) {
+    init(_ x: Int = 0, _ y: Int = 0) {
         self.x = x
         self.y = y
     }
     
     //equatable conformance
     public static func == (lhs: Vector, rhs: Vector) -> Bool {
-        return (lhs.x == lhs.x) && (lhs.y == rhs.y)
+        return (lhs.x == rhs.x) && (lhs.y == rhs.y)
     }
     
     

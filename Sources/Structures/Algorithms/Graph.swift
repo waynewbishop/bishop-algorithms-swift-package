@@ -29,11 +29,11 @@ public class Graph <T> {
         
     
     
-    /// <#Description#>
+    /// Represents a relationship between neighboring vertices
     /// - Parameters:
-    ///   - source: <#source description#>
-    ///   - neighbor: <#neighbor description#>
-    ///   - weight: <#weight description#>
+    ///   - source: Source Vertex
+    ///   - neighbor: Destination Vertex
+    ///   - weight: Edge Weight (level of connectedness).
     
     public func addEdge(source: Vertex<T>, neighbor: Vertex<T>, weight: Int) {
         
@@ -49,8 +49,6 @@ public class Graph <T> {
     }
 
     
-
-
 
     
     //process Dijkstra's shortest path algorithm
