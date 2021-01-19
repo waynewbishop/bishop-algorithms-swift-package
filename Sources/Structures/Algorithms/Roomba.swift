@@ -49,6 +49,8 @@ class Roomba <T: Equatable> {
         //check room for previous visit..
         for v in self.room.canvas {
             
+            //todo: change to work by reference..
+            
             if let vcleaned = v.tvalue as? Vector {
                 
                 if let location = destination as? Vector {
@@ -87,9 +89,19 @@ class Roomba <T: Equatable> {
     }
     
     
-    //what the path taken by the Roomba device?
-    func trackPathHistory() {
-        self.room.traverse(<#T##startingv: Vertex<Equatable>##Vertex<Equatable>#>)
+    /*
+     note: since the room is modeled using a graph, we can
+     track the area of coverage the device has taken using a
+     standard BFS algorithm. The first item added the canvas
+     will always be the initial starting point.
+     */
+    func trackDeviceCoverage() {
+        
+        if let firstVector = self.room.canvas.first {
+            self.room.traverse(firstVector)
+        }
     }
     
-}
+    
+} //end class
+

@@ -7,10 +7,15 @@
 
 import Foundation
 
-class Vector : Equatable {
+class Vector: Equatable, CustomStringConvertible {
     
     var x: Int
     var y: Int
+
+    //print conformance
+    var description: String {
+       return "(\(x), \(y))"
+    }
      
     //class initialization
     init(_ x: Int = 0, _ y: Int = 0) {
@@ -22,6 +27,5 @@ class Vector : Equatable {
     public static func == (lhs: Vector, rhs: Vector) -> Bool {
         return (lhs.x == rhs.x) && (lhs.y == rhs.y)
     }
-    
-    
+
 }

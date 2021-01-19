@@ -43,6 +43,7 @@ class RoombaTest: XCTestCase {
         roomba.trackDeviceTurn(fourth)
 
         print("initial threshold is: \(roomba.threshold)")
+       
         
         
         //overapping events
@@ -67,10 +68,10 @@ class RoombaTest: XCTestCase {
         
         if let items = roomba.history.peek() {
             for s in items {
-                print("vector: (\(s.tvalue!.x), \(s.tvalue!.y)) was passed: \(s.count) ")
+                print("vector: \(s.tvalue!) was passed: \(s.count)")
             }
         }
         
-    }
+    } //end function
     
 }
