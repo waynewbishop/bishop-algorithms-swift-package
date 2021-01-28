@@ -59,27 +59,50 @@ public class ParkingLot <T> {
     
     
     //enter the lot
-    public func enter(item: Reservation?) -> Bool {
+    public func enter(item: Reservation?) -> Ticket? {
+        
+        let ticket = Ticket()
         
         /*
          note: the goal of entering the lot is to create a ticket.
          if they have a reservation this is attached to ticket at entry.
          */
-       
-        /*
+                
         guard let reservation = item else {
-            print("I don't have a ticket..")
-            return false
+            print("don't have a reservation..")
+            
+            //todo: check for capacity in non-reserved spots
+            
+            return nil
         }
         
-        //has reservation - pull the chain and check uuid
-        if let chain = reserveList[reservation.space!.name!] {
-            
-       }
-        */
         
-        return false
+        //confirm the reservation
+        for chain in reserveList {
+            if let space = chain {
+                if let reserveSpace = reservation.space {
+                    
+                    //new ticket
+                    if space.contains(reserveSpace) {
+                        ticket.timeIn = Date()
+                        ticket.reservation = reservation
+                        ticket.space = reserveSpace
+                        
+                        return ticket
+                    }
+                    else {
+                        print("no valid reservation")
+                        return nil
+                    }
+                }
+            }
+        }
+                
+        
+        return nil
     }
+    
+
     
     
     //exit the lot
