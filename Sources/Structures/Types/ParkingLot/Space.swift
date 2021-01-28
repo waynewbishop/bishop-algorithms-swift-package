@@ -7,14 +7,16 @@
 
 import Foundation
 
+
 public class Space: Hashable {
     
-    var name: String?
+    let name: Int
+    var reservation = Reservation()
     let uuid = UUID()
     
     
-    public init() {
-        //package support
+    public init(name: Int) {
+        self.name = name
     }
         
     //hashable conformance

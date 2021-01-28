@@ -8,14 +8,18 @@
 import Foundation
 
 
-public class Ticket <T> : Hashable {
+public class Ticket : Hashable {
     
-    var reservation: Reservation<T>?
+    var space: Space?
+    var reservation: Reservation?
     var timeIn = Date()
     var timeOut: Date?
     var price: Float = 0.0
     let uuid = UUID()
-        
+    
+    public init(_ reservation: Reservation? = nil) {
+        self.reservation = reservation
+    }
 
     //hashable conformance
    public func hash(into hasher: inout Hasher) {
