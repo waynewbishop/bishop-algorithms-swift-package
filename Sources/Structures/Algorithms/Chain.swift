@@ -31,6 +31,24 @@ public class Chain <T: Equatable> {
     }
     
     
+    //returns all values - O(n)
+    public var values: Array<T> {
+        
+        var current: LLNode? = head
+        var results = Array<T>()
+        
+        while let item = current {
+            if let tvalue = item.tvalue {
+                results.append(tvalue)
+            }
+            current = item.next
+        }
+        
+        return results
+    }
+
+    
+    
     public func append(_ tvalue: T) {  // O(n) -  linear time
         
         guard head.tvalue != nil else {
@@ -77,7 +95,7 @@ public class Chain <T: Equatable> {
         
         return false
     }
-    
+
         
     
     public func printValues() {

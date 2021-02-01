@@ -7,55 +7,90 @@
 
 import Foundation
 
-public class ParkingLot <T> {
+public class ParkingLot {
 
     var ticketList = Set<Ticket>()
-    var reserveList: Array<Chain<Space>?>
+    var reserveSchedule: Array<Chain<Space>?>
 
     
     public init() {
-        self.reserveList = Array<Chain<Space>?>(repeatElement(nil, count: 24))
+        self.reserveSchedule = Array<Chain<Space>?>(repeatElement(nil, count: 24))
     }
+    
     
     
     //make a reservation
     public func reserve(start: Date, end: Date) -> Reservation? {
                 
-        //reserved spaces
-        let reserveSlice = Array(reserveList[0...6])
-    
-        /*
-         note: needs to check date range for any potentially
-         chained items in a series.
-         */
-        if let spaceNo = reserveSlice.firstIndex(where: { $0 == nil }) {
-            
-            let reservedSpace = Space(name: spaceNo)
-            
-            //create reservation
-            let res = Reservation(for: reservedSpace)
-            res.start = start
-            res.end = end
-            
-            reservedSpace.reservation = res
-            res.space = reservedSpace
-            
+        let reserveSlice = Array(reserveSchedule[0...6])
+        var spaceNo: Int = 0
+        var isFound: Bool = false
 
-            //new series
-            let spaceChain = Chain<Space>()
-            spaceChain.append(reservedSpace)
-
-            
-            //add new chain
-            reserveList[spaceNo] = spaceChain
-
-            
-            return res
-
-        }
+        
+        //test chains
+        for chain in reserveSlice {
+            if let items = chain {
+                let spaceSchedule = items.values
+                
+                for s in spaceSchedule {
                     
-        return nil
+                    //check conflicts
+                    let range = s.reservation.start...s.reservation.end
+                    
+                    if !range.contains(start) {
+                        isFound = true
+                        break
+                    }
+                    
+                } //end for
+            }
+            spaceNo += 1
+        }
+        
+        
+        guard isFound == true else {
+            return nil
+        }
+    
+        
+        let reservedSpace = Space(name: spaceNo)
+        
+        //create reservation
+        let res = Reservation(for: reservedSpace)
+        res.start = start
+        res.end = end
+        
+        reservedSpace.reservation = res
+        res.space = reservedSpace
+        
+        
+        //todo: check for an exisiting chain
+        if let reschain = reserveSchedule[spaceNo] {
+            print("assign to existing chain..")
+        }
+
+        /*
+        //new series
+        let spaceChain = Chain<Space>()
+        spaceChain.append(reservedSpace)
+
+        
+        //add new chain
+        reserveSchedule[spaceNo] = spaceChain
+        */
+        
+        
+        return res
+                            
+        
     }
+    
+    
+    /*
+     public func newTicket(name: String?, reservation: Reservation?) -> Ticket? {
+       code goes here..
+     }
+     */
     
     
     //enter the lot
@@ -78,7 +113,7 @@ public class ParkingLot <T> {
         
         
         //confirm the reservation
-        for chain in reserveList {
+        for chain in reserveSchedule {
             if let space = chain {
                 if let reserveSpace = reservation.space {
                     
@@ -87,6 +122,8 @@ public class ParkingLot <T> {
                         ticket.timeIn = Date()
                         ticket.reservation = reservation
                         ticket.space = reserveSpace
+                        
+                        ticketList.insert(ticket)
                         
                         return ticket
                     }

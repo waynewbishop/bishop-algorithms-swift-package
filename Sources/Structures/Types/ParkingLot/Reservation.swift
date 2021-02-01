@@ -10,12 +10,11 @@ import Foundation
 public class Reservation : Hashable {
     
     var space: Space?
-    var start: Date?
-    var end: Date?
+    var start = Date()
+    var end = Date()
     
     var price: Float = 0.0
     let uuid = UUID()    
-
     
     public init() {
        //default initializer
