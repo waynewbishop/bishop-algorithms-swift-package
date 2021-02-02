@@ -22,7 +22,7 @@ public class ParkingLot {
     //make a reservation
     public func reserve(start: Date, end: Date) -> Reservation? {
                 
-        let reserveSlice = Array(reserveSchedule[0...6])
+        let reserveSlice = Array(reserveSchedule[0...2])
         var spaceNo: Int = 0
         var isFound: Bool = false
 
@@ -44,6 +44,10 @@ public class ParkingLot {
                     
                 } //end for
             }
+            else {
+                print("no schedule items for space \(spaceNo)")
+                break
+            }
             spaceNo += 1
         }
         
@@ -64,25 +68,23 @@ public class ParkingLot {
         res.space = reservedSpace
         
         
-        //todo: check for an exisiting chain
-        if let reschain = reserveSchedule[spaceNo] {
-            print("assign to existing chain..")
+        //check existing chain
+        if let echain = reserveSchedule[spaceNo] {
+            echain.append(reservedSpace)
         }
-
-        /*
-        //new series
-        let spaceChain = Chain<Space>()
-        spaceChain.append(reservedSpace)
-
         
-        //add new chain
-        reserveSchedule[spaceNo] = spaceChain
-        */
-        
+        else {
+            //new series
+            let spaceChain = Chain<Space>()
+            spaceChain.append(reservedSpace)
+
+            
+            //add new chain
+            reserveSchedule[spaceNo] = spaceChain
+        }        
         
         return res
-                            
-        
+                                    
     }
     
     
