@@ -15,8 +15,8 @@ public class Space: Hashable {
     let uuid = UUID()
     
     
-    public init(name: Int) {
-        self.name = name
+    public init(with: Int) {
+        self.name = with
     }
         
     //hashable conformance

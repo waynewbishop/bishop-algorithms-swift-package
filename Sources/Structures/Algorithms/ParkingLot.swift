@@ -11,6 +11,7 @@ public class ParkingLot {
 
     var ticketList = Set<Ticket>()
     var reserveSchedule: Array<Chain<Space>?>
+    let reserved: Int = 2
 
     
     public init() {
@@ -22,7 +23,7 @@ public class ParkingLot {
     //make a reservation
     public func reserve(from start: Date, to end: Date) -> Reservation? {
                 
-        let reserveSlice = Array(reserveSchedule[0...2])
+        let reserveSlice = ArraySlice(reserveSchedule[0...reserved])
         var spaceNo: Int = 0
         var isFound: Bool = false
 
@@ -58,7 +59,7 @@ public class ParkingLot {
         }
     
         
-        let reservedSpace = Space(name: spaceNo)
+        let reservedSpace = Space(with: spaceNo)
         
         //create reservation
         let res = Reservation(for: reservedSpace)
@@ -91,7 +92,7 @@ public class ParkingLot {
     
     
     //enter the lot
-    public func enter(with res: Reservation?) -> Ticket? {
+    public func enter(_  res: Reservation? = nil) -> Ticket? {
         
         let ticket = Ticket()
         
@@ -101,38 +102,63 @@ public class ParkingLot {
          */
                 
         guard let reservation = res else {
-            print("don't have a reservation..")
             
-            //todo: check for capacity in non-reserved spots
+            let openSchedule = ArraySlice(reserveSchedule[reserved...])
             
+            if let chain = openSchedule.firstIndex(where: { $0 == nil }) {
+                let spaceNo = chain + reserved
+                
+                print("available open space: \(spaceNo)")
+
+                
+                //new chain
+                let openChain = Chain<Space>()
+                openChain.append(Space(with: spaceNo))
+
+                
+                //update schedule
+                reserveSchedule[spaceNo] = openChain
+
+                
+                //new ticket..
+                ticket.timeIn = Date()
+                ticket.space = Space(with: spaceNo)
+                
+                self.ticketList.insert(ticket)
+
+                
+                return ticket
+                
+            }
+                        
             return nil
         }
         
         
-        //confirm the reservation
-        for chain in reserveSchedule {
-            if let space = chain {
-                if let reserveSpace = reservation.space {
-                    
-                    //new ticket
-                    if space.contains(reserveSpace) {
+        //confirm reservation - check chained schedule based on assigned space - O(s + h)
+        
+        if let rSpace = reservation.space {
+            let chain = reserveSchedule[rSpace.name]
+            
+            if let items = chain {
+                let spaceSchedule = items.values
+                
+                for event in spaceSchedule {
+                    if event.reservation == reservation {
+                        
+                        //new ticket
                         ticket.timeIn = Date()
                         ticket.reservation = reservation
-                        ticket.space = reserveSpace
+                        ticket.space = rSpace
                         
-                        ticketList.insert(ticket)
+                        self.ticketList.insert(ticket)
                         
                         return ticket
-                    }
-                    else {
-                        print("no valid reservation")
-                        return nil
                     }
                 }
             }
         }
                 
-        
         return nil
     }
     
