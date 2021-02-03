@@ -25,6 +25,7 @@ extension String: Indexable {
         return divisor
     }
     
+    
 
     
     //compute the length

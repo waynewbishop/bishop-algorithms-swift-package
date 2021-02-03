@@ -20,7 +20,7 @@ public class ParkingLot {
     
     
     //make a reservation
-    public func reserve(start: Date, end: Date) -> Reservation? {
+    public func reserve(from start: Date, to end: Date) -> Reservation? {
                 
         let reserveSlice = Array(reserveSchedule[0...2])
         var spaceNo: Int = 0
@@ -45,7 +45,8 @@ public class ParkingLot {
                 } //end for
             }
             else {
-                print("no schedule items for space \(spaceNo)")
+                print("no reservations for space \(spaceNo)")
+                isFound = true
                 break
             }
             spaceNo += 1
@@ -88,15 +89,9 @@ public class ParkingLot {
     }
     
     
-    /*
-     public func newTicket(name: String?, reservation: Reservation?) -> Ticket? {
-       code goes here..
-     }
-     */
-    
     
     //enter the lot
-    public func enter(item: Reservation?) -> Ticket? {
+    public func enter(with res: Reservation?) -> Ticket? {
         
         let ticket = Ticket()
         
@@ -105,7 +100,7 @@ public class ParkingLot {
          if they have a reservation this is attached to ticket at entry.
          */
                 
-        guard let reservation = item else {
+        guard let reservation = res else {
             print("don't have a reservation..")
             
             //todo: check for capacity in non-reserved spots
@@ -158,5 +153,7 @@ public class ParkingLot {
          */
         
     }
+    
+    
     
 }
