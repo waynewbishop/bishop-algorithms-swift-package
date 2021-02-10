@@ -10,7 +10,7 @@ import Foundation
 public class Reservation : Hashable {
     
     var space: Space?
-    var start = Date()
+    var start = Date() //todo: store these dates as a range..
     var end = Date()
     
     var price: Float = 0.0

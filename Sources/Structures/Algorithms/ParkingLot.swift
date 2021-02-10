@@ -11,17 +11,19 @@ public class ParkingLot {
 
     var ticketList = Set<Ticket>()
     var reserveSchedule: Array<Chain<Space>?>
-    let reserved: Int = 2
+    let reserved: Int = 6
 
     
     public init() {
-        self.reserveSchedule = Array<Chain<Space>?>(repeatElement(nil, count: 24))
+        self.reserveSchedule = Array<Chain<Space>?>(repeatElement(nil, count: reserved))
     }
     
     
     
     //make a reservation
     public func reserve(from start: Date, to end: Date) -> Reservation? {
+        
+        let desiredRange = start...end
                 
         let reserveSlice = ArraySlice(reserveSchedule[0...reserved])
         var spaceNo: Int = 0
@@ -36,9 +38,9 @@ public class ParkingLot {
                 for s in spaceSchedule {
                     
                     //check conflicts
-                    let range = s.reservation.start...s.reservation.end
-                    
-                    if !range.contains(start) {
+                    let range = s.reservation.start...s.reservation.end  //todo: call this from the range of the reservation..
+                                        
+                    if !range.overlaps(desiredRange) {
                         isFound = true
                         break
                     }
@@ -125,7 +127,7 @@ public class ParkingLot {
                 ticket.space = Space(with: spaceNo)
                 
                 self.ticketList.insert(ticket)
-
+                
                 
                 return ticket
                 
