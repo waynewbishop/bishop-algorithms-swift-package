@@ -10,10 +10,11 @@ import Foundation
 
 public class Link: Hashable {
     
-    var hash: Int
+    var short: Int
     var cleartext: String
     var description: String?
     var user: User
+    var analytics = Array<Int>()
     
     /*
      note: since strings in swift conform to the hashable
@@ -26,19 +27,19 @@ public class Link: Hashable {
         self.cleartext = url
         
         //combine cleartext and user
-        self.hash = url.hashValue + user.hashValue
+        self.short = url.hashValue + user.hashValue
         self.user = user
     }
     
     //hashable conformance
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(self.hash)
+        hasher.combine(self.short)
     }
     
     
     //equatable conformance
     public static func == (lhs: Link, rhs: Link) -> Bool {
-        return (lhs.hash == rhs.hash)
+        return (lhs.short == rhs.short)
     }
     
         

@@ -10,7 +10,6 @@ import Foundation
 public class User: Hashable {
     
     var name: String?
-    var links = Array<Link>()
     var uuid = UUID()
     
     public init(with name: String) {
@@ -20,14 +19,15 @@ public class User: Hashable {
     
     //hashable conformance
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(uuid)
+        hasher.combine(self.uuid)
     }
     
     
     //equatable conformance
     public static func == (lhs: User, rhs: User) -> Bool {
-        return lhs.uuid == rhs.uuid
+        return (lhs.uuid == rhs.uuid)
     }
-        
+    
+    
     
 }

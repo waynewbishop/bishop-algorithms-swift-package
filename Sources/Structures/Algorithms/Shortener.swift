@@ -9,47 +9,69 @@ import Foundation
 
 public class Shortnener {
     
-    private var users = Set<User>() //todo: structure needs to be a reference (not copied)
-    var sharedLinks = Set<SharedLink>()
+    private var users = Array<User>()
+    var sharedLinks = Set<Link>()
 
     
     public init() {
         //package support
     }
-        
     
-    //create a new user
+    
+    //MARK: User functionality
+
+    
+    //new user
     func newUser(_ name: String) -> User? {
         
         let user = User(with: name)
-        users.insert(user)
+        users.append(user)
         
         return user
     }
+
+
+    //obtain links
+    func linksForUser(_ user: User) -> Set<Link> {
+        
+        let results = sharedLinks.filter { (s: Link) -> Bool in
+            return s.user == user
+        }
+        
+        return results
+    }
     
     
-    //create a new link
+    //MARK: Link functionality
+
+    
+    //generate a new link
     func newLink(for user: User, with cleartext: String) {
         
-        //create link
         let link = Link(cleartext, user)
-        
-        //associate with specified user
-        user.links.append(link)
-        
-                
-        //public shared repository
-        let publicLink = SharedLink(link, cleartext)
-        sharedLinks.insert(publicLink)
+        self.sharedLinks.insert(link)
     }
 
     
 
     //someone clicked on a link
     func redirect(short: Int) -> String? {
+
+        //check for link
+        let first = sharedLinks.first { (s: Link) -> Bool in
+            return s.short == short
+        }        
         
+        //unwrap
+        if let link = first {
+            link.analytics.append(200)
+            return link.cleartext
+        }
+        
+        //todo: update copied link with revised analytics?
         
         return nil
     }
+            
     
 }
