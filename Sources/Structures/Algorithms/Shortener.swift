@@ -10,7 +10,8 @@ import Foundation
 public class Shortnener {
     
     private var users = Array<User>()
-    var sharedLinks = Set<Link>()
+    var sharedLinks = Dictionary<Int, Link>()
+    var analytics = Dictionary<Link, Table<Int>>()  //todo: instead of a table object we will manage an Array of type analytics
 
     
     public init() {
@@ -22,55 +23,71 @@ public class Shortnener {
 
     
     //new user
-    func newUser(_ name: String) -> User? {
+    func newUser(_ name: String) -> User {
         
         let user = User(with: name)
-        users.append(user)
+        self.users.append(user)
         
         return user
-    }
-
-
-    //obtain links
-    func linksForUser(_ user: User) -> Set<Link> {
-        
-        let results = sharedLinks.filter { (s: Link) -> Bool in
-            return s.user == user
-        }
-        
-        return results
     }
     
     
     //MARK: Link functionality
 
     
-    //generate a new link
-    func newLink(for user: User, with cleartext: String) {
+    //generate new link -  O(1)
+    func newLink(for user: inout User, with cleartext: String) {
         
         let link = Link(cleartext, user)
-        self.sharedLinks.insert(link)
+        
+        //the list of user links is updated via reference
+        user.links.append(link)
+        
+        //the public dictionary is updated
+        sharedLinks[link.short] = link
     }
 
+    
+    
+    //obtain link history - O(1)
+    func getAnalytics(for link: Link) -> Table<Int>? {
+        
+        guard let records = analytics[link] else {
+            return nil
+        }
+        
+        return records
+    }
+
+    
+    //MARK: Redirect functionality
     
 
     //someone clicked on a link
     func redirect(short: Int) -> String? {
-
-        //check for link
-        let first = sharedLinks.first { (s: Link) -> Bool in
-            return s.short == short
-        }        
         
-        //unwrap
-        if let link = first {
-            link.analytics.append(200)
-            return link.cleartext
+        //obtain dictionary link - O(1)
+        guard let link = sharedLinks[short] else {
+            return nil
         }
+
         
-        //todo: update copied link with revised analytics?
+        /*
+        note: the analytics model is built using a custom table
+        object. this will count occurences based on a specified
+         equatable value. 
+        */
         
-        return nil
+        if let records = analytics[link] {
+            records.add(200)
+            analytics[link] = records
+        }
+        else {
+            let table = Table<Int>(200)
+            analytics[link] = table
+        }
+                        
+        return link.cleartext
     }
             
     

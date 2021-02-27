@@ -13,8 +13,8 @@ public class Link: Hashable {
     var short: Int
     var cleartext: String
     var description: String?
-    var user: User
-    var analytics = Array<Int>()
+    var userid: UUID
+
     
     /*
      note: since strings in swift conform to the hashable
@@ -28,8 +28,9 @@ public class Link: Hashable {
         
         //combine cleartext and user
         self.short = url.hashValue + user.hashValue
-        self.user = user
+        self.userid = user.id
     }
+    
     
     //hashable conformance
     public func hash(into hasher: inout Hasher) {
