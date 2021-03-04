@@ -24,7 +24,7 @@ stack.push(9)
 stack.push(20)
 
 //uncomment this code to see what changes!
-//stack.pop()
+stack.pop()
 
 /*:
  Often referred to in technical interviews, **Stacks** are useful structures because their primary operations (e.g., push, pop) occur in O(1) - **constant time**. Compared to similar algorithms, they are relatively straightforward to code and can be written using a standard **Array** data structure. Similar to my other custom structures, the Stack also supports **Generics**. You can find the source for this implementation under the Sources/Structures/Algorithms folder under the main Swift package.

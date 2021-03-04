@@ -9,7 +9,7 @@ import Foundation
 
 public class Shortnener {
     
-    private var users = Array<User>()
+    var users = Array<User>()
     var sharedLinks = Dictionary<Int, Link>()
     var history = Dictionary<Link, Events<Int>>() //history events, mapped by Link
 
@@ -36,7 +36,7 @@ public class Shortnener {
 
     
     //generate new link -  O(1)
-    func newLink(for user: inout User, with cleartext: String) {
+    func newLink(for user: inout User, with cleartext: String) -> Int {
         
         let link = Link(cleartext, user)
         
@@ -45,12 +45,15 @@ public class Shortnener {
 
         //public dictionary update
         sharedLinks[link.short] = link
+
+        
+        return link.short
     }
 
     
     
     //obtain link history - O(1)
-    func getHistory(for link: Link) -> Events<Int>? {
+    func getEvents(for link: Link) -> Events<Int>? {
         
         guard let events = history[link] else {
             return nil

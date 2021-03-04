@@ -27,7 +27,7 @@ public class Link: Hashable {
         self.cleartext = url
         
         //combine cleartext and user
-        self.short = url.hashValue + user.hashValue
+        self.short = (url.hashValue / 10) + (user.hashValue / 10)  //to prevent overflow errors..
         self.userid = user.id
     }
     

@@ -9,7 +9,7 @@ import Foundation
 
 public class Events <T: Equatable> {
     
-    var items: Array<Event<T>>
+    var items: Array<Event<T>>  //todo: change container to Stack - O(1)
     
     init() {
         self.items = Array<Event<T>>()
