@@ -11,7 +11,7 @@ public class Shortnener {
     
     private var users = Array<User>()
     var sharedLinks = Dictionary<Int, Link>()
-    var analytics = Dictionary<Link, Table<Int>>()  //todo: instead of a table object we will manage an Array of type analytics
+    var history = Dictionary<Link, Events<Int>>() //history events, mapped by Link
 
     
     public init() {
@@ -40,23 +40,23 @@ public class Shortnener {
         
         let link = Link(cleartext, user)
         
-        //the list of user links is updated via reference
+        //links updated via reference
         user.links.append(link)
-        
-        //the public dictionary is updated
+
+        //public dictionary update
         sharedLinks[link.short] = link
     }
 
     
     
     //obtain link history - O(1)
-    func getAnalytics(for link: Link) -> Table<Int>? {
+    func getHistory(for link: Link) -> Events<Int>? {
         
-        guard let records = analytics[link] else {
+        guard let events = history[link] else {
             return nil
         }
         
-        return records
+        return events
     }
 
     
@@ -70,23 +70,22 @@ public class Shortnener {
         guard let link = sharedLinks[short] else {
             return nil
         }
-
         
         /*
-        note: the analytics model is built using a custom table
-        object. this will count occurences based on a specified
-         equatable value. 
+        note: the analytics / event model is built using a custom table
+        object. this will group events based on a specified value
         */
         
-        if let records = analytics[link] {
+        if let records = history[link] {
             records.add(200)
-            analytics[link] = records
         }
         else {
-            let table = Table<Int>(200)
-            analytics[link] = table
+            let records = Events<Int>()
+            records.add(200)
+            history[link] = records
         }
-                        
+                
+        
         return link.cleartext
     }
             
