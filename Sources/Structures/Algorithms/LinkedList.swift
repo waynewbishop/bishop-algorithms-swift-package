@@ -224,8 +224,62 @@ public class LinkedList<T> {
     }
 
     
+    //remove a specific index
+    public func remove(at index: Int) {
+        
+        guard head.tvalue != nil else {
+            return
+        }
+        
+        //determine if removal is at the head
+        if index == 0 {
+            if let item = head.next {
+                head = item
+                counter -= 1
+            }
+            else {
+                head.tvalue = nil
+                counter = 0
+            }
+            return
+        }
+        
+        
+        var current: LLNode<T>? = head
+        var trailer: LLNode<T>?
+        var nodeindex: Int = 0
+
+        
+        //iterate through remaining items
+        while let item = current {
+            
+            if nodeindex == index {
+                
+                //redirect the trailer and next pointers
+                if let tnode = trailer {
+                    if let cnode = current {
+                        tnode.next = cnode.next
+                    }
+                }
+                
+                current = nil
+                break
+            }
+            
+            //update assignment
+            trailer = current
+            
+            //advance to next record
+            current = item.next
+            nodeindex += 1
+            
+        }
+        
+        counter -= 1
+        
+    }
     
-    
+    /*
     //remove at specific index
     public func remove(at index: Int) {
         
@@ -241,6 +295,7 @@ public class LinkedList<T> {
         var listIndex: Int = 0
         
         
+
         //determine if the removal is at the head
         if (index == 0) {
             current = current?.next
@@ -276,7 +331,8 @@ public class LinkedList<T> {
         
     } //end function
     
-
+*/
+    
 
     
     

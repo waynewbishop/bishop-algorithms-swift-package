@@ -136,6 +136,7 @@ class ClosureTest: XCTestCase {
         let results: LinkedList<Int>! = linkedList.map(mapFormula)
         
         
+        
         //print results
         results.printValues()
 
