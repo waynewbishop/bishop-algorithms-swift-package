@@ -14,6 +14,7 @@ class Score {
     
     var name: String
     var value: Int
+    var secondary: Int?
 
     public init(_ name: String, _ value: Int) {
         

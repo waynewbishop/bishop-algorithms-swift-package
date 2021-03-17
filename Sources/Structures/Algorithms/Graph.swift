@@ -44,8 +44,8 @@ public class Graph <T> {
         //connect source vertex with the neighboring edge
         newEdge.neighbor = neighbor
         newEdge.weight = weight
+        
         source.neighbors.append(newEdge)
-                                
     }
 
     

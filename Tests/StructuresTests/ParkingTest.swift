@@ -12,7 +12,8 @@ import Foundation
 
 
 class ParkingTest: XCTestCase {
-        
+
+/*
     
     //reservation with open spaces
     func testParkingLot() {
@@ -64,5 +65,9 @@ class ParkingTest: XCTestCase {
         }
         
     }
+     
+*/
     
 }
+
+
