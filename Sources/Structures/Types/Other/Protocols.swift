@@ -9,6 +9,17 @@
 import Foundation
 
 
+public protocol Playable {
+    
+    var players: Array<Player> {get}
+    var deck: Deck {get}
+
+    func deal(_ player: inout Player) ->()
+    func play(_ player: inout Player, _ card: Card) ->()
+    func draw(_ player: inout Player) ->()
+    func call() ->()
+}
+
 /**
  Used in a blockchain network, `Peers` and `Miners` both conform to this protocol. The conformance of `balance` is implemented through the `Member` protocol extension.
  */

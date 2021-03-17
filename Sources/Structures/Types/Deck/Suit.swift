@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Suit {
+public class Suit {
     
     var name: String
     var scores = Array<Score>()
@@ -22,8 +22,8 @@ class Suit {
         generic model, each having the same rules and basis of
         comparision.
         */
- 
-        scores.append(Score("A", 1))
+        
+        scores.append(Score("A", 1, 11))
         scores.append(Score("2", 2))
         scores.append(Score("3", 3))
         scores.append(Score("4", 4))
