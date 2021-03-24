@@ -14,7 +14,7 @@ public class Player : Equatable {
     let uuid = UUID()
 
     //assign player name
-    public init(_ name: String) {
+    public init(with name: String) {
         self.name = name
     }
     

@@ -32,7 +32,7 @@ public class PathHeap <T> {
     public  func peek() -> Path<T>? {
         
         if heap.count > 0 {
-           return heap[0] //the shortest path: O(n) - constant time
+           return heap[0] //the shortest path: O(1) - constant time
         }
         else {
             return nil
@@ -52,7 +52,7 @@ public class PathHeap <T> {
     }
     
 
-    //sort shortest paths into a min-heap (heapify)
+    //sort shortest paths into a min-heap (heapify) - O(log n)
     public func enQueue(_ key: Path<T>) {
         
 

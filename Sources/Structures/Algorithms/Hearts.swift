@@ -1,13 +1,13 @@
 //
-//  Blackjack.swift
-//  
+//  Hearts.swift
+//
 //
 //  Created by Wayne Bishop on 3/17/21.
 //
 
 import Foundation
 
-class Blackjack : Playable {
+class Hearts : Playable {
     
     var players = Array<Player>()
     var deck = Deck()
@@ -36,13 +36,13 @@ class Blackjack : Playable {
 
     //put down a card
     func play(_ player: inout Player, _ card: Card) {
-        
     }
     
     
     //receive a card
     func draw(_ player: inout Player) -> Card?  {
-        return nil
+        let card = Card(of: "hearts")
+        return card
     }
     
     

@@ -11,13 +11,14 @@ import Foundation
 
 public protocol Playable {
     
-    var players: Array<Player> {get}
-    var deck: Deck {get}
+    var players: Array<Player> { get set }
+    var deck: Deck { get }
 
     func deal(_ player: inout Player) ->()
     func play(_ player: inout Player, _ card: Card) ->()
-    func draw(_ player: inout Player) ->()
+    func draw(_ player: inout Player) -> Card?
     func call() ->()
+    //todo: func fold() ->()
 }
 
 /**

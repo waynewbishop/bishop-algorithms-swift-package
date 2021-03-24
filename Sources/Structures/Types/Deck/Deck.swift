@@ -7,34 +7,42 @@
 
 import Foundation
 
+
 public class Deck {
 
-    //the deck of cards
-    var cards = Array<Card>()
+    var cards = Stack<Card>()  //todo should this be a stack!!
+    private var suits = Array<Suit>()  //provides card template
+
     
     public init() {
-        //package support
-    }
+
+        suits.append(Suit(of: "hearts"))
+        suits.append(Suit(of: "diamonds"))
+        suits.append(Suit(of: "spades"))
+        suits.append(Suit(of: "clubs"))
     
-    //create new cards based on a generic suit
-    public func add(suit: Suit) {
         
-        /*
-         note: scores template generates cards for the entire suit
-         */
-        for s in suit.scores {
-            
-            let card = Card(of: suit.name)
-            
-            card.name = s.name
-            card.score = s.value
-            card.secondary = s.secondary
-            
-            //add card to deck
-            self.cards.append(card)
+        for suit in suits {
+            /*
+             note: scores template generates cards for the entire suit
+             */
+            for s in suit.scores {
+                
+                let card = Card(of: suit.name)
+                
+                card.name = s.name
+                card.score = s.value
+                card.secondary = s.secondary
+                
+                //push card to deck
+                //self.cards.append(card)
+                self.cards.push(card)
+            }
         }
         
-    }
+    } //end init
+    
+    
 
     
     //randomize all the array values in the deck..
@@ -49,7 +57,8 @@ public class Deck {
     
     //remove a card from the deck
     public func draw() -> Card? {
-        return nil
+        let card = self.cards.popValue()
+        return card
     }
     
     

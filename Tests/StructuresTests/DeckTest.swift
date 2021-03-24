@@ -12,28 +12,44 @@ import XCTest
 
 class DeckTest: XCTestCase {
     
-    func testRegularDeck() {
+    func testBlackJack() {
         
-        //establish the suits
-        let hearts = Suit(of: "Hearts")
-        let diamonds = Suit(of: "Diamonds")
-        let spades = Suit(of: "Spades")
-        let clubs = Suit(of: "Clubs")
-                
+        var blackjack = Blackjack()
+        
+        /*
+         note: adding new players is part of the
+         Playable protocol
+         */
+        
+        _ = blackjack.newplayer("Sam")
+        _ = blackjack.newplayer("Wayne")
+        
+    }
+
+    
+    func testHearts() {
+        
+        var hearts = Hearts()
+        
+        /*
+         note: adding new players is part of the
+         Playable protocol
+         */
+        
+        _ = hearts.newplayer("Larry")
+        _ = hearts.newplayer("Sergi")
+        
+    }
+        
+    
+    func testRegularDeck() {
+            
+        /*
+        
         let deck = Deck()
         
         //create cards - based on suit templates
         
-        //todo: could this be done on an init?
-        //todo: could the creation of the deck be done as a protocol?
-        
-        deck.add(suit: hearts)
-        deck.add(suit: diamonds)
-        deck.add(suit: spades)
-        deck.add(suit: clubs)
-
-        
-        //test the card deck contents..
         print("there are: \(deck.cards.count) cards in the deck..")
         
         for card in deck.cards {
@@ -54,6 +70,7 @@ class DeckTest: XCTestCase {
         if cardA < cardB {
             print("\(cardA.name!) of \(cardA.suit!) is smaller than \(cardB.name!) of \(cardB.suit!)")
         }
+        */
         
     }
 

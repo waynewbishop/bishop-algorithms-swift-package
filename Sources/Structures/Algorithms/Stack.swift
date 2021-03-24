@@ -9,11 +9,15 @@
 import Foundation
 
 
-public class Stack<T> {
+public class Stack<T>: Sequence, IteratorProtocol {
+    
+    //todo: use IteratorProtocol for transforming to standard collection..
     
    public var top: Node<T>
    private var counter: Int = 0
-    
+   private var iterator: Node<T>?
+   private var times: Int = 0
+
     
   public init() {
         top = Node<T>()
@@ -102,8 +106,36 @@ public class Stack<T> {
     }
 
 
-//MARK: Pop functions
+//MARK: Iterator protocol conformance
+    
+    //iterates through each item
+    public func next() -> T? {
 
+        //check starting reference
+        if times == 0 {
+            iterator = top
+        }
+                
+        
+        //assign next instance
+        if let item = iterator {
+            if let tvalue = item.tvalue {
+                iterator = item.next
+                times += 1
+                return tvalue
+            }
+        }
+        
+        //reset timer
+        times = 0
+        
+        return nil
+        
+    }
+    
+
+    
+//MARK: Pop functions
     
     //returns item from the stack - O(1)
     public func popValue() ->T? {

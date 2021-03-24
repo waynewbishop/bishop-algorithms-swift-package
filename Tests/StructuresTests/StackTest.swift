@@ -38,7 +38,6 @@ class StackTest: XCTestCase {
         XCTAssertTrue(tstack.count == numberList.count, "test failed: stack count does not match..")
     }
     
-    
 
     func testPopStack() {
         
@@ -62,6 +61,28 @@ class StackTest: XCTestCase {
  
         XCTAssertTrue(tstack.isEmpty(), "test failed: stack structured not emptied..")
                 
+    }
+    
+
+    func testIteratorStack() {
+        
+       let tstack: Stack<Int> = self.buildStack()
+        
+        if tstack.count == 0 {
+           XCTFail("test failed: no stack items available..")
+        }
+        
+        //first pass through generic stack..
+        for s in tstack {
+            print("stack item: \(s)")
+        }
+        
+        //second pass through same instance
+        for k in tstack {
+            print("second stack: \(k)")
+        }
+        
+        
     }
     
     
