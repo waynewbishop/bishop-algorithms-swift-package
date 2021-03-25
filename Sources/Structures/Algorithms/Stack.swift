@@ -11,7 +11,6 @@ import Foundation
 
 public class Stack<T>: Sequence, IteratorProtocol {
     
-    //todo: use IteratorProtocol for transforming to standard collection..
     
    public var top: Node<T>
    private var counter: Int = 0

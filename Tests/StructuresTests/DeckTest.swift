@@ -17,12 +17,23 @@ class DeckTest: XCTestCase {
         var blackjack = Blackjack()
         
         /*
+         note: with a new game started, check the
+         to ensure the card deck has been shuffled.
+         */
+        
+        for card in blackjack.deck.cards.elements {
+            print("\(card.name!) of \(card.suit!)..")
+        }
+        
+        
+        /*
          note: adding new players is part of the
          Playable protocol
          */
         
         _ = blackjack.newplayer("Sam")
         _ = blackjack.newplayer("Wayne")
+        
         
     }
 

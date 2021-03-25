@@ -15,8 +15,8 @@ public protocol Playable {
     var deck: Deck { get }
 
     func deal(_ player: inout Player) ->()
-    func play(_ player: inout Player, _ card: Card) ->()
-    func draw(_ player: inout Player) -> Card?
+    func play(_ player: inout Player, _ index: Int) ->()
+    func draw(_ player: inout Player) ->()
     func call() ->()
     //todo: func fold() ->()
 }

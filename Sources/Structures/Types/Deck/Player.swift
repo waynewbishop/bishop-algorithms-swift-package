@@ -10,7 +10,7 @@ import Foundation
 public class Player : Equatable {
     
     let name: String
-    var cards = Array<Card>()
+    var hand = Heap<Card>(type: .Max)  //note: the hand is based on a max-heap
     let uuid = UUID()
 
     //assign player name

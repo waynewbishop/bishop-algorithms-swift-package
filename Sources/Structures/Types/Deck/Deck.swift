@@ -10,7 +10,7 @@ import Foundation
 
 public class Deck {
 
-    var cards = Stack<Card>()  //todo should this be a stack!!
+    var cards = SimpleStack<Card>()
     private var suits = Array<Suit>()  //provides card template
 
     
@@ -47,18 +47,30 @@ public class Deck {
     
     //randomize all the array values in the deck..
     public func shuffle() {
+        
         /*
-         notes: copy the deck array then assign each value
-         card to a new random slot between 0 and the remaining
-         slots avaiable in the shuffled model.
+         notes: simulate dealer taking multiple pairs of cards,
+         putting them in random places in the deck.
          */
+        
+        let cardRange: Range = 0..<cards.count
+        
+        for _ in 0...cards.count {
+            
+            //obtain random values
+            let first = Int.random(in: cardRange)
+            let second = Int.random(in: cardRange)
+            
+            //swap card positions
+            cards.swapAt(lhs: first, rhs: second)
+        }
+        
     }
     
     
     //remove a card from the deck
     public func draw() -> Card? {
-        let card = self.cards.popValue()
-        return card
+        return self.cards.pop()
     }
     
     
