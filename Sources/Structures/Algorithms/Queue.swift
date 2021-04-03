@@ -9,10 +9,14 @@
 import Foundation
 
 
-public class Queue<T> {
+public class Queue<T>: Sequence, IteratorProtocol {
         
     var top = Node<T>()
     private var counter: Int = 0
+    private var iterator: Node<T>?
+    private var times: Int = 0
+
+    
 
     public init() {
         //dependency support
@@ -103,6 +107,37 @@ public class Queue<T> {
     
     }
     
+    
+    //MARK: Iterator protocol conformance
+    
+    
+     //iterates through each item
+     public func next() -> T? {
+         
+         print("iterator called..")
+         
+         //check starting reference
+         if times == 0 {
+             iterator = top
+         }
+                 
+         
+         //assign next instance
+         if let item = iterator {
+             if let tvalue = item.tvalue {
+                 iterator = item.next
+                 times += 1
+                 return tvalue
+             }
+         }
+         
+         //reset timer
+         times = 0
+         
+         return nil
+         
+     }
+     
     
     
 } //end class

@@ -72,10 +72,18 @@ class StackTest: XCTestCase {
            XCTFail("test failed: no stack items available..")
         }
         
+
         //first pass through generic stack..
         for s in tstack {
             print("stack item: \(s)")
         }
+        
+        for (s, u) in tstack.enumerated() {
+            
+        }
+    
+        let foo = tstack.contains(9)
+        
         
         //second pass through same instance
         for k in tstack {

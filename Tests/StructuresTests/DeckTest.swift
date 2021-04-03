@@ -33,7 +33,7 @@ class DeckTest: XCTestCase {
         
         _ = blackjack.newplayer("Sam")
         _ = blackjack.newplayer("Wayne")
-        
+    
         
     }
 

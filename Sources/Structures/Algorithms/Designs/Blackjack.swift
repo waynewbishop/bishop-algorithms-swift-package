@@ -53,9 +53,16 @@ class Blackjack : Playable {
          */
         
         let card = player.hand.items[index]
+
+        /*
+        todo: although technically correct, this actually breaks the
+         max-heap property of the selected players hand..
+        */
+        
         discard.append(card)
         
         //do some card analysis here..
+        
     }
     
     

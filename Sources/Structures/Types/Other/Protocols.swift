@@ -18,7 +18,7 @@ public protocol Playable {
     func play(_ player: inout Player, _ index: Int) ->()
     func draw(_ player: inout Player) ->()
     func call() ->()
-    //todo: func fold() ->()
+    //todo: works as a protocol extension func fold(_ player: inout Player) ->()
 }
 
 /**

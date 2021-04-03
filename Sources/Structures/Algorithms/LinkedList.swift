@@ -9,15 +9,16 @@
 import Foundation
 
 /**
- Generic `Linked List` algorithm used in conjunction with the `LLNode` data structure.
-  */
+ notes: generic `Linked List` algorithm used in conjunction with the `LLNode` data structure.
+*/
 
-public class LinkedList<T> {
+public class LinkedList<T>: Sequence, IteratorProtocol {
     
+   private var head = LLNode<T>() //represents the entire list
     
-   //new instance
-   private var head = LLNode<T>()
    private var counter: Int  = 0
+   private var iterator: LLNode<T>?
+   private var times: Int = 0
     
     
     public init() {
@@ -116,6 +117,36 @@ public class LinkedList<T> {
         }
         
     }
+    
+    
+    //MARK: Iterator protocol conformance
+    
+     //iterates through each item
+     public func next() -> T? {
+         
+         print("iterator called..")
+         
+         //check starting reference
+         if times == 0 {
+             iterator = head
+         }
+                 
+         
+         //assign next instance
+         if let item = iterator {
+             if let tvalue = item.tvalue {
+                 iterator = item.next
+                 times += 1
+                 return tvalue
+             }
+         }
+         
+         //reset timer
+         times = 0
+         
+         return nil
+         
+     }
     
     
     //MARK: Key & index operations

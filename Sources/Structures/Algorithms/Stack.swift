@@ -109,7 +109,9 @@ public class Stack<T>: Sequence, IteratorProtocol {
     
     //iterates through each item
     public func next() -> T? {
-
+        
+        print("iterator called..")
+        
         //check starting reference
         if times == 0 {
             iterator = top
