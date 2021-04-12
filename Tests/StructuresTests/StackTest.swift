@@ -78,12 +78,13 @@ class StackTest: XCTestCase {
             print("stack item: \(s)")
         }
         
+        /*
         for (s, u) in tstack.enumerated() {
             
         }
     
         let foo = tstack.contains(9)
-        
+        */
         
         //second pass through same instance
         for k in tstack {
