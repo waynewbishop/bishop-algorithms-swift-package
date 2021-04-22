@@ -15,7 +15,7 @@ import Foundation
    for prepend operations.
  */
 
-public class Deque <T>: Sequence, IteratorProtocol{
+public class Deque <T>: Sequence, IteratorProtocol {
 
     var head = LLNode<T>()
 

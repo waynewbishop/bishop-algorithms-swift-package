@@ -50,8 +50,8 @@ class IteratorTest: XCTestCase {
         
 
         //3. find a specific value - O(n)
-        //XCTAssert(list.contains(9), "test failed: no stack item found..")
-        
+         XCTAssert(list.contains(8), "test failed: no stack item found..")
+         //XCTAssertTrue(list.contains(955))
         
         let baseValue: Int = 2
         

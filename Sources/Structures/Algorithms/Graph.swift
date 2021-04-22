@@ -169,7 +169,7 @@ public class Graph <T> {
             newPath.total = e.weight
             
             
-            //add the new path to the frontier
+            //add the new path to the frontier - O(log n)
             frontier.enQueue(newPath)
             
         }
