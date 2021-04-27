@@ -12,7 +12,7 @@ import Foundation
  notes: generic `Linked List` algorithm used in conjunction with the `LLNode` data structure.
 */
 
-public class LinkedList<T>: Sequence, IteratorProtocol {
+public class LinkedList <T>: Sequence, IteratorProtocol {
     
    private var head = LLNode<T>() //represents the entire list
     
@@ -423,14 +423,14 @@ public class LinkedList<T>: Sequence, IteratorProtocol {
         
         
         var current: LLNode! = head
-        let results = LinkedList<T>()
+        let results = LinkedList<T>()  //todo: make this optional..
         
         while current != nil {
             
             //filter based on formula
             if formula(current) == true {
                 if let key = current.tvalue {
-                    results.append(key)
+                    results.append(key) //new filtered list..
                 }
             }
                         
