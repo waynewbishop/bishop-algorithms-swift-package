@@ -10,7 +10,9 @@ import Foundation
 
 /// (Re)Create the base functionality for a native Dictionary object.
 
-class Glossary <Key: Indexable, Value> {
+  class Glossary <Key, Value> where Key : Indexable {
+
+   //class Glossary <Key: Indexable, Value> { //alternate signature..
     
    private var klist = Set<Key>()
    private var vlist = Array<Value?>(repeating: nil, count: 100)
@@ -29,7 +31,7 @@ class Glossary <Key: Indexable, Value> {
 
     
     //insert or update - O(1)
-    public func updateValue(_ value: Value, for key: Key) {
+    public func updateValue(_ value: Value, forKey key: Key) {
         
         //insert, update existing key
         klist.insert(key)
@@ -59,7 +61,7 @@ class Glossary <Key: Indexable, Value> {
     
     
     //remove key-value pair - O(1)
-    public func removeValue(for key: Key) {
+    public func removeValue(forkey key: Key) {
             
         //generate unique hash
         let index = self.hash(key)
@@ -96,7 +98,7 @@ class Glossary <Key: Indexable, Value> {
     //returns the first index - O(n)
     public func firstIndex(of formula: (Value) -> Bool) -> Int? {
         
-        var results: Int = 0
+        var results: Int?
         
         //find value based on criteria
         for (index, value) in vlist.enumerated() {
@@ -104,6 +106,7 @@ class Glossary <Key: Indexable, Value> {
             if let item = value {
                 if formula(item) == true {  //add magic here..
                     results = index
+                    break
                 }
             }
         }
