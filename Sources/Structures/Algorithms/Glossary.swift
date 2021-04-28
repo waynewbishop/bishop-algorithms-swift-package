@@ -8,6 +8,8 @@
 import Foundation
 
 
+/// (Re)Create the base functionality for a native Dictionary object.
+
 class Glossary <Key: Indexable, Value> {
     
    private var klist = Set<Key>()
@@ -24,8 +26,9 @@ class Glossary <Key: Indexable, Value> {
     var values: Array<Value?> {
         return vlist
     }
+
     
-    //add or update key-value pair
+    //insert or update - O(1)
     public func updateValue(_ value: Value, for key: Key) {
         
         //insert, update existing key
@@ -39,26 +42,59 @@ class Glossary <Key: Indexable, Value> {
     }
     
     
-    //remove key-value pair
+    //retreive value - O(1)
+    public func valueForKey(_ key: Key) -> Value? {
+        
+        var results: Value?
+                
+        //generate unique hash
+        let index = self.hash(key)
+        
+        if vlist.indices.contains(index) {
+            results = vlist[index]
+        }
+            
+        return results
+    }
+    
+    
+    //remove key-value pair - O(1)
     public func removeValue(for key: Key) {
             
         //generate unique hash
         let index = self.hash(key)
         
-        //reset value at index
-        vlist[index] = nil
+        if vlist.indices.contains(index) {
+            
+            //reset value at index
+            vlist[index] = nil
 
-        //remove related key
-        klist.remove(key)
-        
+            //remove related key
+            klist.remove(key)
+        }
     }
+    
+    
+    private func hash (_ key: Key) -> Int {
+       
+       /*
+        conforming indexable objects are required to have an
+        ascii representation to be used by the hash algorithm.
+        */
+       
+       var remainder: Int = 0
+       remainder = key.asciiRepresentation % vlist.count
+       return remainder
+   }
+
+    
     
 
     //MARK: Closure operations
     
     
-    //returns the first index - based on value
-    public func firstIndex(formula: (Value) -> Bool) -> Int? {
+    //returns the first index - O(n)
+    public func firstIndex(of formula: (Value) -> Bool) -> Int? {
         
         var results: Int = 0
         
@@ -75,21 +111,6 @@ class Glossary <Key: Indexable, Value> {
         return results
     }
     
-    
-    //MARK: Helper function
-    
-    
-    private func hash (_ key: Key) -> Int {
-       
-       /*
-        conforming indexable objects are required to have an
-        ascii representation to be used by the hash algorithm.
-        */
-       
-       var remainder: Int = 0
-       remainder = key.asciiRepresentation % vlist.count
-       return remainder
-   }
-    
+        
     
 }
