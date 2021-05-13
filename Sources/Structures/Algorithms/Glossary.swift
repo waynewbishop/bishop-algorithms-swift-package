@@ -6,12 +6,11 @@
 //
 
 import Foundation
-
-
+    
 /// (Re)Create the base functionality for a native Dictionary object.
 
   class Glossary <Key, Value> where Key : Indexable {
-
+    
    //class Glossary <Key: Indexable, Value> { //alternate signature..
     
    private var klist = Set<Key>()
@@ -26,21 +25,41 @@ import Foundation
     
     //return values
     var values: Array<Value?> {
-        return vlist
+        
+        //check keys for corresponding values
+        let results = klist.map { (key: Key) -> Value? in
+            
+            let value = self.valueForKey(key)
+            return value
+        }
+            
+        return results
     }
+    
 
     
     //insert or update - O(1)
-    public func updateValue(_ value: Value, forKey key: Key) {
+    @discardableResult public func updateValue(_ value: Value, forKey key: Key) -> Value? {
         
+        var results: Value?
+        
+        if klist.contains(key) {
+            if let oldValue = self.valueForKey(key) {
+                results = oldValue
+            }
+        }
+                
         //insert, update existing key
         klist.insert(key)
         
         //generate unique hash
         let index = self.hash(key)
         
-        //add to bucket list
+        //modify bucket list
         vlist[index] = value
+        
+       
+        return results
     }
     
     
@@ -89,31 +108,6 @@ import Foundation
        return remainder
    }
 
-    
-    
-
-    //MARK: Closure operations
-    
-    
-    //returns the first index - O(n)
-    public func firstIndex(of formula: (Value) -> Bool) -> Int? {
-        
-        var results: Int?
-        
-        //find value based on criteria
-        for (index, value) in vlist.enumerated() {
-            
-            if let item = value {
-                if formula(item) == true {  //add magic here..
-                    results = index
-                    break
-                }
-            }
-        }
-        
-        return results
-    }
-    
         
     
 }

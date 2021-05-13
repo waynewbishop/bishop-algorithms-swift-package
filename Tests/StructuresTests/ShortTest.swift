@@ -27,19 +27,19 @@ class ShortTest: XCTestCase {
     func testLinksValid() {
         
         //new link
-        var jason = bitly.newUser("Jason")
+        var sruti = bitly.newUser("Sruti")
 
         //build links
-        google = bitly.newLink(for: &jason, with: "www.google.com")
-        amazon = bitly.newLink(for: &jason, with: "www.amazon.com")
-        yahoo = bitly.newLink(for: &jason, with: "www.yahoo.com")
+        google = bitly.newLink(for: &sruti, with: "www.google.com")
+        amazon = bitly.newLink(for: &sruti, with: "www.amazon.com")
+        yahoo = bitly.newLink(for: &sruti, with: "www.yahoo.com")
 
         
         //check user links
-        XCTAssertTrue(jason.links.count > 0, "no short links created for user..")
+        XCTAssertTrue(sruti.links.count > 0, "no short links created for user..")
         
         
-        for link in jason.links {
+        for link in sruti.links {
             print("link is: \(link.cleartext)")
         }
         

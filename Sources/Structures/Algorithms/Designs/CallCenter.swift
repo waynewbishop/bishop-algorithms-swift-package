@@ -13,7 +13,8 @@ class CallCenter: OperatorDelegate {
     var history = Deque<Call>()
     let dispatcher = Queue<Call>()
     let employee = Operator("Wayne")  //todo: how can I support multiple operators?
-    
+    //var listOperator: Set<Operator> (include status as enum)
+    //threading? Answer calls in parallel?
         
     init() {
         //set the delegate
@@ -32,7 +33,7 @@ class CallCenter: OperatorDelegate {
         dispatcher.enQueue(caller)
     }
     
-    func requestNextCall() {
+    func requestNextCall(operator: Operator) {
         
         if let item = dispatcher.deQueue() {
             employee.receiveNextCall(item)
@@ -51,7 +52,7 @@ class CallCenter: OperatorDelegate {
          and process a new call
          */
         
-        self.requestNextCall()
+        //self.requestNextCall()
     }
     
 }

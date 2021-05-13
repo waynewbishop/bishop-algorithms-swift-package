@@ -9,9 +9,9 @@ import Foundation
 
 //set conforming rules
 protocol OperatorDelegate {
-  //todo: func willReceiveCall(employee: Operator, item: Call) -> ()
     func didProcessCall(employee: Operator, item: Call) -> ()
 }
+
 
 class Operator {
     
@@ -19,6 +19,8 @@ class Operator {
     var delegate: OperatorDelegate?
     let uuid = UUID()
     var name: String
+    var isActive: Bool = true
+    var level: Int = 1
     
     init(_ name: String) {
         self.name = name

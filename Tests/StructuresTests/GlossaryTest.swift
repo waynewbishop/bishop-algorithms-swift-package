@@ -43,20 +43,17 @@ class GlossaryTest: XCTestCase {
     }
     
     //test glossary closure method - mimics Swift SDK
-    func testGlossaryClosure() {
+    func testGlossaryDuplicateKey() {
             
         let bids = Glossary<String, Float>()
         
         //add new auction values
         bids.updateValue(20.0, forKey: "Tim")
         bids.updateValue(50.0, forKey: "Sruti")
-        bids.updateValue(20.0, forKey: "Wayne") //same duplicate value as tim..
-        
-        let results = bids.firstIndex { (value: Float) -> Bool in
-            return (value == 50 ? true : false)
-        }
-        
-        print("first value over 50 found at glossary index: \(results!)")
+        bids.updateValue(10.0, forKey: "Tim") //same duplicate value as tim..
+        bids.updateValue(50.0, forKey: "Sam")
+                
+        print("valueForKey: Tim is: \(bids.valueForKey("Tim")!) ")
                 
     }
     
