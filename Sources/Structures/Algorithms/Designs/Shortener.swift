@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class Shortnener {
+public class Shortnener {  //todo: implement as singleton?
     
     var users = Array<User>()
     var sharedLinks = Dictionary<Int, Link>()

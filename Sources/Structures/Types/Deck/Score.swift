@@ -16,7 +16,7 @@ class Score {
     var value: Int
     var secondary: Int?
 
-    public init(_ name: String, _ value: Int, _ secondary: Int? = nil) {
+    public init(_ name: String = "", _ value: Int = 0, _ secondary: Int? = nil) {
         
         self.name = name
         self.value = value

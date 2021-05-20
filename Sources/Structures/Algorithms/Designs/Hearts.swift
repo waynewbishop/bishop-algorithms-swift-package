@@ -9,25 +9,19 @@ import Foundation
 
 class Hearts : Playable {
     
+    var hasStarted: Bool = false
     var players = Array<Player>()
     var deck = Deck()
     var discard = Array<Card>()
     
-    /*
-     note: in addition to the specified based model, an additional
-     hasStarted property could also be added at the level preventing
-     new players to the model once the game has started.
-     */
-    
-    public init() {
-        //randomize the deck
-        deck.shuffle()
-    }
-
-    
     
     //MARK: Playable protocol conformance
     
+    func start() {
+        deck.shuffle()
+        self.hasStarted = true
+    }
+
     
     //deal cards to player
     func deal(_ player: inout Player) {

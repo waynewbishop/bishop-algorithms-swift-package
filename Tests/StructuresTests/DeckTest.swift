@@ -22,21 +22,25 @@ class DeckTest: XCTestCase {
          */
         
         for card in blackjack.deck.cards.elements {
-            print("\(card.name!) of \(card.suit!)..")
+            print("\(card.score.name) of \(card.suit.name)..")
         }
         
-        
-        /*
-         note: adding new players is part of the
-         Playable protocol
-         */
-        
-        _ = blackjack.newplayer("Sam")
-        _ = blackjack.newplayer("Wayne")
     
+        var sruti = Player(with: "Sruti")
+        var wayne = Player(with: "Wayne")
+        
+        
+        //feature of the protocol
+        blackjack.addPlayer(&sruti)
+        blackjack.addPlayer(&wayne)
+        
+        //start the game
+        blackjack.start()
+        
         
     }
 
+    
     
     func testHearts() {
         
@@ -47,8 +51,11 @@ class DeckTest: XCTestCase {
          Playable protocol
          */
         
-        _ = hearts.newplayer("Larry")
-        _ = hearts.newplayer("Sergi")
+        var larry = Player(with: "Larry")
+        var sergi = Player(with: "Sergi")
+        
+        hearts.addPlayer(&larry)
+        hearts.addPlayer(&sergi)
         
     }
         

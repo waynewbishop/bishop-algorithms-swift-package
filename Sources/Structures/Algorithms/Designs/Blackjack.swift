@@ -12,22 +12,17 @@ class Blackjack : Playable {
     var players = Array<Player>()
     var deck = Deck()
     var discard = Array<Card>()
-    
-    /*
-     note: in addition to the specified based model, an additional
-     hasStarted property could also be added at the level preventing
-     new players to the model once the game has started.
-     */
-    
-    public init() {
-        //randomize the deck
-        deck.shuffle()
-    }
-
+    var hasStarted: Bool = false
     
     
     //MARK: Playable protocol conformance
     
+    func start() {
+        
+        //randomize the deck
+        deck.shuffle()
+        self.hasStarted = true
+    }
     
     //deal cards to player
     func deal(_ player: inout Player) {

@@ -56,8 +56,6 @@ public class CallCenterTwo : OperatorDelegate {
                 operators.enQueue(nextEmployee)
             }
         }
-
-        
     }
     
     

@@ -13,11 +13,14 @@ public protocol Playable {
     
     var players: Array<Player> { get set }
     var deck: Deck { get }
-
+    var hasStarted: Bool { get set }
+    
+    func start() ->()
     func deal(_ player: inout Player) ->()
     func play(_ player: inout Player, _ index: Int) ->()
     func draw(_ player: inout Player) ->()
     func call() ->()
+    
     //todo: works as a protocol extension func fold(_ player: inout Player) ->()
 }
 

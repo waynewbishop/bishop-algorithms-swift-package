@@ -28,14 +28,13 @@ public class Deck {
              */
             for s in suit.scores {
                 
-                let card = Card(of: suit.name)
+                let card = Card()
                 
-                card.name = s.name
-                card.score = s.value
-                card.secondary = s.secondary
+                card.suit.name = s.name
+                card.score.value = s.value
+                card.score.secondary = s.secondary
                 
                 //push card to deck
-                //self.cards.append(card)
                 self.cards.push(card)
             }
         }

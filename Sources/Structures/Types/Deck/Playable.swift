@@ -10,15 +10,10 @@ import Foundation
 
 extension Playable {  //extension of a protocol
     
-    
-    //new player to a game - regardless of game type
-    mutating func newplayer(_ name: String) -> Player {
-        
-        let player = Player(with: name)
-        players.append(player)
-        return player
+    mutating func addPlayer(_ player: inout Player) {
+        if self.hasStarted == false {
+            players.append(player)
+        }
     }
 
-    
-    
 }

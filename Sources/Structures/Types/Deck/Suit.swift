@@ -13,7 +13,7 @@ public class Suit {
     var scores = Array<Score>()
     
     //initialize names and values
-    public init(of name: String) {
+    public init(of name: String = "") {
         
         self.name = name
 
@@ -36,7 +36,6 @@ public class Suit {
         scores.append(Score("J", 11))
         scores.append(Score("Q", 12))
         scores.append(Score("K", 13))
-        
     }
     
 }

@@ -10,24 +10,24 @@ import Foundation
 
  public class Card : Comparable {
     
-    //todo: these fields are redudant. Can be obtained from the related Suit and Score objects..
-    
-    var suit: String?
-    var name: String?
-    var score: Int = 0
-    var secondary: Int?
+    var suit: Suit
+    var score: Score
     
     
-    public init(of name: String) {
-        self.suit = name
+    public init() {
+        self.suit = Suit()
+        self.score = Score()
     }
+    
     
     static public func <(lhs: Card, rhs: Card) -> Bool {
-            return lhs.score < rhs.score //what about secondary score..?
+        return lhs.score.value < rhs.score.value
     }
     
+    //test primany and seconday scores
     static public func == (lhs: Card, rhs: Card) -> Bool {
-            return lhs.score == rhs.score
+        return lhs.score.value == rhs.score.value
+            && lhs.score.secondary == rhs.score.secondary
     }
     
  }
