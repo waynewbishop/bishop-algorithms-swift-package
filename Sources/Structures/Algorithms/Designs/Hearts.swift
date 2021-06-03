@@ -7,17 +7,19 @@
 
 import Foundation
 
+
 class Hearts : Playable {
     
     var hasStarted: Bool = false
     var players = Array<Player>()
     var deck = Deck()
-    var discard = Array<Card>()
+    var discard = Stack<Card>()
     
     
     //MARK: Playable protocol conformance
     
     func start() {
+        
         deck.shuffle()
         self.hasStarted = true
     }
@@ -36,19 +38,40 @@ class Hearts : Playable {
     
 
     //put down a card
-    func play(_ player: inout Player, _ index: Int) {
+    @discardableResult func play(_ player: inout Player, card: Card?) -> Turn {
+            
+        guard let tcard = card else {
+            self.draw(&player)
+            return Turn.draw
+        }
+    
         
-        /*
-         note: since each players hand is a heap,
-         we can indicate which card should be discarded by
-         selecting the card index value. This 'card' can then
-         just be removed, or added to a 'virtual' discard pile.
-         */
+        //only occurs at game start
+        guard discard.count != 0 else {
+            discard.push(tcard)
+            return Turn.match
+        }
         
-        let card = player.hand.items[index]
-        discard.append(card)
         
-        //do some card analysis here..
+        //todo: what about the hearts wildcard (change the suit).
+        
+        //todo: can we set up helper indicators as to which cards
+        //from their hand to use for the next turn?
+        
+        if let faceCard = discard.peek() {
+            if faceCard.score == tcard.score || faceCard.suit == tcard.suit {
+                discard.push(tcard)
+                return Turn.match
+            }
+            else {
+                //player keeps the non-matching card
+                player.hand.enQueue(tcard)
+                self.draw(&player)
+                return Turn.nomatch
+            }
+        }
+       
+        return Turn.match
     }
     
     
@@ -60,12 +83,32 @@ class Hearts : Playable {
             player.hand.enQueue(card)
         }
     }
+
     
+    //remove player from game
+    func fold(_ player: inout Player) {
+        
+        if let index = players.firstIndex(of: player) {
+            players.remove(at: index)
+        }
+        
+        //todo: where does the players card's go?
+        //expired cards stack?
+    }
+
     
     //analyze and complete game
-    func call() {
+    func call() -> Player? {
         
+        //review all players hands to determine a winner.
+        for p in players {
+            if p.hand.count == 0 {
+                return p
+            }
+        }
+        
+        return nil
     }
-    
+            
     
 }

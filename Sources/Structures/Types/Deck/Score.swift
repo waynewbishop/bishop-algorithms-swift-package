@@ -10,11 +10,11 @@ import Foundation
 
 /// Serves as a basis of comparision for generic cards.
 
-class Score {
+class Score : Equatable {
     
-    var name: String
-    var value: Int
-    var secondary: Int?
+    var name: String //A
+    var value: Int  //1
+    var secondary: Int?  //11  //todo: wildcard...
 
     public init(_ name: String = "", _ value: Int = 0, _ secondary: Int? = nil) {
         
@@ -23,4 +23,11 @@ class Score {
         self.secondary = secondary
     }
     
+    
+    //test primary and seconday scores
+    static public func == (lhs: Score, rhs: Score) -> Bool {
+        return lhs.value == rhs.value
+            && lhs.secondary == rhs.secondary
+    }
+        
 }

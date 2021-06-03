@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CallCenter: OperatorDelegate {
+class CallCenter: CallCenterDelegate {
     
     var estimate: Int = 0
     var history = Deque<Call>()

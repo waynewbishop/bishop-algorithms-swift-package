@@ -12,7 +12,7 @@ extension Playable {  //extension of a protocol
     
     mutating func addPlayer(_ player: inout Player) {
         if self.hasStarted == false {
-            players.append(player)
+            players.append(player)  //reference being added..
         }
     }
 

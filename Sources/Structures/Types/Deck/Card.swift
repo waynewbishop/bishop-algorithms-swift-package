@@ -13,18 +13,17 @@ import Foundation
     var suit: Suit
     var score: Score
     
-    
     public init() {
         self.suit = Suit()
         self.score = Score()
     }
-    
+            
     
     static public func <(lhs: Card, rhs: Card) -> Bool {
         return lhs.score.value < rhs.score.value
     }
     
-    //test primany and seconday scores
+    //test primary and seconday scores
     static public func == (lhs: Card, rhs: Card) -> Bool {
         return lhs.score.value == rhs.score.value
             && lhs.score.secondary == rhs.score.secondary

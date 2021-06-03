@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class Suit {
+public class Suit: Equatable {
     
     var name: String
     var scores = Array<Score>()
@@ -36,6 +36,12 @@ public class Suit {
         scores.append(Score("J", 11))
         scores.append(Score("Q", 12))
         scores.append(Score("K", 13))
+    }
+    
+    
+    //test suit names
+    static public func == (lhs: Suit, rhs: Suit) -> Bool {
+        return lhs.name == rhs.name
     }
     
 }

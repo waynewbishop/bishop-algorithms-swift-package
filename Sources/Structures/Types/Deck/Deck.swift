@@ -10,18 +10,17 @@ import Foundation
 
 public class Deck {
 
-    var cards = SimpleStack<Card>()
+    var cards = SimpleStack<Card>()  
     private var suits = Array<Suit>()  //provides card template
 
     
     public init() {
 
-        suits.append(Suit(of: "hearts"))
-        suits.append(Suit(of: "diamonds"))
-        suits.append(Suit(of: "spades"))
-        suits.append(Suit(of: "clubs"))
-    
-        
+        suits.append(Suit(of: "Hearts")) //0-A
+        suits.append(Suit(of: "Diamonds"))
+        suits.append(Suit(of: "Spades"))
+        suits.append(Suit(of: "Clubs"))
+            
         for suit in suits {
             /*
              note: scores template generates cards for the entire suit
@@ -30,8 +29,9 @@ public class Deck {
                 
                 let card = Card()
                 
-                card.suit.name = s.name
-                card.score.value = s.value
+                card.suit.name = suit.name       //name of the suit 'hearts'
+                card.score.name = s.name         //name of card 'A'
+                card.score.value = s.value      //card value '1'
                 card.score.secondary = s.secondary
                 
                 //push card to deck

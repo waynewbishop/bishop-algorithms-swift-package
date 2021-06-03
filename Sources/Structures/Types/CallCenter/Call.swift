@@ -23,6 +23,7 @@ public class Call {
     
     let uuid = UUID()
     let date = Date()
+    //todo: add additional enqueue and deque dates..
     
     init(_ name: String) {
         self.name = name

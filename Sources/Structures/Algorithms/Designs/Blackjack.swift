@@ -38,26 +38,10 @@ class Blackjack : Playable {
     
 
     //put down a card
-    func play(_ player: inout Player, _ index: Int) {
-        
-        /*
-         note: since each players hand is a heap,
-         we can indicate which card should be discarded by
-         selecting the card index value. This 'card' can then
-         just be removed, or added to a 'virtual' discard pile.
-         */
-        
-        let card = player.hand.items[index]
-
-        /*
-        todo: although technically correct, this actually breaks the
-         max-heap property of the selected players hand..
-        */
-        
-        discard.append(card)
+    func play(_ player: inout Player, card: Card?) -> Turn  {
         
         //do some card analysis here..
-        
+        return Turn.match
     }
     
     
@@ -71,9 +55,13 @@ class Blackjack : Playable {
     }
     
     
+    func fold(_ player: inout Player) {
+        //code goes here..
+    }
+    
     //analyze and complete game
-    func call() {
-        
+    func call() -> Player? {
+        return nil
     }
     
     

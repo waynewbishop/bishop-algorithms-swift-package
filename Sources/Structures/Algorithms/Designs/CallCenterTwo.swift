@@ -7,12 +7,12 @@
 
 import Foundation
 
-public class CallCenterTwo : OperatorDelegate {
-    
+public class CallCenterTwo : CallCenterDelegate {
+            
     var estimate: Int = 0
     var history = Deque<Call>()
     let dispatcher = Queue<Call>()
-    let operators = Queue<Operator>()
+    let operators = Queue<Operator>() //would an array work better?
     
     
     /// Add new calls to the system
@@ -20,8 +20,7 @@ public class CallCenterTwo : OperatorDelegate {
     
     func newCall(from name: String) {
         
-        let caller = Call(name)
-        dispatcher.enQueue(caller)
+        dispatcher.enQueue(Call(name))
         
         //check call queue
         self.processNextCall()
@@ -30,6 +29,8 @@ public class CallCenterTwo : OperatorDelegate {
     
     /// Add new call operator to the system
     /// - Parameter name: representation of the operator
+    
+   
     
     func newOperator(_ name: String) {
         
@@ -48,10 +49,12 @@ public class CallCenterTwo : OperatorDelegate {
 
         if let nextEmployee = operators.deQueue() {
             
+            //todo: check for employee status
+            //obtain the next employee from the queue if unavailable..
+            
             if let call = dispatcher.deQueue() {
                 nextEmployee.receiveNextCall(call)
             }
-            
             else {
                 operators.enQueue(nextEmployee)
             }
@@ -60,7 +63,7 @@ public class CallCenterTwo : OperatorDelegate {
     
     
     //MARK: Delegate Methods
-    
+        
     func didProcessCall(employee: Operator, item: Call) {
        
         //add to audit log

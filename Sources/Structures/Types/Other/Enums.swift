@@ -9,6 +9,12 @@
 import Foundation
 
 
+/// Governs types card game moves (deck of cards)
+
+enum Turn {
+    case match, nomatch, draw, hit, hold
+}
+
 /**
 The type of blockchain `Exchange`. While both peers and miners participate in the blockchain network, only peers are granted the ability to exchange funds with others.
  */
