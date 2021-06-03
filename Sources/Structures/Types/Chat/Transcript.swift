@@ -9,7 +9,7 @@ import Foundation
 
 /// Acts a bundle of messages
 
-class Transcript: Hashable {
+class Transcript: Hashable {  //todo: transcripts are many-to-many relationship..
     
     var list = Stack<Message>()
     let uuid = UUID()

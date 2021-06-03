@@ -7,9 +7,8 @@
 
 import Foundation
 
-class ChatServer {
+class ChatServer: MessageDelegate {
     
-    var tlist = Set<Transcript>()
     var accounts = Array<Account>()
         
     init() {
@@ -19,15 +18,36 @@ class ChatServer {
     func addAccount(_ account: inout Account) {
         accounts.append(account)  //reference being added..
     }
+
+    
+    //returns an enum to determine success, fail or blocked..
+    func newMessage(from: inout Account, to: inout Account, text: String?) -> () {
+            
+        //todo: check for blocked accounts
+        //encapsulate text into Message
+        //send message to delegate for processing..
+        
+        return
+    }
+    
+    //todo: how will we track new versus existing converstations?
+        
+    
+    //MARK: protocol methods
+
+    
+    //callback sends message to recipient
+    func didReceiveMessage(chat: Message) {
+        
+        if let recipient = chat.to {
+            recipient.receiveMessage(message: chat)
+        }
+    }
+
     
     
-    func sendMessage(message: Message) {
-        //check for an existing transcript
-        
-        //todo: if the message transcript is nil
-        //create a new one and associate with the message.
-        
-        //todo: send "message" to delegate method to post..
+    func willRecieveMessage(chat: Message) {
+        //code goes here..
     }
     
 }

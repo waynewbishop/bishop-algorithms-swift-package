@@ -10,22 +10,20 @@ import Foundation
 class Account: Hashable {
     
     var name: String
+    var tlist = Set<Transcript>()
     var blist = Set<Account>() //list of blocked users
     let uuid = UUID()
+    
+    //todo: how could this work in keychain?
     
     init(name: String) {
         self.name = name
     }
+        
     
-    func newMessage(to: Account, text: String?) -> Message? {
-        //todo: request transcript "container" from chat server
-        return nil //stub..
-    }
-    
-    
-    func receiveMessage(from: Account) {
+    func receiveMessage(message: Message) {
         //todo: this occurs after the chatServer callback has
-        //posted the received message to the central transcript..
+        //posted the received message to the account transcript..
     }
     
     

@@ -17,7 +17,7 @@ public class Vertex <T> : Equatable {
         
     var tvalue: T?
     var neighbors = Array<Edge<T>>()
-    var rank: Array<Float> = [0, 0, 0]
+    var rank: Array<Float> = [0, 0, 0]  //memoization..
     var visited: Bool = false
     var lastModified = Date()
     let uuid = UUID()

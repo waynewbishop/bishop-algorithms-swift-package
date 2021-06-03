@@ -9,9 +9,10 @@ import Foundation
 
 protocol MessageDelegate {
     
-    func didReceiveMessage()
-    func willRecieveMessage()    
-    func didReceiveRequest()
-    func willReceiveRequest()
+    func didReceiveMessage(chat: Message)
+    func willRecieveMessage(chat: Message)
 }
+
+//todo: create working class to
+//invoke specific callback messages..
 
