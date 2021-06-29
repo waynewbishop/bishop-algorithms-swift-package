@@ -66,7 +66,7 @@ class RoombaTest: XCTestCase {
          queue
          */
         
-        if let items = roomba.history.peek() {
+        if let items = roomba.history.get() {
             for s in items {
                 print("vector: \(s.tvalue!) was passed: \(s.count)")
             }

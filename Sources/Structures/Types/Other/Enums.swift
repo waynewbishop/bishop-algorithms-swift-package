@@ -8,12 +8,32 @@
 
 import Foundation
 
+/// Provides details on natural language tokens used in the knowledge graph
+
+public enum Token {
+    case isA, hasA, occupation, worksAt, livesAt, population, creates, weather, unknown
+}
+
 
 /// Governs types card game moves (deck of cards)
 
 enum Turn {
     case match, nomatch, draw, hit, hold
 }
+
+struct Game {
+    struct Hearts {
+        enum Turn {
+            case match, nomatch, draw
+        }
+    }
+    struct BlackJack {
+        enum Turn {
+            case hit, hold
+        }
+    }
+}
+
 
 /**
 The type of blockchain `Exchange`. While both peers and miners participate in the blockchain network, only peers are granted the ability to exchange funds with others.

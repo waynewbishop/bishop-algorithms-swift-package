@@ -24,8 +24,7 @@ class Roomba <T: Equatable> {
     public var lastLocation: Vertex <T>? {
         return last
     }
-    
-    
+        
     //is the room clean?
     public var threshold: Float {
         return revisited / total
@@ -44,7 +43,7 @@ class Roomba <T: Equatable> {
     }
     
     
-    public func trackDeviceTurn(_ destination: T) {
+    public func trackDeviceTurn(_ destination: T) {  //delegate callback from rooma API..
         
         //check room for previous visit..
         for v in self.room.canvas {

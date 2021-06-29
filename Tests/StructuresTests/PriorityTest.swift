@@ -37,7 +37,7 @@ class PriorityTest: XCTestCase {
             pqueue.add(p)
         }
         
-        if let results = pqueue.peek() {
+        if let results = pqueue.get() {
         
             //base analysis off the number of possible matches. even or odd.
             if (phrase.count % 2 == 0) {
@@ -77,7 +77,7 @@ class PriorityTest: XCTestCase {
            
            //iterate through the results
            
-           if let results = pqueue.peek() {
+           if let results = pqueue.get() {
                for item in results {
                    if let tvalue = item.tvalue {
                      print("\(String(describing: tvalue)):\(item.count)")
@@ -111,7 +111,7 @@ class PriorityTest: XCTestCase {
           
           //iterate through the results
           
-          if let results = pqueue.peek() {
+          if let results = pqueue.get() {
               for item in results {
                   if let tvalue = item.tvalue {
                     print("\(String(describing: tvalue)):\(item.count)")
@@ -147,7 +147,7 @@ class PriorityTest: XCTestCase {
           
           //iterate through the results
           
-          if let results = pqueue.peek() {
+          if let results = pqueue.get() {
               for item in results {
                   if let tvalue = item.tvalue {
                     print("\(String(describing: tvalue)):\(item.count)")

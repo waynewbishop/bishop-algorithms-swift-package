@@ -15,6 +15,10 @@ class Hearts : Playable {
     var deck = Deck()
     var discard = Stack<Card>()
     
+    //todo: needed state machine?
+    //deck of cards, suit to match, who's turn it is..
+    //can this be established as a delegate..
+    
     
     //MARK: Playable protocol conformance
     
@@ -26,7 +30,7 @@ class Hearts : Playable {
 
     
     //deal cards to player
-    func deal(_ player: inout Player) {
+    func deal(_ player: inout Player) {  //todo: pass all playrers as a collection.. pass in from self.players
         
         //assign two cards to the designated player
         for _ in 0..<5 {
@@ -38,18 +42,18 @@ class Hearts : Playable {
     
 
     //put down a card
-    @discardableResult func play(_ player: inout Player, card: Card?) -> Turn {
+    @discardableResult func play(_ player: inout Player, card: Card?) -> Game.Hearts.Turn {
             
         guard let tcard = card else {
             self.draw(&player)
-            return Turn.draw
+            return .draw
         }
     
         
         //only occurs at game start
         guard discard.count != 0 else {
             discard.push(tcard)
-            return Turn.match
+            return .match
         }
         
         
@@ -61,17 +65,17 @@ class Hearts : Playable {
         if let faceCard = discard.peek() {
             if faceCard.score == tcard.score || faceCard.suit == tcard.suit {
                 discard.push(tcard)
-                return Turn.match
+                return .match
             }
             else {
                 //player keeps the non-matching card
                 player.hand.enQueue(tcard)
                 self.draw(&player)
-                return Turn.nomatch
+                return .nomatch
             }
         }
        
-        return Turn.match
+        return .match
     }
     
     

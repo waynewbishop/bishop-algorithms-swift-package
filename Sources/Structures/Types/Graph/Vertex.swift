@@ -17,10 +17,12 @@ public class Vertex <T> : Equatable {
         
     var tvalue: T?
     var neighbors = Array<Edge<T>>()
-    var rank: Array<Float> = [0, 0, 0]  //memoization..
+    var rank: Array<Float> = [0, 0, 0]  //memoization.. //todo: what about a Stack? 
     var visited: Bool = false
     var lastModified = Date()
-    let uuid = UUID()
+    let uuid = UUID()  //objectidentifier?
+    //todo: var inbound_connections = Array<Vertex<T>>()
+    
 
    public init() {
         //package support

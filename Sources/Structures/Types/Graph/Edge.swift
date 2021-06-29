@@ -16,9 +16,11 @@ public class Edge <T> {
     
     var neighbor: Vertex<T>
     var weight: Int
+    var detail: Token
     
     init() {
         weight = 0
+        detail = .unknown
         self.neighbor = Vertex<T>()
     }
     

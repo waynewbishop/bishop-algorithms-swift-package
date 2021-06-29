@@ -24,7 +24,7 @@ public class Priority <T: Equatable> {
     }
     
     //return the entire structure
-    public func peek() -> Array<Table<T>>? {
+    public func get() -> Array<Table<T>>? {
         
         if items.count > 0 {
             return items

@@ -40,12 +40,15 @@ public class Graph <T> {
         //create a new edge
         let newEdge = Edge<T>()
         
-        
         //connect source vertex with the neighboring edge
         newEdge.neighbor = neighbor
         newEdge.weight = weight
         
         source.neighbors.append(newEdge)
+        
+        //todo: we need to know who following the neighbor..
+        //we can pass source and destination as a reference to create a matrix??
+        
     }
 
     
@@ -298,6 +301,7 @@ public class Graph <T> {
                     
                     let assignedRank = roundf(currRank / Float(v.neighbors.count))
                     
+                    
                     //assign rank
                     for m in v.neighbors {
                         m.neighbor.rank[round + 1] += assignedRank
@@ -321,6 +325,9 @@ public class Graph <T> {
 
             //advance to next round
             round += 1
+            
+            //todo: if you are in the final round, then add the resulting
+            //vertex rank values to a heap..
         }
         
         
