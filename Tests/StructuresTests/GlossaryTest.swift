@@ -19,13 +19,27 @@ class GlossaryTest: XCTestCase {
     
     //test basic glossary functionality
     func testGlossaryStrings() {
-        
+                
         let vehicals = Glossary<String, String>()
-        
-        //add new values
+         
+        //new values
         vehicals.updateValue("Porshe", forKey: "Car")
         vehicals.updateValue("Tesla", forKey: "Electric")
         vehicals.updateValue("Cessna", forKey: "Plane")
+
+        
+        //print keys (non-nil)
+        for k in vehicals.keys {
+            print("key is \(k)")
+        }
+        
+        //print values
+        for v in vehicals.values {
+            if let value = v {
+                print("value is \(value)")
+            }
+        }
+        
         
         //check for existing value
         if let results = vehicals.valueForKey("Car") {
@@ -38,8 +52,6 @@ class GlossaryTest: XCTestCase {
         
         //test for non-existing key
         XCTAssertNil(vehicals.valueForKey("Boat"), "test failed: value does not exist..")
-        
-
     }
     
     //test glossary closure method - mimics Swift SDK

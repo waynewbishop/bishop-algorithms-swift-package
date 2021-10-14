@@ -44,6 +44,10 @@ class KnowledgeTest: XCTestCase {
     
     }
     
+    func testKnowledgeSearch() {
+        knowledge.search(term: "Tell me about main dishes and red wine")
+    }
+    
 
     func testingWorkingKnowledge() {
         
@@ -66,20 +70,24 @@ class KnowledgeTest: XCTestCase {
 
         
         //what other assocations can be made with Apple?
-        let result = knowledge.mutualFriends(of: &apple)
-        
-        
-        for t in result {
+        if let result = knowledge.mutualFriends(of: &apple) {
             
-            if let item = t.tvalue {
-                if let entity = item.tvalue {
-                    print("\(apple.tvalue!) can be associated to \(entity)'s \(t.count) mutual connections..")
+            for t in result {
+                
+                if let item = t.tvalue {
+                    if let entity = item.tvalue {
+                        print("\(apple.tvalue!) can be associated to \(entity)'s \(t.count) mutual connections..")
+                    }
                 }
             }
         }
+        else {
+            
+        }
                 
-    }
+                
+    } //end function
 
-}
+} //end class
 
     

@@ -9,7 +9,7 @@
 import Foundation
 
 
-public class Stack<T>: Sequence, IteratorProtocol {
+public class Stack <T> : Sequence, IteratorProtocol {
     
     
    public var top: Node<T>

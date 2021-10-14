@@ -7,7 +7,7 @@
 
 import Foundation
     
-/// (Re)Create the base functionality for a native Dictionary object.
+/// Recreate the base functionality for a native Dictionary object.
 
   class Glossary <Key, Value> where Key : Indexable {
     

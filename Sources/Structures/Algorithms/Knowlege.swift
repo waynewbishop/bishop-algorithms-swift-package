@@ -6,11 +6,11 @@
 //
 
 import Foundation
+import NaturalLanguage
 
 
 public class Knowledge <T: Hashable> {
     
-    //todo: change canvas to a priority queue to support modeling
     var canvas = Set<Entity<T>>()
 
     
@@ -40,10 +40,10 @@ public class Knowledge <T: Hashable> {
     }
     
     
-    public func mutualFriends(of source: inout Entity<T>) -> [Table<Entity<T>>] {
+    public func mutualFriends(of source: inout Entity<T>) -> [Table<Entity<T>>]? {
                 
         let priority = Priority<Entity<T>>()
-        var results = [Table<Entity<T>>]()
+        var result = [Table<Entity<T>>]() //could the table
         
         //check adjacency list
         for s in source.neighbors {
@@ -51,7 +51,7 @@ public class Knowledge <T: Hashable> {
             //check their connections
             for c in s.neighbor.connections {
                 
-                if c != source {
+                if c != source /*&& !source.connections.contains(c)*/ {
 
                     var isConnected = false
                     
@@ -69,52 +69,68 @@ public class Knowledge <T: Hashable> {
                 }
             }
         }
- 
-        //obtain vertices with most mutual connections
-        if let items = priority.get() {
-            
-            var most: Int = 0
 
-            //values are pre-sorted based on priority
-            for i in items {
+        
+        //obtain vertices with most mutual connections
+        guard let items = priority.get() else {
+            return nil 
+        }
+        
+             
+        var most: Int = 0
+
+        //values are pre-sorted based on priority
+        for i in items {
+            
+            most = max(i.count, most)
+            
+            if (i.count == most) {
+                result.append(i)
+                continue
                 
-                most = max(i.count, most)
-                
-                if (i.count == most) {
-                    results.append(i)
-                    continue
-                    
-                } else {
-                    break
-                }
-            }            
+            } else {
+                break
+            }
         }
                 
-        return results
+        return result
     }
 
 
     
     public func search(term phrase: T) -> () {
         
-        //todo: parse keywords in model to determine best
-        //matching fact and connection relation..
-        //natural language processing??
-        
-        //need to create tokenization of input string to something tht
-        //can be used..
-        
-        //todo: pass in order history as well as menu list of items..
-        
-        //1. parse the string into a structured data format.
-        
-        //2. match the first identified noun in the phrase
-
         /*
-        self.canvas.contains { (entity: Entity) -> Bool in
-            return entity.tvalue == phrase
-        }
-        */
+         todo: parse keywords in model to determine best
+         //matching fact and connection relation..
+         //natural language processing??
+         */
+        
+        
+        let options = NSLinguisticTagger.Options.omitWhitespace.rawValue | NSLinguisticTagger.Options.joinNames.rawValue
+        
+        let tagger = NSLinguisticTagger(tagSchemes: NSLinguisticTagger.availableTagSchemes(forLanguage: "en"), options: Int(options))
+
+        
+        if let inputString = phrase as? String {
+            
+            tagger.string = inputString
+            let range = NSRange(location: 0, length: inputString.utf16.count)
+            
+            tagger.enumerateTags(in: range, scheme: .nameTypeOrLexicalClass, options: NSLinguisticTagger.Options(rawValue: options)) { tag, tokenRange, sentenceRange, stop in
+                
+                guard let range = Range(tokenRange, in: inputString) else {
+                    return
+                }
+                
+                let token = inputString[range]
+                print("\(tag!.rawValue): \(token)")
+                
+                //todo: how can this assumed knowledge through tokenization be
+                //translated to our knowlege graph?
+            }
+            
+        }//end if
         
     }
 

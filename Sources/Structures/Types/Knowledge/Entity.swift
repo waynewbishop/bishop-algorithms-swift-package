@@ -31,6 +31,7 @@ public class Entity <T: Hashable> : Hashable {
         hasher.combine(tvalue)
     }
     
+
     //equatable conformance
     public static func == (lhs: Entity, rhs: Entity) -> Bool {
         return lhs.tvalue == rhs.tvalue

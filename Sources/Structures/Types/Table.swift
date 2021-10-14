@@ -11,7 +11,6 @@ import Foundation
 /**
   Custom generic structure used with hash tables and priorty queues.
  */
-
 public class Table <T: Equatable> {
     
     var tvalue: T?
@@ -31,5 +30,5 @@ public class Table <T: Equatable> {
             self.count += 1
         }
     }
-    
+            
 }

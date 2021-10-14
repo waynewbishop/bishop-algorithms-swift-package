@@ -21,6 +21,21 @@ class BSTest: XCTestCase {
     }
     
     
+    //test conformance of characters in swift
+    func testCharacters() {
+        
+        let characters = Array("lock")
+        let bsTree = BSModel<Character>()
+                
+        for c in characters {
+            bsTree.append(c)
+        }
+        
+        //iterate through each alphabetized letter
+        bsTree.root.DFSTraverse()
+                
+    }
+    
     
     func testCount() {
         
