@@ -1,6 +1,6 @@
 //
-//  Model.swift
-//  SwiftStructures
+//  ModelPresenter.swift
+//  Structures
 //
 //  Created by Wayne Bishop on 7/26/17.
 //  Copyright © 2017 Arbutus Software Inc. All rights reserved.
@@ -8,33 +8,34 @@
 import Foundation
 
 
-class ModelPresenter: ModelDelegate {
+class ModelPresenter {
     
     
     let service: ModelService = ModelService()
     
-    init() {
-        service.delegate = self
+    //use the protocol as a type
+    weak var modelDelegate: ModelDelegate?
+    
+    
+    func setControllerDelegate(modelDelegate: ModelDelegate?) {
+        self.modelDelegate = modelDelegate
     }
+
     
-    
-    //invoke delegation pattern - presenter updates the model
+    //delegation model - presenter contacts service / updates controller
     func processContent(withElement element: Int) {
-        service.processContent(element)
-    }
-    
-    
-    //MARK: - Delegate Methods
-    
-    //invoked prior to process start
-    func willProcessContent(message: String) {
-        print(message)
-    }
-    
-    
-    //invoked after process completion
-    func didProcessContent(results: Int) {
-        print("the result is: \(results)")
-    }
+        
+        
+        //post starting message - presenter notifies controller
+        modelDelegate?.willProcessContent(message: "starting process..")
+        
+        
+       let results = service.processContent(element)
+
+        
+        //post results message - presenter notifies controller
+        modelDelegate?.didProcessContent(results: results)
+        
+    }    
     
 }
