@@ -14,11 +14,11 @@ class ModelPresenter {
     let service: ModelService = ModelService()
     
     //use the protocol as a type
-    weak var modelDelegate: ModelDelegate?
-    
+    weak var delegate: ModelDelegate?
+
     
     func setControllerDelegate(modelDelegate: ModelDelegate?) {
-        self.modelDelegate = modelDelegate
+        self.delegate = modelDelegate
     }
 
     
@@ -27,14 +27,14 @@ class ModelPresenter {
         
         
         //post starting message - presenter notifies controller
-        modelDelegate?.willProcessContent(message: "starting process..")
+        delegate?.willProcessContent(message: "starting process..")
         
-        
+       //todo: async/await!!
        let results = service.processContent(element)
 
         
         //post results message - presenter notifies controller
-        modelDelegate?.didProcessContent(results: results)
+        delegate?.didProcessContent(results: results)
         
     }    
     

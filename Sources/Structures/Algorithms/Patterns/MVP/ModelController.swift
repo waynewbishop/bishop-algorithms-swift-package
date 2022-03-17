@@ -9,8 +9,11 @@ import Foundation
 
 class ModelController: ModelDelegate {
     
-    let presenter: ModelPresenter = ModelPresenter()
-        
+    let presenter: ModelPresenter
+     
+    init(presenter: ModelPresenter = ModelPresenter()) {
+        self.presenter = presenter
+    }
 
     //set the delegate being managed by the presenter..
     func viewDidLoad() {

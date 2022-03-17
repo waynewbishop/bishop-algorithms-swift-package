@@ -28,6 +28,7 @@ public class HashSet <T: Indexable> {
     }
     
 
+    //O(1) - constant time
     public func insert (_ element: T) -> Bool {
         
       //compute hash value
@@ -55,7 +56,7 @@ public class HashSet <T: Indexable> {
     }
     
     
-        
+    //O(1) - constant time
     public func contains(_ element: T) -> Bool { //O(1) - constant time.
         
       //compute hash value

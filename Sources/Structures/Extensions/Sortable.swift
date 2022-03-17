@@ -22,7 +22,7 @@ extension Sortable {
         
         var index = sequence.startIndex
                 
-        //compare sequence values
+        //compare sequence values - O(n)
         while index < sequence.endIndex - 1 {
             if sequence[index] > sequence[sequence.index(after: index)] {
                 return false

@@ -13,6 +13,7 @@ import Foundation
     var suit: Suit
     var score: Score
     
+    
     public init() {
         self.suit = Suit()
         self.score = Score()

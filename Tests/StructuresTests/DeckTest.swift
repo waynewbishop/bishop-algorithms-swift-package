@@ -70,7 +70,7 @@ class DeckTest: XCTestCase {
         larry.showHand()
         sergi.showHand()
         
-        //make a play
+        //make a play - http post or socket transaction..
         hearts.play(&larry, card: larry.playCard(index: 2))
 
         //make a play

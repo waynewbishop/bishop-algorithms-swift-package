@@ -14,6 +14,8 @@ class Hearts : Playable {
     var players = Array<Player>()
     var deck = Deck()
     var discard = Stack<Card>()
+    //var history = Blockchain() - track history..
+    
     
     //todo: needed state machine?
     //deck of cards, suit to match, who's turn it is..

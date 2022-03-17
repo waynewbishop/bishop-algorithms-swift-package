@@ -25,7 +25,7 @@ extension Int: Indexable {
            var divisor: Int = 0
 
            for item in String(self).unicodeScalars {
-            divisor += Int(item.value)
+               divisor += Int(item.value)
            }
 
            return divisor

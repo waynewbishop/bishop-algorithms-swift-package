@@ -22,11 +22,12 @@ public class Graph <T> {
     }
     
     
-    //add vertex to graph canvas
+    
+    ///add vertex to graph canvas
+    /// - Parameter element: the vertex to be added to the graph
     public func addVertex(element: Vertex<T>) {
         canvas.append(element)
     }
-        
     
     
     /// Represents a relationship between neighboring vertices

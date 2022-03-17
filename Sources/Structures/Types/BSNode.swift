@@ -86,18 +86,20 @@ public class BSNode<T>{
             print("no key provided..")
             return
         }
-        
+
         //process the left side
-        if self.left != nil {
-            left?.DFSTraverse()
+        if let left = self.left {
+            left.DFSTraverse()
         }
-        
+                
         print("...the value is: \(key) - height: \(self.height)..")
         
+        
         //process the right side
-        if self.right != nil {
-            right?.DFSTraverse()
+        if let right = self.right {
+            right.DFSTraverse()
         }
+        
     }
     
     
