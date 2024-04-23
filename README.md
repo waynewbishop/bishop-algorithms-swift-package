@@ -17,6 +17,8 @@ The project is an Xcode package project which brings added benefits and flexibil
 
 
 ```swift
+import Structures
+
  //create a new stack
  let stack = Stack<Int>()
 
