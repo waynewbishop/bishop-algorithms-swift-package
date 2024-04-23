@@ -30,7 +30,7 @@ import Structures
  stack.push(20)
 
  if let item = stack.peek() {
-    print("top level item is: \(String(describing: stack.peek()))") //prints 20
+    print("top level item is: \(String(describing: item))") //prints 20
  }
 
  //remove item from structure
