@@ -128,8 +128,6 @@ Swift Structures has been optimized for **Swift 5.9** (e.g., Xcode 15.0) or late
 + Playgrounds - Getting started material plus an interactive example of Stack algorithms. 
 + Tests - 90+ unit tests with XCTest Framework
 
-**Note**: If you plan to use the project as Swift package, you may also have to include `XCTest.framework` as a project target dependency. 
-
 
 Usage
 --------------------
