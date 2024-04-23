@@ -85,37 +85,37 @@ Example
 --------------------
 
 ```swift
-  // complexity: O(1) - constant time average time for all operations.
-  public struct Stack <T> {
+// complexity: O(1) - constant time average time for all operations.
+public struct Stack <T> {
 
-       var elements : [T] = [T]()
+   var elements : [T] = [T]()
 
-        public init() {
-            //initialization
-        }
-        
-        //the number of items
-        var count: Int {
-            return elements.count
-        }
-        
-        public func peek() -> T? {
-              return elements.last
-          }
-      
-        public mutating func push(_ element: T) {
-              elements.append(element)
-          }
-
-        public mutating func pop() -> T? {
-              return elements.popLast()
-          }
-
-        //swap positions
-        public mutating func swapAt(lhs: Int, rhs: Int) -> () {
-            self.elements.swapAt(lhs, rhs)
-        }        
+    public init() {
+        //initialization
     }
+    
+    //the number of items
+    var count: Int {
+        return elements.count
+    }
+    
+    public func peek() -> T? {
+          return elements.last
+      }
+  
+    public mutating func push(_ element: T) {
+          elements.append(element)
+      }
+
+    public mutating func pop() -> T? {
+          return elements.popLast()
+      }
+
+    //swap positions
+    public mutating func swapAt(lhs: Int, rhs: Int) -> () {
+        self.elements.swapAt(lhs, rhs)
+    }        
+}
 ```
 
 Getting Started
