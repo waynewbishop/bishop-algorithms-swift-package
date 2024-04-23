@@ -17,8 +17,6 @@ The project is an Xcode package project which brings added benefits and flexibil
 
 
 ```swift
-import Structures
-
  //create a new stack
  let stack = Stack<Int>()
 
@@ -29,7 +27,9 @@ import Structures
  stack.push(9)
  stack.push(20)
 
- print("top level item is: \(stack.peek())) //prints 20
+ if let item = stack.peek() {
+    print("top level item is: \(String(describing: stack.peek()))") //prints 20
+ }
 
  //remove item from structure
  stack.pop()
@@ -125,6 +125,8 @@ Swift Structures has been optimized for **Swift 5.9** (e.g., Xcode 15.0) or late
 + Sources - Code for all Swift data structures, algorithms and source extensions
 + Playgrounds - Getting started material plus an interactive example of Stack algorithms. 
 + Tests - 90+ unit tests with XCTest Framework
+
+**Note**: If you plan to use the project as Swift package, you may also have to include `XCTest.framework` as a project target dependency. 
 
 
 Usage
