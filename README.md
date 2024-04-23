@@ -1,7 +1,7 @@
-Structures
+Swift Structures
 ====================
 
-This project provides a framework for commonly used data structures and algorithms written in <a href="http://www.waynewbishop.com" target="_blank">Swift</a>. While details of many algorithms exist on Wikipedia, these implementations are often written as pseudocode or are expressed in C or C++. This code project, along with its supporting book, provides theory, instruction and guidance on many commonly used models. These educational designs can help you pass your next technical interview or build your next app.
+This project provides a framework for commonly used data structures and algorithms written in Swift. While details of many algorithms exist on Wikipedia, these implementations are often written as pseudocode or are expressed in C or C++. This code project, along with its [supporting book](https://medium.com/swift-algorithms-data-structures), provides theory, instruction and guidance on many commonly used models. These educational designs can help you pass your next technical interview or build your next app.
 
 
 Audience
@@ -12,13 +12,13 @@ To best utilize this project, you should already be familiar with the basics of 
 Package Benefits
 ---------------------
 
-The project is an Xcode package project which brings added benefits and flexibility. The source, along with its 70+ unit tests can be opened and executed as a standalone project or included as a project dependency. Since Swift packages support all Apple platforms, **Structures** can be used in any iOS, WatchOS, MacOS, or TvOS application. Quick help documentation has also been made available for the many custom types and implementations.
+The project is an Xcode package project which brings added benefits and flexibility. The source, along with its 90+ unit tests can be opened and executed as a standalone project or included as a project dependency. Since Swift packages support all Apple platforms, **Structures** can be used in any iOS, WatchOS, MacOS, or TvOS application. Quick help documentation has also been made available for the many custom types and implementations.
 
 
 Style Guide
 ---------------------
 
-In addition to the over 70 included unit tests, this project also contains a sample **Swift Playground** to demonstrate how one can use the custom types. Executing the example provides an interactive illustration of building a Stack data structure. Beyond the algorithm, a visual implementation is also shown using SwiftUI. 
+In addition to the over 90 included unit tests, this project also contains a sample **Swift Playground** to demonstrate how one can use the custom types. Executing the example provides an interactive illustration of building a Stack data structure. Beyond the algorithm, a visual implementation is also shown using SwiftUI. 
 
 
 
@@ -45,6 +45,7 @@ The project features code-level examples for the following items:
 + Dijkstra's Shortest Path
 + Depth-First Search
 + Breadth-First Search
++ PageRank
 + Blockchain Networks
 + Generics
 + Type Contraints
@@ -58,7 +59,7 @@ The project features code-level examples for the following items:
 
 The Book
 --------------------
-Now in its **5th edition** and supporting latest version of **Swift**, the <a href="http://wwww.waynewbishop.com" target="_blank">The Swift Algorithms Book</a> features code and color illustrations that benefits students and professionals. As an ongoing effort, I also welcome <a href="https://twitter.com/waynewbishop" target="_blank">feedback</a> and contribution from others. 
+Now in its **4th edition** and supporting latest version of **Swift**, the <a href="https://medium.com/swift-algorithms-data-structures" target="_blank">The Swift Algorithms Book</a> features code and color illustrations that benefits students and professionals. As an ongoing effort, I also welcome <a href="https://github.com/waynewbishop/Structures/pulls" target="_blank">feedback</a> and contribution from others. 
 
 
 Example
@@ -112,18 +113,18 @@ Example
 Getting Started
 --------------------
 
-Swift Structures has been optimized for **Swift 5.3** (e.g., Xcode 12.0) or later. The directories are organized as follows:
+Swift Structures has been optimized for **Swift 5.9** (e.g., Xcode 15.0) or later. The directories are organized as follows:
 + Sources - Code for all Swift data structures, algorithms and source extensions
-+ Playgrounds - Getting started material plus an interactive example of Linked List and Stacks / Queues. 
-+ Tests - 70+ unit tests with XCTest Framework
++ Playgrounds - Getting started material plus an interactive example of Stack algorithms. 
++ Tests - 90+ unit tests with XCTest Framework
 
 
 Usage
 --------------------
-Individuals are welcome to use the code with commercial and open-source projects. As a courtesy, please provide attribution to <a href="http://www.waynewbishop.com" target="_blank">waynewbishop.com</a>. For more information, review the complete <a href="https://github.com/waynewbishop/SwiftStructures/blob/master/License.md" target="_blank">license agreement</a>. 
+Individuals are welcome to use the code with commercial and open-source projects. As a courtesy, please provide attribution to <a href="https://www.linkedin.com/in/waynebishop" target="_blank">Wayne Bishop</a>. For more information, review the complete <a href="https://github.com/waynewbishop/SwiftStructures/blob/master/License.md" target="_blank">license agreement</a>. 
 
 
 Questions
 --------------------
 
-Have a question? Feel free to contact me on <a href="http://www.twitter.com/waynewbishop" target="_blank">Twitter</a> or <a href="http://www.waynewbishop.com/contact" target="_blank">online</a>.
+Have a question? Feel free to contact me on <a href="https://www.linkedin.com/in/waynebishop" target="_blank">Linked In</a>.
