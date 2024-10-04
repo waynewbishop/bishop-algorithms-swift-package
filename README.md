@@ -1,7 +1,7 @@
-Swift Structures
+Swift Structures Package
 ====================
 
-This project provides a framework for commonly used data structures and algorithms written in Swift. While details of many algorithms exist on Wikipedia, these implementations are often written as pseudocode or are expressed in C or C++. This code project, along with its [supporting book](https://medium.com/swift-algorithms-data-structures), provides theory, instruction and guidance on many commonly used models. These educational designs can help you pass your next technical interview or build your next app.
+This project provides a framework for commonly used data structures and algorithms written in Swift. While details of many algorithms exist on Wikipedia, these implementations are often written as pseudocode or are expressed in C or C++. This code project, along with my [Github book](https://github.com/waynewbishop/bishop-algorithms-book), provides theory, instruction and guidance on many commonly used models. These educational designs can help you pass your next technical interview or build your next app.
 
 
 Audience
@@ -40,7 +40,7 @@ import Structures
 Style Guide
 ---------------------
 
-In addition to the over 90 included unit tests, this project also contains a sample **Swift Playground** to demonstrate how one can use the custom types. Executing the example provides an interactive illustration of building a Stack data structure. Beyond the algorithm, a visual implementation is also shown using SwiftUI. 
+In addition to the over **90 included** unit tests, this project also contains a sample **Swift Playground** to demonstrate how one can use the custom types. Executing the example provides an interactive illustration of building a Stack data structure. Beyond the algorithm, a visual implementation is also shown using SwiftUI. 
 
 
 Features
@@ -80,7 +80,7 @@ The project features code-level examples for the following items:
 The Book
 --------------------
 
-Now in its **4th edition** and supporting latest version of **Swift**, [The Swift Algorithms Book](https://medium.com/swift-algorithms-data-structures) features code and color illustrations that benefits students and professionals. As an ongoing effort, I also welcome [feedback and contribution](https://github.com/waynewbishop/Structures/pulls) from others. 
+Now in its **5th edition** and supporting latest version of **Swift**, [The Swift Algorithms Book](https://github.com/waynewbishop/bishop-algorithms-book) features code and color illustrations that benefits students and professionals. As an ongoing effort, I also welcome [feedback and contribution](https://github.com/waynewbishop/bishop-algorithms-book/pulls) from others. 
 
 
 Example
