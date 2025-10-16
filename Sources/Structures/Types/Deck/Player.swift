@@ -10,7 +10,7 @@ import Foundation
 public class Player : Scoreable {
     
     let name: String
-    var hand = Heap<Card>(type: .Max)
+    var hand = Heap<Card>(type: .max)
     var isDealer: Bool = false //todo: provide different rules if they are the dealer..
     
     let uuid = UUID()

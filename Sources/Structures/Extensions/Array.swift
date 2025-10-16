@@ -104,42 +104,33 @@ extension Array where Element: Comparable {
      insertion sort algorithm - rank set of random numbers lowest to highest by
      inserting numbers based on a sorted and unsorted side. performance of O(n2).
      */
-   
     func insertionSort() -> Array<Element> {
-        
         
         //check for trivial case
         guard self.count > 1 else {
             return self
         }
-        
-        
+                
         var output: Array<Element> = self
         
         for primaryindex in 0..<output.count {
             
             let key = output[primaryindex]
+            
             var secondaryindex = primaryindex
-            
-            
+                        
             while secondaryindex > -1 {
-                
                 print("comparing \(key) and \(output[secondaryindex])")
-                
                 if key < output[secondaryindex] {
-                    
                     //move into correct position
                     output.remove(at: secondaryindex + 1)
                     output.insert(key, at: secondaryindex)
                 }
-                
                 secondaryindex -= 1
             }
-            
         }
         
         return output
-        
     }
     
     

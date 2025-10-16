@@ -19,39 +19,39 @@ class EnumModel{
         
         switch model {
 
-            
-        case .Empty:
+
+        case .empty:
             return nil
 
-            
-        case let .Elements(elementList):
+
+        case let .elements(elementList):
             return elementList
-            
-            
-        case let .InsertionSort(elementList):
-            
-            
+
+
+        case let .insertionSort(elementList):
+
+
             //evaluate sequence
             let output = evaluate(withModel: elementList)
             return output?.insertionSort()
-            
 
-        case let .BubbleSort(elementList):
-            
-            
+
+        case let .bubbleSort(elementList):
+
+
             //evaluate sequence
             let output = evaluate(withModel: elementList)
             return output?.bubbleSort()
 
-            
-        case let .SelectionSort(elementList):
 
-            
+        case let .selectionSort(elementList):
+
+
             //evaluate sequence
             let output = evaluate(withModel: elementList)
             return output?.selectionSort()
-            
-            
+
+
         } //end switch
         
         

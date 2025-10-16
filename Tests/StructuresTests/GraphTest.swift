@@ -115,11 +115,29 @@ class GraphTest: XCTestCase {
         XCTAssert(probability == 100, "test failed: pagerank probability for all vertices does not equal 1")
     }
     
+    //pagerank with damping factor - more mathematically accurate
+    func testPageRankWithDamping() {
+
+        var probability: Float = 0.0
+
+        testGraph.processPageRankWithDamping()
+
+        for v in testGraph.canvas {
+
+            if let rvalue = v.rank.last {
+                probability += rvalue
+                print("\(v.tvalue!) pagerank with damping is: \(rvalue)" )
+            }
+        }
+
+        // Should still sum to 100 (educational scale)
+        XCTAssert(abs(probability - 100) < 0.01, "test failed: pagerank probability for all vertices does not equal 100")
+    }
+
 
     
     //MARK: Closures and traversals
- 
-    
+     
     //breadth-first search
     func testBFSTraverse() {
         testGraph.traverse(vertexA)
@@ -141,20 +159,14 @@ class GraphTest: XCTestCase {
         notes: the inout parameter is passed by reference.
         As a result, no return type is required. Also note the trailing closure syntax.
         */
-
         testGraph.traverse(vertexA) { ( node: inout Vertex) -> () in
-            
             node.visited = true
             print("traversed vertex: \(node.tvalue!)..")
-            
         }
-        
-        
     }
     
-
     
-    //closure function passed as parameter
+    //closure function passed as paramete
     func traverseFormula(node: inout Vertex<String>) -> () {
         
         /*
@@ -207,10 +219,9 @@ class GraphTest: XCTestCase {
             current = current.previous
         }
 
-        
-        
     }
-  
-    
-    
+
+
+
+
 } //end class

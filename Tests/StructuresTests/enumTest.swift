@@ -19,9 +19,9 @@ import XCTest
 
     
     class enumsTest: XCTestCase, Sortable {
- 
-        
-        let list = Algorithm.Elements([8, 2, 10, 9, 7, 5])
+
+
+        let list = Algorithm.elements([8, 2, 10, 9, 7, 5])
         
         
         override func setUp() {
@@ -31,35 +31,36 @@ import XCTest
         
         //model for insertion sort algorithm
         func testInsertModel() {
-            
-            let model = Algorithm.InsertionSort(list)
+
+            let model = Algorithm.insertionSort(list)
             self.buildEnumModel(withModel: model)
         }
         
         
         //model for insertion sort (with text)
         func testInsertTextModel() {
-            
-            let textList = Algorithm.Elements(["Dog", "Cat", "Dinasour", "Lion", "Cheetah", "Elephant", "Aardvark"])
-            
-            let model = Algorithm.InsertionSort(textList)
+
+            let textList = Algorithm.elements(["Dog", "Cat", "Dinasour", "Lion", "Cheetah", "Elephant", "Aardvark"])
+
+            let model = Algorithm.insertionSort(textList)
             self.buildEnumModel(withModel: model)
-            
+
         }
 
-        
+
+
         //model for bubble sort algorithm
         func testBubbleModel() {
-            
-            let model = Algorithm.BubbleSort(list)
+
+            let model = Algorithm.bubbleSort(list)
             self.buildEnumModel(withModel: model)
         }
 
-        
+
         //model for selection sort algorithm
         func testSelectionModel() {
-            
-            let model = Algorithm.SelectionSort(list)
+
+            let model = Algorithm.selectionSort(list)
             self.buildEnumModel(withModel: model)
         }
         

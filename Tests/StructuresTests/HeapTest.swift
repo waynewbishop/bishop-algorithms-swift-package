@@ -45,8 +45,8 @@ class HeapTest: XCTestCase {
     
     //test for max-heap property
     func testNumericMaxHeap() {
-        
-        let maxHeap = Heap<Int>(type: .Max)
+
+        let maxHeap = Heap<Int>(type: .max)
         
         
         //heapify
@@ -79,10 +79,11 @@ class HeapTest: XCTestCase {
     }
     
     
-    
+
+
     func testCharacterMaxHeap() {
-        
-        let maxHeap = Heap<Character>(type: .Max)
+
+        let maxHeap = Heap<Character>(type: .max)
         
         
         //heapify

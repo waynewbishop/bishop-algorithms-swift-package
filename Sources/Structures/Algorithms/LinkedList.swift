@@ -168,7 +168,10 @@ public class LinkedList <T>: Sequence, IteratorProtocol {
             
             //cycle through elements
             while (index != x) {
-                current = current.next!
+                guard let nextNode = current.next else {
+                    return nil
+                }
+                current = nextNode
                 x += 1
             }
             
@@ -226,9 +229,11 @@ public class LinkedList <T>: Sequence, IteratorProtocol {
                     childToUse.previous = linktrailer
                 }
                 
-                
+
                 //point new node to the current / previous
-                current!.previous = childToUse
+                if let linkCurrent = current {
+                    linkCurrent.previous = childToUse
+                }
                 
                 
                 //replace the head node if required
@@ -421,20 +426,20 @@ public class LinkedList <T>: Sequence, IteratorProtocol {
             return nil
         }
         
-        
-        var current: LLNode! = head
+
+        var current: LLNode<T>? = head
         let results = LinkedList<T>()  //todo: make this optional..
-        
-        while current != nil {
-            
+
+        while let node = current {
+
             //filter based on formula
-            if formula(current) == true {
-                if let key = current.tvalue {
+            if formula(node) == true {
+                if let key = node.tvalue {
                     results.append(key) //new filtered list..
                 }
             }
-                        
-            current = current.next
+
+            current = node.next
         }
         
         
@@ -445,37 +450,31 @@ public class LinkedList <T>: Sequence, IteratorProtocol {
     
     
     //map list content - higher order function
-    public func map(_ formula: (LLNode<T>) -> T) -> LinkedList<T>! {
-        
-        
+    public func map(_ formula: (LLNode<T>) -> T) -> LinkedList<T>? {
+
+
         //check for instance
         guard head.tvalue != nil else {
             return nil
         }
-        
-        
-        var current: LLNode! = head
+
+
+        var current: LLNode<T>? = head
         let results = LinkedList<T>()
-        var newKey: T!
-        
-        
-        while current != nil {
-            
+
+
+        while let node = current {
+
             //map based on formula
-            newKey = formula(current)
-            
-            //add non-nil entries
-            if newKey != nil {
-                results.append(newKey)
-            }
-            
-            
-            current = current.next
+            let newKey = formula(node)
+            results.append(newKey)
+
+            current = node.next
         }
-        
-        
+
+
         return results
-        
+
     }
 
 } //end class

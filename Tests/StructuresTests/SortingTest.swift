@@ -32,7 +32,7 @@ class SortingTest: XCTestCase, Sortable {
     var emptyTextList: Array<String> = []
     
     //string extension
-    var dateList: Array<Date> = ["12-10-2016".datevalue, "12-08-2016".datevalue, "12-09-2016".datevalue]
+    var dateList: Array<Date> = ["12-10-2016".datevalue!, "12-08-2016".datevalue!, "12-09-2016".datevalue!]
     
     
     override func setUp() {

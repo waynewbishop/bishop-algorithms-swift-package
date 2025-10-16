@@ -132,22 +132,22 @@ public class Graph <T> {
         
     
         //establish the shortest path as an optional
-        var shortestPath: Path! = Path<T>()
-        
-        
+        var shortestPath: Path<T>? = nil
+
+
         for itemPath in finalPaths {
-            
+
             if (itemPath.destination == destination) {
-                
-                if  (shortestPath.total == 0) || (itemPath.total < shortestPath.total) {
+
+                if (shortestPath == nil) || (itemPath.total < shortestPath!.total) {
                     shortestPath = itemPath
                 }
-                
+
             }
-            
+
         }
-        
-        
+
+
         return shortestPath
         
     }
@@ -246,16 +246,16 @@ public class Graph <T> {
         
         //mutated copy
         var output = head
-        
-        
-        var current: Path! = output
-        var prev: Path<T>!
-        var next: Path<T>!
-        
-        
-        while(current != nil) {
-            next = current.previous
-            current.previous = prev
+
+
+        var current: Path<T>? = output
+        var prev: Path<T>? = nil
+        var next: Path<T>? = nil
+
+
+        while current != nil {
+            next = current?.previous
+            current?.previous = prev
             prev = current
             current = next
         }
@@ -334,8 +334,85 @@ public class Graph <T> {
         
     }
 
-        
-    
+
+    /// Enhanced PageRank with damping factor and convergence detection
+    /// - Parameters:
+    ///   - dampingFactor: Probability of following links vs random jump (default: 0.85)
+    ///   - maxIterations: Maximum iterations before stopping (default: 100)
+    ///   - convergenceThreshold: Minimum change required to continue (default: 0.0001)
+    public func processPageRankWithDamping(dampingFactor: Float = 0.85,
+                                         maxIterations: Int = 100,
+                                         convergenceThreshold: Float = 0.0001) {
+
+        // Use mathematical PageRank scale (0.0 to 1.0)
+        let startingRank: Float = 1.0 / Float(self.canvas.count)
+        let randomJumpProbability = (1.0 - dampingFactor) / Float(self.canvas.count)
+
+        var iteration: Int = 0
+        var hasConverged = false
+
+        // Initialize all vertices with equal starting rank
+        for vertex in self.canvas {
+            vertex.rank = [startingRank, 0, 0]  // Only use first two slots
+        }
+
+        while iteration < maxIterations && !hasConverged {
+
+            // Reset next iteration ranks to random jump baseline
+            for vertex in self.canvas {
+                vertex.rank[1] = randomJumpProbability
+            }
+
+            // Calculate authority distribution for this iteration
+            for vertex in self.canvas {
+                let currentRank = vertex.rank[0]
+
+                // Standard case: Distribute rank to neighbors
+                if vertex.neighbors.count > 0 {
+                    let linkContribution = (dampingFactor * currentRank) / Float(vertex.neighbors.count)
+
+                    for edge in vertex.neighbors {
+                        edge.neighbor.rank[1] += linkContribution
+                    }
+                }
+                // Sink node case: Distribute to all other vertices
+                else {
+                    if self.canvas.count > 1 {
+                        let sinkContribution = (dampingFactor * currentRank) / Float(self.canvas.count - 1)
+
+                        for otherVertex in self.canvas {
+                            if vertex != otherVertex {
+                                otherVertex.rank[1] += sinkContribution
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Check for convergence
+            var maxChange: Float = 0
+            for vertex in self.canvas {
+                let change = abs(vertex.rank[1] - vertex.rank[0])
+                maxChange = max(maxChange, change)
+
+                // Move new rank to current rank for next iteration
+                vertex.rank[0] = vertex.rank[1]
+            }
+
+            hasConverged = maxChange < convergenceThreshold
+            iteration += 1
+        }
+
+        // Store final results in the last slot for compatibility
+        for vertex in self.canvas {
+            vertex.rank[2] = vertex.rank[0] * 100  // Scale back to educational format
+        }
+
+        print("PageRank converged after \(iteration) iterations")
+    }
+
+
+
     //MARK: traversal algorithms
     
     

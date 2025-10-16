@@ -321,9 +321,12 @@ Store `BSNode` references for later processing - memoization.
     
     
     //MARK: Helper function
-        
+
     public func printTree(_ element: BSNode<T>) {
-        print("left is : \(element.left!.tvalue!) | root is: \(element.tvalue!)  | right is : \(element.right!.tvalue!)..")
+        let leftValue = element.left?.tvalue.map { "\($0)" } ?? "nil"
+        let rootValue = element.tvalue.map { "\($0)" } ?? "nil"
+        let rightValue = element.right?.tvalue.map { "\($0)" } ?? "nil"
+        print("left is : \(leftValue) | root is: \(rootValue)  | right is : \(rightValue)..")
     }
             
     

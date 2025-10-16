@@ -126,10 +126,12 @@ public class Trie {
                 break
             }
             
-            
+
+
             //add unvisited trie nodes to the queue
             for e in leaf.children {
-                print("adding leaf: \(e.tvalue!) to queue..")
+                let leafValue = e.tvalue ?? "nil"
+                print("adding leaf: \(leafValue) to queue..")
                     trieQueue.enQueue(e)
             }
 
@@ -217,21 +219,25 @@ public class Trie {
                 break
             }
             
-            
+
+
             //add unvisited trie nodes to the queue
             for e in leaf.children {
-                print("adding leaf: \(e.tvalue!) to queue..")
+                let leafValue = e.tvalue ?? "nil"
+                print("adding leaf: \(leafValue) to queue..")
                     trieQueue.enQueue(e)
             }
 
-            
+
+
             if leaf.isFinal == true {
                 if let tvalue = leaf.tvalue {
                     wordList.append(tvalue)
                 }
             }
 
-            print("traversed substring: \(leaf.tvalue!)..")
+            let leafValue = leaf.tvalue ?? "nil"
+            print("traversed substring: \(leafValue)..")
             
         }
         

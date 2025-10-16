@@ -74,11 +74,12 @@ class QuickTest: XCTestCase, Sortable {
     //test example with comparable dates
     func testDatesQSort() {
 
-        
+
+
         //create random dates - extension
-        let pastdate: Date = "05-13-2016".datevalue
-        let nowdate: Date = "12-12-2016".datevalue
-        let futuredate: Date = "01-16-2017".datevalue
+        let pastdate: Date = "05-13-2016".datevalue!
+        let nowdate: Date = "12-12-2016".datevalue!
+        let futuredate: Date = "01-16-2017".datevalue!
         
         
         var sequence: Array<Date> = [nowdate, futuredate, pastdate]

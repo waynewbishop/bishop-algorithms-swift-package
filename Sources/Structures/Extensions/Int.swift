@@ -97,24 +97,28 @@ extension Int: Indexable {
             return output
         }
         
-        
+
+
         let results: Int = output[i - 1] + output[i - 2]
         output.append(results)
-        
-        
+
+
         //set iteration
-        final = self.fibRecursive(output)!
-        
-        
+        if let recursiveResult = self.fibRecursive(output) {
+            final = recursiveResult
+        }
+
+
         return final
         
     }
     
-    
+
+
     //build fibonacci sequence to a specified position - trailing closure
-    func fibClosure(withFormula formula: (Array<Int>) -> Int) -> Array<Int>! {
-        
-        
+    func fibClosure(withFormula formula: (Array<Int>) -> Int) -> Array<Int>? {
+
+
         //check trivial condition
         guard self > 2 else {
             return nil

@@ -51,47 +51,47 @@ public enum BTransType{
  */
 
 indirect enum Algorithm<T> {
-    
-    case Empty
-    case Elements(Array<T>)
-    case InsertionSort(Algorithm<T>)
-    case BubbleSort(Algorithm<T>)
-    case SelectionSort(Algorithm<T>)
-    
+
+    case empty
+    case elements(Array<T>)
+    case insertionSort(Algorithm<T>)
+    case bubbleSort(Algorithm<T>)
+    case selectionSort(Algorithm<T>)
+
 }
 
 
 //use for decision tree modeling
 enum LearningType {
-    
-    case Feature
-    case Label
+
+    case feature
+    case label
 }
 
 //used for generic heap data structure processing
 public enum HeapType {
-    
-    case Min
-    case Max
+
+    case min
+    case max
 }
 
 
 //used for unit test cases
 enum SortOrder {
-    
-    case Ascending
-    case Descending
+
+    case ascending
+    case descending
 }
 
 
 //used for generic processing
 enum Result {
-    
-    case Success
-    case Collision
-    case NotFound
-    case NotSupported
-    case Fail
+
+    case success
+    case collision
+    case notFound
+    case notSupported
+    case fail
 }
 
 

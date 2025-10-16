@@ -20,8 +20,8 @@ public class Heap<T: Comparable> {
     
     
     //min-heap default initialization
-    public init(type: HeapType = .Min) {
-        
+    public init(type: HeapType = .min) {
+
         items = Array<T>()
         heapType = type
     }
@@ -82,9 +82,9 @@ public class Heap<T: Comparable> {
             
             //heapify depending on type
             switch heapType {
-                
-            case .Min:
-                
+
+            case .min:
+
                 //swap child and parent positions
                 if childToUse <= parentToUse {
                     items.swapAt(parentIndex, Int(childIndex))
@@ -92,9 +92,9 @@ public class Heap<T: Comparable> {
                 else {
                     break
                 }
-                
-            case .Max:
-                
+
+            case .max:
+
                 //swap child and parent positions
                 if childToUse >= parentToUse {
                     items.swapAt(parentIndex, Int(childIndex))
@@ -102,7 +102,7 @@ public class Heap<T: Comparable> {
                 else {
                     break
                 }
-                
+
             }
             
             

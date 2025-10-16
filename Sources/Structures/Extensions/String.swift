@@ -60,14 +60,15 @@ extension String: Indexable {
     }
 
     
-    
+
+
     //formats a string to date format
-    var datevalue: Date! {
-      
+    var datevalue: Date? {
+
         let stringFormatter = DateFormatter()
         stringFormatter.dateFormat = "MM-dd-yyyy"
         stringFormatter.locale = Locale(identifier: "en_US_POSIX")
-        
+
         //check for correct date format
         if let d = stringFormatter.date(from: self) {
             return Date(timeInterval: 0, since: d)
