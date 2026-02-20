@@ -117,7 +117,6 @@ class HashTableTest: XCTestCase {
 
     func testDynamicResizing() {
         let table = HashTable<Int, String>(capacity: 4)
-        let initialCapacity = 4
 
         // Insert enough items to trigger resize (load factor = 0.75)
         // With capacity 4, inserting 4 items should trigger resize

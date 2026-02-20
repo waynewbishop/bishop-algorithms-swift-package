@@ -1,7 +1,7 @@
 Swift Structures Package
 ====================
 
-This project provides a framework for commonly used data structures and algorithms written in Swift. While details of many algorithms exist on Wikipedia, these implementations are often written as pseudocode or are expressed in C or C++. This code project, along with my [Github book](https://github.com/waynewbishop/bishop-algorithms-book), provides theory, instruction and guidance on many commonly used models. These educational designs can help you pass your next technical interview or build your next app.
+This project provides a framework for commonly used data structures and algorithms written in Swift. While details of many algorithms exist on Wikipedia, these implementations are often written as pseudocode or are expressed in C or C++. This code project, along with my [Swift Algorithms Book](https://waynewbishop.github.io/swift-algorithms/), provides theory, instruction and guidance on many commonly used models. These educational designs can help you pass your next technical interview or build your next app.
 
 
 Audience
@@ -13,7 +13,7 @@ To best utilize this project, you should already be familiar with the basics of 
 Package Benefits
 ---------------------
 
-The project is an Xcode package project which brings added benefits and flexibility. The source, along with its 90+ unit tests can be opened and executed as a standalone project or included as a project dependency. Since Swift packages support all Apple platforms, **Structures** can be used in any iOS, WatchOS, MacOS, or TvOS application. Quick help documentation has also been made available for the many custom types and implementations.
+The project is an Xcode package project which brings added benefits and flexibility. The source, along with its 100+ unit tests can be opened and executed as a standalone project or included as a project dependency. Since Swift packages support all Apple platforms, **Structures** can be used in any iOS, WatchOS, MacOS, or TvOS application. Quick help documentation has also been made available for the many custom types and implementations.
 
 
 ```swift
@@ -40,7 +40,7 @@ import Structures
 Style Guide
 ---------------------
 
-In addition to the over **90 included** unit tests, this project also contains a sample **Swift Playground** to demonstrate how one can use the custom types. Executing the example provides an interactive illustration of building a Stack data structure. Beyond the algorithm, a visual implementation is also shown using SwiftUI. 
+In addition to the over **100 included** unit tests, this project also contains a sample **Swift Playground** to demonstrate how one can use the custom types. Executing the example provides an interactive illustration of building a Stack data structure. Beyond the algorithm, a visual implementation is also shown using SwiftUI.
 
 
 Features
@@ -55,9 +55,8 @@ The project features code-level examples for the following items:
 + Selection Sort
 + Quick Sort
 + Binary Search Trees
-+ Tree Balancing - Rotations
-+ Stacks
-+ Queues
++ Tree Balancing (AVL Rotations)
++ Stacks & Queues
 + Heaps & Heapsort Operations
 + Priority Queues
 + Hash Tables
@@ -66,21 +65,21 @@ The project features code-level examples for the following items:
 + Dijkstra's Shortest Path
 + Depth-First Search
 + Breadth-First Search
++ Topological Sort
 + PageRank
-+ Blockchain Networks
 + Generics
-+ Type Contraints
++ Type Constraints
 + Protocol Extensions
 + Enumerations
 + Fibonacci Numbers
-+ Dyanmic Programming
++ Dynamic Programming
 + Closures
 
 
 The Book
 --------------------
 
-Now in its **5th edition** and supporting latest version of **Swift**, [The Swift Algorithms Book](https://github.com/waynewbishop/bishop-algorithms-book) features code and color illustrations that benefits students and professionals. As an ongoing effort, I also welcome [feedback and contribution](https://github.com/waynewbishop/bishop-algorithms-book/pulls) from others. 
+Now in its **5th edition** and supporting latest version of **Swift**, [The Swift Algorithms Book](https://waynewbishop.github.io/swift-algorithms/) features code and color illustrations that benefits students and professionals. As an ongoing effort, I also welcome [feedback and contribution](https://github.com/waynewbishop/swift-algorithms/pulls) from others.
 
 
 Example
@@ -95,16 +94,16 @@ public struct Stack <T> {
     public init() {
         //initialization
     }
-    
+
     //the number of items
     var count: Int {
         return elements.count
     }
-    
+
     public func peek() -> T? {
           return elements.last
       }
-  
+
     public mutating func push(_ element: T) {
           elements.append(element)
       }
@@ -116,25 +115,39 @@ public struct Stack <T> {
     //swap positions
     public mutating func swapAt(lhs: Int, rhs: Int) -> () {
         self.elements.swapAt(lhs, rhs)
-    }        
+    }
 }
 ```
 
 Getting Started
 --------------------
 
-Swift Structures has been optimized for **Swift 5.9** (e.g., Xcode 15.0) or later. The directories are organized as follows:
+Swift Structures has been optimized for **Swift 6.0** (Xcode 26) or later. The directories are organized as follows:
 + Sources - Code for all Swift data structures, algorithms and source extensions
-+ Playgrounds - Getting started material plus an interactive example of Stack algorithms. 
-+ Tests - 90+ unit tests with XCTest Framework
++ Playgrounds - Getting started material plus an interactive example of Stack algorithms.
++ Tests - 100+ unit tests with XCTest Framework
 
-**Note:** If required, also set `ENABLE_TESTING_SEARCH_PATHS` to `YES` for your project configuration.
+### Installation
+
+Add this package as a dependency in your Xcode project:
+
+1. Go to **File → Add Package Dependencies**
+2. Enter the repository URL: `https://github.com/waynewbishop/bishop-algorithms-swift-package`
+3. Choose version rules and add to your target
+
+Or add to your `Package.swift`:
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/waynewbishop/bishop-algorithms-swift-package", from: "1.0.0")
+]
+```
 
 
 Usage
 --------------------
 
-Individuals are welcome to use the code with commercial and open-source projects. As a courtesy, please provide attribution to [Wayne Bishop](https://www.linkedin.com/in/waynebishop). For more information, review the complete [license agreement](https://github.com/waynewbishop/SwiftStructures/blob/master/License.md). 
+Individuals are welcome to use the code with commercial and open-source projects. As a courtesy, please provide attribution to [Wayne Bishop](https://www.linkedin.com/in/waynebishop). For more information, review the complete [license agreement](https://github.com/waynewbishop/SwiftStructures/blob/master/License.md).
 
 
 Questions

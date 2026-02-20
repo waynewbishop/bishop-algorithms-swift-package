@@ -8,24 +8,50 @@
 
 import Foundation
 
-/**
- Used to organize a list of repeating elements based on occurence.
- based on the concept of the max-heap. the custom `Table` could be
- replaced with a standard dictionary collection.
-  */
-
+/// A frequency-based priority queue that organizes elements by occurrence count
+///
+/// This class maintains a collection of elements sorted by frequency using a max-heap structure.
+/// When you add values, the priority queue tracks how many times each unique value appears and
+/// automatically maintains heap order so the most frequent element is always at the top.
+///
+/// This is useful for:
+/// - Frequency analysis and counting problems
+/// - Finding the most common elements in a stream
+/// - Huffman encoding (where frequencies determine tree structure)
+/// - Top-K frequent elements problems
+///
+/// The implementation uses a `Table<T>` wrapper to store both the value and its count,
+/// organized in an array-based max-heap. Each add operation performs bottom-up heapification
+/// to maintain the heap property: parent counts are always ≥ child counts.
+///
+/// - Note: Unlike standard priority queues that accept external priorities, this queue
+///         automatically derives priority from occurrence count.
 public class Priority <T: Equatable> {
 
-    private var items: Array<Table<T>> = [Table<T>]()  //todo: needs to be changed to a set object.
-        
-    
+    /// Array of frequency tables organized as a max-heap
+    ///
+    /// Each `Table<T>` stores a unique value and its occurrence count. The array maintains
+    /// heap order: items[i].count ≥ items[2i+1].count and items[i].count ≥ items[2i+2].count
+    private var items: Array<Table<T>> = [Table<T>]()
+
+    /// Creates a new empty priority queue
+    ///
+    /// Initializes an empty priority queue ready to accept elements and track their frequencies.
     public init() {
         //package support
     }
-    
-    //return the entire structure
+    /// Returns all frequency tables in heap order
+    ///
+    /// This method provides access to the internal heap structure for inspection or iteration.
+    /// The returned array is in heap order (not sorted by frequency), with the most frequent
+    /// element at index 0.
+    ///
+    /// - Returns: An array of `Table<T>` objects containing values and their counts,
+    ///           or `nil` if the queue is empty
+    ///
+    /// - Complexity: O(1) constant time—returns reference to internal array
     public func get() -> Array<Table<T>>? {
-        
+
         if items.count > 0 {
             return items
         }
@@ -34,8 +60,23 @@ public class Priority <T: Equatable> {
         }
     }
 
-    
-    
+    /// Adds a value to the priority queue and maintains heap order
+    ///
+    /// This method performs two operations:
+    /// 1. **Frequency tracking**: If the value already exists, increments its count.
+    ///    Otherwise, creates a new `Table<T>` entry with count = 1.
+    /// 2. **Heapification**: Performs bottom-up heapification to restore heap property,
+    ///    bubbling the added/updated element up until parent count ≥ child count.
+    ///
+    /// The heapification uses the standard bottom-up approach: compare the child with its
+    /// parent (at index `floor((childIndex - 1) / 2)`) and swap if the child count is greater,
+    /// then repeat until reaching the root or finding correct position.
+    ///
+    /// - Parameter tvalue: The value to add to the priority queue
+    ///
+    /// - Complexity: O(n + log n) where n is the number of unique values. The linear scan
+    ///              to find existing values could be optimized to O(1) with a dictionary,
+    ///              reducing overall complexity to O(log n) for heapification only.
     public func add(_ tvalue: T) {
         
         var isAdded: Bool = false

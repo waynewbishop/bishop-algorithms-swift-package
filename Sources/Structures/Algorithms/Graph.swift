@@ -8,54 +8,131 @@
 
 import Foundation
 
-/**
-A `Graph` defines a relationship between two or more `Vertices`.
- */
-
+/// A graph data structure representing relationships between vertices via edges
+///
+/// This class implements a comprehensive graph with support for multiple algorithms:
+/// - **Shortest paths**: Dijkstra's algorithm (array-based and heap-optimized versions)
+/// - **Web ranking**: PageRank algorithm with damping factor
+/// - **Dependency ordering**: Topological sort for directed acyclic graphs
+/// - **Graph traversal**: Breadth-first search (BFS) with closure support
+/// - **Social networks**: Mutual neighbor discovery (e.g., friend recommendations)
+///
+/// **Graph Representation:**
+/// Uses an adjacency list representation where each vertex maintains an array of outgoing
+/// edges. This representation is space-efficient for sparse graphs (few edges relative to
+/// possible connections).
+///
+/// **Directed vs. Undirected:**
+/// - **Directed graph**: Add edge from A to B creates A→B only
+/// - **Undirected graph**: Add edges from A to B AND from B to A creates A↔B
+///
+/// **Use Cases:**
+/// - Road networks and GPS routing (Dijkstra's shortest path)
+/// - Web page ranking and search engines (PageRank)
+/// - Build systems and task scheduling (topological sort)
+/// - Social network analysis (mutual friends, BFS traversal)
+///
+/// - Note: The `canvas` property stores all vertices in the graph. The term "canvas"
+///         reflects the visual metaphor of vertices arranged on a canvas with edges
+///         drawn between them.
 public class Graph <T> {
-   
+
+    /// Array storing all vertices in the graph
+    ///
+    /// The "canvas" contains every vertex in the graph. Edges are stored within each
+    /// vertex's `neighbors` array rather than in a separate structure. This adjacency
+    /// list representation provides O(1) vertex addition and efficient edge iteration.
     var canvas: Array<Vertex<T>>
-    
-    
+
+
+    /// Creates a new empty graph with no vertices or edges
+    ///
+    /// Initializes an empty graph ready to accept vertices via `addVertex` and edges
+    /// via `addEdge`. The graph can represent any relationship structure based on how
+    /// vertices and edges are added.
    public init() {
         canvas = Array<Vertex>()
     }
-    
-    
-    
-    ///add vertex to graph canvas
-    /// - Parameter element: the vertex to be added to the graph
+
+
+
+    /// Adds a vertex to the graph
+    ///
+    /// Appends the vertex to the graph's canvas. The vertex can then be connected to
+    /// other vertices via `addEdge`. Vertices should be added before creating edges
+    /// between them.
+    ///
+    /// - Parameter element: The vertex to add to the graph
+    ///
+    /// - Complexity: O(1) amortized (array append)
     public func addVertex(element: Vertex<T>) {
         canvas.append(element)
     }
-    
-    
-    /// Represents a relationship between neighboring vertices
+
+
+    /// Creates a directed edge from source vertex to neighbor vertex
+    ///
+    /// Adds a weighted edge representing a relationship or connection from the source
+    /// to the neighbor. The edge is stored in the source vertex's adjacency list.
+    ///
+    /// **Creating Undirected Edges:**
+    /// For an undirected graph, call this method twice with reversed parameters:
+    /// ```swift
+    /// graph.addEdge(source: A, neighbor: B, weight: 5)
+    /// graph.addEdge(source: B, neighbor: A, weight: 5)
+    /// ```
+    ///
     /// - Parameters:
-    ///   - source: Source Vertex
-    ///   - neighbor: Destination Vertex
-    ///   - weight: Edge Weight (level of connectedness).
-    
+    ///   - source: The starting vertex (edge tail)
+    ///   - neighbor: The destination vertex (edge head)
+    ///   - weight: The cost, distance, or strength of the connection
+    ///
+    /// - Complexity: O(1) to create and append the edge
     public func addEdge(source: Vertex<T>, neighbor: Vertex<T>, weight: Int) {
-        
+
         //create a new edge
         let newEdge = Edge<T>()
-        
+
         //connect source vertex with the neighboring edge
         newEdge.neighbor = neighbor
         newEdge.weight = weight
-        
+
         source.neighbors.append(newEdge)
-        
-        //todo: we need to know who following the neighbor..
-        //we can pass source and destination as a reference to create a matrix??
-        
+
     }
 
     
 
-    
-    //process Dijkstra's shortest path algorithm
+
+    //MARK: Dijkstra's Shortest Path
+
+    /// Computes shortest path using Dijkstra's algorithm with array-based frontier
+    ///
+    /// This method implements the classic Dijkstra's shortest path algorithm using an
+    /// array to store the frontier (unexplored paths). The algorithm:
+    /// 1. Initializes frontier with paths to source's immediate neighbors
+    /// 2. Repeatedly selects the shortest path from the frontier (greedy approach)
+    /// 3. Explores that path's destination neighbors, creating new paths
+    /// 4. Adds new paths to frontier and preserves selected path in finalPaths
+    /// 5. Continues until frontier is empty
+    /// 6. Returns the shortest path to destination from finalPaths
+    ///
+    /// **Algorithm Complexity:**
+    /// - **Overall**: O(V²) due to linear search for minimum path in frontier
+    /// - **Finding minimum**: O(n) linear scan through frontier array (lines 91-102)
+    /// - **Path extensions**: O(E) total across all iterations
+    ///
+    /// For improved performance, use `processDijkstraWithHeap` which achieves O((V+E) log V)
+    /// by using a min-heap to find the minimum path in O(1) instead of O(n).
+    ///
+    /// - Parameters:
+    ///   - source: The starting vertex
+    ///   - destination: The target vertex to reach
+    ///
+    /// - Returns: The shortest path from source to destination, or `nil` if no path exists
+    ///
+    /// - Complexity: O(V²) for dense graphs. Use heap version for better performance on
+    ///              large graphs.
     public func processDijkstra(_ source: Vertex<T>, destination: Vertex<T>) -> Path<T>? {
             
         var frontier: Array<Path<T>> = Array<Path<T>>()
@@ -151,10 +228,38 @@ public class Graph <T> {
         return shortestPath
         
     }
-    
-    
-    
-    ///An optimized version of Dijkstra's shortest path algorthim
+
+
+
+
+    /// Computes shortest path using heap-optimized Dijkstra's algorithm
+    ///
+    /// This method implements an optimized version of Dijkstra's algorithm using a min-heap
+    /// (`PathHeap`) to manage the frontier. The key optimization: extracting the shortest
+    /// path from the heap is O(1) via `peek()`, versus O(n) linear search in the array version.
+    ///
+    /// **Algorithm Overview:**
+    /// 1. Initializes frontier heap with paths to source's immediate neighbors
+    /// 2. Repeatedly extracts minimum path from heap in O(1) - the greedy choice
+    /// 3. Explores that path's destination neighbors, creating new paths
+    /// 4. Adds new paths to frontier heap (O(log n) each)
+    /// 5. If best path reaches destination, adds to finalPaths heap
+    /// 6. Returns shortest path from finalPaths
+    ///
+    /// **Performance Comparison:**
+    /// - **Array version**: O(V²) - O(n) to find minimum path in frontier
+    /// - **Heap version**: O((V+E) log V) - O(1) to peek minimum, O(log n) to add/remove
+    ///
+    /// For dense graphs with many vertices, the heap version provides significant speedup.
+    ///
+    /// - Parameters:
+    ///   - source: The starting vertex
+    ///   - destination: The target vertex to reach
+    ///
+    /// - Returns: The shortest path from source to destination, or `nil` if no path exists
+    ///
+    /// - Complexity: O((V+E) log V) where V is vertices and E is edges. Much faster than
+    ///              O(V²) array version for large graphs.
     public func processDijkstraWithHeap(_ source: Vertex<T>, destination: Vertex<T>) -> Path<T>? {
         
         
@@ -226,17 +331,32 @@ public class Graph <T> {
         return shortestPath
         
     }
-    
-    
-    
-    /**
-     Reverse the sequence of paths given the shortest path. Process analagous to reversing a linked list..
-     
-     - Parameter head: The source Vertex.
-     - Parameter source: The connecting destination `Vertex`.
-     - Returns: The reversed `Path`.
-     */
 
+
+
+
+    /// Reverses a path chain to reconstruct the route from source to destination
+    ///
+    /// Dijkstra's algorithm builds paths in reverse order (destination back to source) via
+    /// the `previous` pointer. This method reverses that chain to produce a forward path
+    /// from source to destination.
+    ///
+    /// **Algorithm:**
+    /// Uses the standard linked list reversal technique:
+    /// 1. Traverses the path chain following `previous` pointers
+    /// 2. Reverses each `previous` link to point in the opposite direction
+    /// 3. Appends a new path segment for the source vertex at the beginning
+    ///
+    /// This is analogous to reversing a linked list - same three-pointer technique
+    /// (current, prev, next) to reverse direction while traversing.
+    ///
+    /// - Parameters:
+    ///   - head: The final path (destination end of the chain)
+    ///   - source: The source vertex to prepend to the reversed path
+    ///
+    /// - Returns: A path chain starting at source and ending at the original head's destination
+    ///
+    /// - Complexity: O(n) where n is the number of path segments (vertices in the route)
     public func reversePath(_ head: Path<T>?, source: Vertex<T>) -> Path<T>? {
         
         
@@ -274,12 +394,36 @@ public class Graph <T> {
         return output
         
     }
-    
-    
-        
-    
-    //MARK: PageRank algorithms
-    
+
+
+
+
+    //MARK: PageRank Algorithms
+
+    /// Computes PageRank scores using simplified algorithm with sink handling
+    ///
+    /// This method implements a basic PageRank algorithm that distributes authority scores
+    /// across the graph over multiple iterations. It demonstrates the core concept: pages
+    /// linked to by important pages become important themselves.
+    ///
+    /// **Algorithm:**
+    /// 1. **Round 0**: Equal allocation - all vertices get `100/vertex_count` rank (random surfer)
+    /// 2. **Round 1**: Authority distribution:
+    ///    - **Standard vertices**: Divide current rank equally among outgoing neighbors
+    ///    - **Sink vertices** (no outgoing edges): Distribute rank to all other vertices
+    /// 3. **Iterations**: Currently runs 2 rounds (line 289)
+    ///
+    /// **Sink Handling:**
+    /// Vertices with no outgoing edges (sink nodes) would lose their rank permanently.
+    /// This implementation redistributes sink rank to all other vertices, preventing rank
+    /// from disappearing from the graph.
+    ///
+    /// **Limitations:**
+    /// - Fixed 2 iterations (production would run until convergence)
+    /// - No damping factor (see `processPageRankWithDamping` for proper damping)
+    /// - Uses educational scale (0-100) instead of mathematical scale (0.0-1.0)
+    ///
+    /// - Complexity: O(R × (V + E)) where R is rounds (2), V is vertices, E is edges
     public func processPageRankWithSink() {
                 
         let startingRank: Float = roundf(Float((100 / self.canvas.count))) //todo: change from default 100 to 1?
@@ -335,11 +479,35 @@ public class Graph <T> {
     }
 
 
-    /// Enhanced PageRank with damping factor and convergence detection
+    /// Computes PageRank scores using production-grade algorithm with damping and convergence
+    ///
+    /// This method implements the complete PageRank algorithm as used by search engines,
+    /// including the damping factor that models user behavior: users follow links with
+    /// probability `dampingFactor` (0.85), or jump to a random page with probability
+    /// `1 - dampingFactor` (0.15).
+    ///
+    /// **Algorithm Enhancements:**
+    /// - **Damping factor**: Prevents rank from accumulating in sink nodes
+    /// - **Convergence detection**: Stops when changes fall below threshold (not fixed iterations)
+    /// - **Mathematical scale**: Uses 0.0-1.0 scale (sum of all ranks = 1.0)
+    /// - **Random jump baseline**: All vertices start each iteration with `(1-d)/V` rank
+    ///
+    /// **Formula:**
+    /// ```
+    /// PageRank(v) = (1-d)/V + d × Σ(PageRank(u) / OutDegree(u))
+    /// ```
+    /// Where sum is over all vertices u linking to v.
+    ///
+    /// **Convergence:**
+    /// Iterates until the maximum rank change across all vertices is below `convergenceThreshold`,
+    /// or until `maxIterations` is reached.
+    ///
     /// - Parameters:
     ///   - dampingFactor: Probability of following links vs random jump (default: 0.85)
     ///   - maxIterations: Maximum iterations before stopping (default: 100)
     ///   - convergenceThreshold: Minimum change required to continue (default: 0.0001)
+    ///
+    /// - Complexity: O(I × (V + E)) where I is iterations until convergence
     public func processPageRankWithDamping(dampingFactor: Float = 0.85,
                                          maxIterations: Int = 100,
                                          convergenceThreshold: Float = 0.0001) {
@@ -415,9 +583,34 @@ public class Graph <T> {
 
     //MARK: Topological Sort
 
-    /// Performs topological sort on a directed acyclic graph (DAG) using DFS-based approach
-    /// - Returns: Array of vertices in topological order, or nil if cycle detected
-    /// - Complexity: O(V + E) time, O(V) space for recursion
+    /// Performs topological sort on a directed acyclic graph using DFS-based approach
+    ///
+    /// Topological sort produces a linear ordering of vertices such that for every directed
+    /// edge u→v, vertex u appears before v in the ordering. This is essential for:
+    /// - **Build systems**: Compile dependencies before dependents
+    /// - **Task scheduling**: Complete prerequisites before dependent tasks
+    /// - **Course planning**: Take prerequisite courses before advanced courses
+    ///
+    /// **Algorithm:**
+    /// Uses depth-first search with post-order stack addition:
+    /// 1. Performs DFS from each unvisited vertex
+    /// 2. Recursively visits all neighbors before processing current vertex
+    /// 3. Adds vertex to stack AFTER all descendants are visited (post-order)
+    /// 4. Reverses stack to get topological order
+    ///
+    /// **Cycle Detection:**
+    /// Uses white-gray-black coloring:
+    /// - **White** (unvisited): Not yet discovered
+    /// - **Gray** (visiting): Currently in DFS recursion stack
+    /// - **Black** (visited): Fully processed
+    ///
+    /// If we encounter a gray vertex during traversal, a back edge exists (cycle detected).
+    /// Topological sort only works on DAGs (directed acyclic graphs).
+    ///
+    /// - Returns: Array of vertices in topological order, or `nil` if a cycle is detected
+    ///
+    /// - Complexity: O(V + E) time (visits each vertex and edge once), O(V) space for
+    ///              recursion depth and tracking arrays
     public func topologicalSort() -> [Vertex<T>]? {
         var stack: [Vertex<T>] = []
         var visiting: [Vertex<T>] = []  // For cycle detection (gray nodes)
@@ -441,8 +634,33 @@ public class Graph <T> {
     }
 
 
-    /// Helper function for DFS-based topological sort with cycle detection
-    /// Uses white-gray-black algorithm: white (unvisited), gray (visiting), black (visited)
+    /// Recursive DFS helper for topological sort with cycle detection
+    ///
+    /// This method implements the depth-first search portion of topological sort using
+    /// the white-gray-black coloring algorithm for cycle detection:
+    ///
+    /// **Color States:**
+    /// - **White** (not in visiting or visited): Unvisited vertex
+    /// - **Gray** (in visiting array): Currently in DFS recursion stack
+    /// - **Black** (in visited array): Fully processed, all descendants visited
+    ///
+    /// **Cycle Detection:**
+    /// If we encounter a vertex that's gray (currently being visited), we've found a
+    /// back edge indicating a cycle. This makes topological sorting impossible.
+    ///
+    /// **Post-order Processing:**
+    /// Vertices are added to the stack AFTER visiting all neighbors (post-order), ensuring
+    /// dependencies are processed before dependents.
+    ///
+    /// - Parameters:
+    ///   - vertex: Current vertex being visited
+    ///   - stack: Accumulates vertices in reverse topological order
+    ///   - visiting: Gray nodes (currently in recursion stack)
+    ///   - visited: Black nodes (fully processed)
+    ///
+    /// - Returns: `true` if DFS succeeds without finding cycles, `false` if cycle detected
+    ///
+    /// - Complexity: O(V + E) across all calls (each vertex and edge visited once)
     private func topologicalDFS(_ vertex: Vertex<T>,
                                 stack: inout [Vertex<T>],
                                 visiting: inout [Vertex<T>],
@@ -483,10 +701,35 @@ public class Graph <T> {
 
 
 
-    //MARK: traversal algorithms
-    
-    
-    //bfs traversal with inout closure function
+    //MARK: Traversal Algorithms
+
+
+    /// Performs breadth-first search with custom vertex processing via inout closure
+    ///
+    /// This method traverses the graph level-by-level from the starting vertex, executing
+    /// a user-provided closure on each vertex. The closure receives an `inout` parameter,
+    /// allowing it to modify vertex properties during traversal.
+    ///
+    /// **BFS Characteristics:**
+    /// - **Level-order**: Visits all vertices at distance k before visiting any at distance k+1
+    /// - **Shortest paths**: For unweighted graphs, BFS finds shortest paths
+    /// - **Uses queue**: FIFO ensures level-by-level exploration
+    ///
+    /// **Inout Closure Pattern:**
+    /// The formula closure receives a mutable reference to each vertex, enabling property
+    /// updates without explicit return values:
+    /// ```swift
+    /// graph.traverse(startVertex) { vertex in
+    ///     vertex.visited = true
+    ///     vertex.rank[0] = calculateRank(vertex)
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - startingv: The vertex to begin traversal from
+    ///   - formula: Closure executed on each visited vertex (receives inout reference)
+    ///
+    /// - Complexity: O(V + E) where V is vertices and E is edges
     public func traverse(_ startingv: Vertex<T>, formula: (_ node: inout Vertex<T>) -> ()) {
 
         
@@ -533,13 +776,31 @@ public class Graph <T> {
     }
 
 
-    
-    
-    /// Identifies all unconnected vertices of related neighbors (e.g. mutual friends).
+
+
+    /// Discovers vertices connected to the source's neighbors but not to the source itself
     ///
-    /// - Parameter source: the source vertex
-    /// - Returns: the list of unconnected vertices, based on priority
-    
+    /// This method implements "mutual friends" or "people you may know" recommendation logic.
+    /// It finds vertices that share connections with the source but aren't directly connected
+    /// to the source, ranking them by frequency of shared connections.
+    ///
+    /// **Algorithm:**
+    /// 1. Iterate through source's direct neighbors (friends)
+    /// 2. For each neighbor, examine all vertices in the graph
+    /// 3. If a vertex links to the same neighbor but isn't the source, it's a mutual connection
+    /// 4. Add to priority queue (frequency-based ranking via `Priority<T>`)
+    ///
+    /// **Social Network Example:**
+    /// If Alice (source) is friends with Bob, and Carol is also friends with Bob but not Alice,
+    /// Carol appears as a mutual neighbor recommendation. If Carol is friends with multiple of
+    /// Alice's friends, she ranks higher in the priority queue.
+    ///
+    /// - Parameter source: The source vertex to find recommendations for
+    ///
+    /// - Returns: Priority queue of mutual neighbors, ranked by number of shared connections
+    ///
+    /// - Complexity: O(V × E) where V is vertices and E is edges - examines entire graph
+    ///              for each of source's neighbors
     public func mutualNeighbors(of source: Vertex<T>) -> Priority<Vertex<T>>  {
        
         let priority = Priority<Vertex<T>>()
@@ -564,9 +825,22 @@ public class Graph <T> {
         return priority
     }
     
-    
-    
-    //breadth first search
+
+
+
+    /// Performs breadth-first search with console output for educational purposes
+    ///
+    /// This method implements standard BFS traversal, printing each vertex as it's visited.
+    /// Unlike the closure-based version, this method simply marks vertices as visited and
+    /// logs the traversal order to the console.
+    ///
+    /// **Educational Use:**
+    /// Demonstrates the core BFS algorithm without the complexity of closure parameters.
+    /// Useful for visualizing graph connectivity and understanding BFS traversal order.
+    ///
+    /// - Parameter startingv: The vertex to begin traversal from
+    ///
+    /// - Complexity: O(V + E) where V is vertices and E is edges
     public func traverse(_ startingv: Vertex<T>) {
         
         
@@ -608,9 +882,29 @@ public class Graph <T> {
         
     } //end function
     
-    
-    
-    //use bfs with trailing closure to update all values
+
+
+
+    /// Performs breadth-first search with boolean validation closure
+    ///
+    /// This method traverses the graph using BFS while executing a validation closure on
+    /// each vertex. The closure returns `Bool` indicating success/failure of the update
+    /// operation, allowing error handling during traversal.
+    ///
+    /// **Use Case:**
+    /// Useful when vertex updates might fail and you need to log or handle failures
+    /// separately. For example, validating data constraints, checking permissions, or
+    /// conditional vertex modifications.
+    ///
+    /// **Formula Closure:**
+    /// The formula receives each vertex and returns `true` for successful update or `false`
+    /// for failure. Failed updates are logged to console but don't stop traversal.
+    ///
+    /// - Parameters:
+    ///   - startingv: The vertex to begin traversal from
+    ///   - formula: Closure that processes each vertex and returns success/failure
+    ///
+    /// - Complexity: O(V + E) where V is vertices and E is edges
     func update(startingv: Vertex<T>, formula:((Vertex<T>) -> Bool)) {
         
         
