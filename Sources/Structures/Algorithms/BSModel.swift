@@ -1,10 +1,15 @@
+// Copyright 2026 Wayne W Bishop. All rights reserved.
 //
-//  BSModel.swift
-//  SwiftStructures
 //
-//  Created by Wayne Bishop on 7/13/20.
-//  Copyright © 2017 Arbutus Software Inc. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
+// file except in compliance with the License. You may obtain a copy of the License at
 //
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under
+// the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+// ANY KIND, either express or implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 import Foundation
 
@@ -459,12 +464,34 @@ public class BSModel <T: Comparable>{
     ///
     /// - Parameter element: The node to visualize
     ///
-    /// Example output: `left is : 5 | root is: 8  | right is : 12..`
+    /// Example output: `left is: 5 | root is: 8 | right is: 12`
     public func printTree(_ element: BSNode<T>) {
-        let leftValue = element.left?.tvalue.map { "\($0)" } ?? "nil"
-        let rootValue = element.tvalue.map { "\($0)" } ?? "nil"
-        let rightValue = element.right?.tvalue.map { "\($0)" } ?? "nil"
-        print("left is : \(leftValue) | root is: \(rootValue)  | right is : \(rightValue)..")
+
+        // Get left child value
+        let leftValue: String
+        if let left = element.left, let value = left.tvalue {
+            leftValue = "\(value)"
+        } else {
+            leftValue = "nil"
+        }
+
+        // Get root value
+        let rootValue: String
+        if let value = element.tvalue {
+            rootValue = "\(value)"
+        } else {
+            rootValue = "nil"
+        }
+
+        // Get right child value
+        let rightValue: String
+        if let right = element.right, let value = right.tvalue {
+            rightValue = "\(value)"
+        } else {
+            rightValue = "nil"
+        }
+
+        print("left is: \(leftValue) | root is: \(rootValue) | right is: \(rightValue)")
     }
 
 

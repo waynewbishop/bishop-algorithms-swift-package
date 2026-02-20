@@ -37,10 +37,10 @@ import Structures
  stack.pop()
 ```
 
-Style Guide
+Testing
 ---------------------
 
-In addition to the over **100 included** unit tests, this project also contains a sample **Swift Playground** to demonstrate how one can use the custom types. Executing the example provides an interactive illustration of building a Stack data structure. Beyond the algorithm, a visual implementation is also shown using SwiftUI.
+This project includes over **100 comprehensive unit tests** that demonstrate how to use the custom data structures and algorithms. The tests provide detailed examples of working with Binary Search Trees, Heaps, Graphs, and other complex structures.
 
 
 Features
@@ -122,10 +122,9 @@ public struct Stack <T> {
 Getting Started
 --------------------
 
-Swift Structures has been optimized for **Swift 6.0** (Xcode 26) or later. The directories are organized as follows:
+Swift Structures has been optimized for **Swift 6.0** (Xcode 16) or later. The directories are organized as follows:
 + Sources - Code for all Swift data structures, algorithms and source extensions
-+ Playgrounds - Getting started material plus an interactive example of Stack algorithms.
-+ Tests - 100+ unit tests with XCTest Framework
++ Tests - 100+ comprehensive unit tests with XCTest Framework
 
 ### Installation
 
