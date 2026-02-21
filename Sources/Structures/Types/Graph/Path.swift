@@ -20,13 +20,24 @@ import Foundation
 /// and a reference to the previous path segment, forming a linked list that traces the
 /// complete route.
 ///
+/// **Memoization in Dijkstra's Algorithm:**
+/// Path objects implement a form of memoization by caching the best-known cumulative cost
+/// to reach each vertex as the algorithm explores the frontier. Rather than recomputing
+/// costs from scratch, each Path stores:
+/// - The lowest total cost discovered so far to reach its destination
+/// - The route that achieved this cost (via the `previous` chain)
+///
+/// This memoization enables Dijkstra's algorithm to efficiently build up shortest paths by
+/// reusing previously computed partial routes. When a better path to a vertex is discovered,
+/// a new Path object replaces the old one in the frontier, updating the memoized cost.
+///
 /// **Role in Dijkstra's Algorithm:**
 /// Paths are the fundamental unit stored in the "frontier" (priority queue of unexplored
 /// paths). The algorithm repeatedly:
 /// 1. Extracts the shortest path from the frontier (via `PathHeap`)
 /// 2. Examines the destination vertex's neighbors
 /// 3. Creates new path objects for each neighbor, extending the current path
-/// 4. Adds these new paths back to the frontier
+/// 4. Adds these new paths back to the frontier (memoizing improved costs)
 ///
 /// **Path Reconstruction:**
 /// The `previous` pointer chains path segments together in reverse order. To reconstruct
