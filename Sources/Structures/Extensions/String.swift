@@ -53,7 +53,7 @@ extension String: Indexable {
     ///
     /// Convenience property wrapping `count` for clearer intent in string algorithms.
     ///
-    /// - Complexity: O(1) - Swift strings cache their count
+    /// - Complexity: O(*n*) — Swift strings are composed of variable-width Unicode grapheme clusters, so counting requires traversal
     var length: Int {
        return self.count
     }

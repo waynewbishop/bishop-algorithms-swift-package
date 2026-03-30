@@ -591,115 +591,75 @@ public class Graph <T> {
     /// Performs topological sort on a directed acyclic graph using DFS-based approach
     ///
     /// Topological sort produces a linear ordering of vertices such that for every directed
-    /// edge u→v, vertex u appears before v in the ordering. This is essential for:
-    /// - **Build systems**: Compile dependencies before dependents
-    /// - **Task scheduling**: Complete prerequisites before dependent tasks
-    /// - **Course planning**: Take prerequisite courses before advanced courses
-    ///
-    /// **Algorithm:**
-    /// Uses depth-first search with post-order stack addition:
-    /// 1. Performs DFS from each unvisited vertex
-    /// 2. Recursively visits all neighbors before processing current vertex
-    /// 3. Adds vertex to stack AFTER all descendants are visited (post-order)
-    /// 4. Reverses stack to get topological order
-    ///
-    /// **Cycle Detection:**
-    /// Uses white-gray-black coloring:
-    /// - **White** (unvisited): Not yet discovered
-    /// - **Gray** (visiting): Currently in DFS recursion stack
-    /// - **Black** (visited): Fully processed
-    ///
-    /// If we encounter a gray vertex during traversal, a back edge exists (cycle detected).
-    /// Topological sort only works on DAGs (directed acyclic graphs).
+    /// edge u→v, vertex u appears before v in the ordering. Uses depth-first search with
+    /// post-order processing and cycle detection via visiting/visited sets.
     ///
     /// - Returns: Array of vertices in topological order, or `nil` if a cycle is detected
     ///
-    /// - Complexity: O(V + E) time (visits each vertex and edge once), O(V) space for
-    ///              recursion depth and tracking arrays
+    /// - Complexity: O(V + E) time (visits each vertex and edge once), O(V) space
     public func topologicalSort() -> [Vertex<T>]? {
-        var stack: [Vertex<T>] = []
-        var visiting: [Vertex<T>] = []  // For cycle detection (gray nodes)
-        var visited: [Vertex<T>] = []   // Fully processed (black nodes)
-
-        // Reset visited flags
-        for vertex in canvas {
-            vertex.visited = false
-        }
+        var result: [Vertex<T>] = []
+        var visiting = Set<UUID>()
+        var visited = Set<UUID>()
 
         // Process all vertices (handles disconnected components)
         for vertex in canvas {
-            if !vertex.visited {
-                if !topologicalDFS(vertex, stack: &stack, visiting: &visiting, visited: &visited) {
-                    return nil  // Cycle detected - not a DAG
+            if !visited.contains(vertex.uuid) {
+                if !topologicalDFS(vertex, result: &result,
+                                   visiting: &visiting, visited: &visited) {
+                    return nil
                 }
             }
         }
 
-        return stack.reversed()  // Reverse to get correct topological order
+        return result.reversed()
     }
-
 
     /// Recursive DFS helper for topological sort with cycle detection
     ///
-    /// This method implements the depth-first search portion of topological sort using
-    /// the white-gray-black coloring algorithm for cycle detection:
-    ///
-    /// **Color States:**
-    /// - **White** (not in visiting or visited): Unvisited vertex
-    /// - **Gray** (in visiting array): Currently in DFS recursion stack
-    /// - **Black** (in visited array): Fully processed, all descendants visited
-    ///
-    /// **Cycle Detection:**
-    /// If we encounter a vertex that's gray (currently being visited), we've found a
-    /// back edge indicating a cycle. This makes topological sorting impossible.
-    ///
-    /// **Post-order Processing:**
-    /// Vertices are added to the stack AFTER visiting all neighbors (post-order), ensuring
-    /// dependencies are processed before dependents.
+    /// Vertices currently in the recursion stack are tracked in the `visiting` set.
+    /// Encountering a vertex already in `visiting` indicates a back edge (cycle).
+    /// Vertices are added to the result after all neighbors are processed (post-order).
     ///
     /// - Parameters:
     ///   - vertex: Current vertex being visited
-    ///   - stack: Accumulates vertices in reverse topological order
-    ///   - visiting: Gray nodes (currently in recursion stack)
-    ///   - visited: Black nodes (fully processed)
+    ///   - result: Accumulates vertices in reverse topological order
+    ///   - visiting: UUIDs of vertices currently in the recursion stack
+    ///   - visited: UUIDs of fully processed vertices
     ///
     /// - Returns: `true` if DFS succeeds without finding cycles, `false` if cycle detected
     ///
     /// - Complexity: O(V + E) across all calls (each vertex and edge visited once)
     private func topologicalDFS(_ vertex: Vertex<T>,
-                                stack: inout [Vertex<T>],
-                                visiting: inout [Vertex<T>],
-                                visited: inout [Vertex<T>]) -> Bool {
+                                result: inout [Vertex<T>],
+                                visiting: inout Set<UUID>,
+                                visited: inout Set<UUID>) -> Bool {
 
-        // Cycle detection: if we encounter a vertex we're currently visiting (gray node)
-        if visiting.contains(where: { $0 == vertex }) {
-            return false  // Back edge found - cycle exists
+        // Cycle detection: vertex is currently in the recursion stack
+        if visiting.contains(vertex.uuid) {
+            return false
         }
 
-        if visited.contains(where: { $0 == vertex }) {
-            return true  // Already processed (black node)
+        // Already fully processed
+        if visited.contains(vertex.uuid) {
+            return true
         }
 
-        visiting.append(vertex)  // Mark as gray (currently visiting)
+        visiting.insert(vertex.uuid)
 
         // Visit all neighbors recursively
         for edge in vertex.neighbors {
-            if !topologicalDFS(edge.neighbor, stack: &stack, visiting: &visiting, visited: &visited) {
+            if !topologicalDFS(edge.neighbor, result: &result,
+                               visiting: &visiting, visited: &visited) {
                 return false
             }
         }
 
-        // Remove from gray set
-        if let index = visiting.firstIndex(where: { $0 == vertex }) {
-            visiting.remove(at: index)
-        }
+        visiting.remove(vertex.uuid)
+        visited.insert(vertex.uuid)
 
-        visited.append(vertex)  // Mark as black (fully processed)
-        vertex.visited = true
-
-        // Post-order: add to stack AFTER visiting all neighbors
-        // This ensures dependencies are processed before dependents
-        stack.append(vertex)
+        // Post-order: add after all neighbors are processed
+        result.append(vertex)
 
         return true
     }

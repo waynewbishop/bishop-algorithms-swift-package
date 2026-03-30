@@ -181,21 +181,19 @@ extension Array where Element: Comparable {
 
         var output: Array<Element> = self
 
-        for primaryindex in 0..<output.count {
+        for primaryindex in 1..<output.count {
 
             let key = output[primaryindex]
+            var secondaryindex = primaryindex - 1
 
-            var secondaryindex = primaryindex
-
-            while secondaryindex > -1 {
-                print("comparing \(key) and \(output[secondaryindex])")
-                if key < output[secondaryindex] {
-                    //move into correct position
-                    output.remove(at: secondaryindex + 1)
-                    output.insert(key, at: secondaryindex)
-                }
+            //shift elements right until we find key's position
+            while secondaryindex >= 0 && key < output[secondaryindex] {
+                output[secondaryindex + 1] = output[secondaryindex]
                 secondaryindex -= 1
             }
+
+            //place key in its sorted position
+            output[secondaryindex + 1] = key
         }
 
         return output

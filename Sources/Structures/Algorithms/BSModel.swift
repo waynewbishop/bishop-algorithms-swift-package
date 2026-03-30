@@ -277,9 +277,9 @@ public class BSModel <T: Comparable>{
 
     //MARK: Balancing - Rotation Methods
 
-    /// Performs a left rotation on the specified node to fix left-heavy imbalance
+    /// Performs a left rotation on the specified node to fix right-heavy imbalance
     ///
-    /// This method handles the case where the right subtree is too tall (left-left case
+    /// This method handles the case where the right subtree is too tall (right-right case
     /// in AVL terminology). The rotation:
     /// 1. Saves the current node's value in a new left child
     /// 2. Promotes the right child's value to become the new root
@@ -329,9 +329,9 @@ public class BSModel <T: Comparable>{
         self.printTree(element)
         
     }
-    /// Performs a right rotation on the specified node to fix right-heavy imbalance
+    /// Performs a right rotation on the specified node to fix left-heavy imbalance
     ///
-    /// This method handles the case where the left subtree is too tall (right-right case
+    /// This method handles the case where the left subtree is too tall (left-left case
     /// in AVL terminology). The rotation:
     /// 1. Saves the current node's value in a new right child
     /// 2. Promotes the left child's value to become the new root
